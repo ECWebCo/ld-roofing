@@ -14,7 +14,7 @@ const WHITE   = '#FFFFFF'
 
 const PHONE = '(469) 585-8908'
 const EMAIL = 'Info@ld-roofing.com'
-const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_19_58%20PM.png'
+const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_36_58%20PM.png'
 
 const REVIEWS = [
   { name:'Rick', role:'Business Owner', stars:5, text:'"LD Roofing & Exteriors are the most professional and friendly contractors I have ever worked with. Top quality work and great pricing. Lane the owner really cares about helping his clients."' },
@@ -147,9 +147,9 @@ function Hero({ onSchedule }) {
       <img
         src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=85"
         alt="Roof replacement Texas"
-        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.1 }}
+        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.55 }}
       />
-      <div style={{ position:'absolute', inset:0, background:`linear-gradient(100deg, ${NAVY}F2 40%, ${NAVY}C0 65%, rgba(15,31,75,0.55) 100%)` }}/>
+      <div style={{ position:'absolute', inset:0, background:`linear-gradient(100deg, ${NAVY}CC 35%, ${NAVY}88 65%, rgba(15,31,75,0.3) 100%)` }}/>
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>
 
       <div style={{ position:'relative', maxWidth:1200, margin:'0 auto', padding:'140px 48px 100px', width:'100%' }}>
