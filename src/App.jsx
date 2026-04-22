@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import laneFamilyImg from './lane-family.png'
+import wolfFamilyImg from './wolf-family.png'
 
 // ─── Brand ────────────────────────────────────────────────────
 const NAVY   = '#1B2B5E'
@@ -143,7 +145,7 @@ function Hero({ onSchedule }) {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: NAVY }}>
       {/* Background image */}
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.25 }}/>
+      <img src="https://images.unsplash.com/photo-1635424710928-0544e8512ede?w=1920&q=80" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.3 }}/>
 
       {/* Gradient overlay */}
       <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg, ${NAVY}F0 0%, ${NAVY}B0 50%, rgba(240,123,33,0.15) 100%)` }}/>
@@ -287,6 +289,96 @@ function Services({ onSchedule }) {
   )
 }
 
+// ─── Gallery ──────────────────────────────────────────────────
+const GALLERY = [
+  { src:'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80', label:'Residential Replacement · Houston' },
+  { src:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80', label:'Commercial Flat Roof · Dallas' },
+  { src:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80', label:'Shingle Installation · Houston' },
+  { src:'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80', label:'Storm Damage Repair · Katy' },
+  { src:'https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=800&q=80', label:'Commercial Roof Coating · Dallas' },
+  { src:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80', label:'Full Replacement · Sugar Land' },
+]
+
+function Gallery() {
+  return (
+    <section style={{ background: DARK, padding: '96px 48px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: ORANGE, marginBottom: 12 }}>Our Work</div>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(28px,4vw,44px)', color: WHITE }}>Recent Projects</h2>
+        </div>
+        <div className="ld-gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          {GALLERY.map((g, i) => (
+            <div key={i} style={{ position: 'relative', overflow: 'hidden', borderRadius: 4, aspectRatio: '4/3' }}>
+              <img src={g.src} alt={g.label} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                onMouseOver={e => e.target.style.transform = 'scale(1.06)'}
+                onMouseOut={e => e.target.style.transform = 'scale(1)'}/>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)' }}/>
+              <div style={{ position: 'absolute', bottom: 14, left: 16, right: 16, fontSize: 12, fontWeight: 600, color: WHITE, letterSpacing: '0.5px' }}>{g.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:768px){.ld-gallery-grid{grid-template-columns:1fr!important}}`}</style>
+    </section>
+  )
+}
+
+// ─── Two Divisions ────────────────────────────────────────────
+function Divisions() {
+  return (
+    <section style={{ background: LIGHT, padding: '96px 48px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: ORANGE, marginBottom: 12 }}>Two Great Teams</div>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(28px,4vw,44px)', color: NAVY }}>Family-Owned, Texas-Wide</h2>
+          <p style={{ fontSize: 16, color: MUTED, maxWidth: 560, margin: '16px auto 0', lineHeight: 1.7 }}>Two family-run divisions, one standard of excellence. Whether you're in Houston or Dallas, you're working with people who treat your home like their own.</p>
+        </div>
+
+        <div className="ld-div-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+          {[
+            {
+              city: 'Houston',
+              name: 'Lane Pauly',
+              title: 'Owner, Houston Division',
+              desc: 'Lane and his wife Dana founded LD Roofing to be the roofing company they\'d want working on their own home — honest, thorough, and always reachable. Lane personally oversees every Houston job.',
+              phone: '(469) 585-8908',
+              img: laneFamilyImg,
+              color: NAVY,
+            },
+            {
+              city: 'Dallas',
+              name: 'Robert & Lauren Wolf',
+              title: 'Owners, Dallas Division',
+              desc: 'Robert and Lauren Wolf lead our Dallas operation with the same family-first values. Their team brings deep expertise in both residential and commercial roofing across the DFW metroplex.',
+              phone: '(469) 585-8908',
+              img: wolfFamilyImg,
+              color: ORANGE,
+            },
+          ].map((d, i) => (
+            <div key={i} style={{ background: WHITE, borderRadius: 8, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+              <div style={{ position: 'relative', height: 300, overflow: 'hidden' }}>
+                <img src={d.img} alt={d.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}/>
+                <div style={{ position: 'absolute', top: 16, left: 16, background: d.color, color: WHITE, fontSize: 11, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', padding: '6px 14px', borderRadius: 4 }}>{d.city} Division</div>
+              </div>
+              <div style={{ padding: '28px 28px 32px' }}>
+                <div style={{ fontFamily: 'Georgia,serif', fontSize: 20, color: NAVY, marginBottom: 4 }}>{d.name}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: d.color, marginBottom: 16 }}>{d.title}</div>
+                <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.8, marginBottom: 20 }}>{d.desc}</p>
+                <a href={`tel:${d.phone}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 700, color: NAVY, textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseOver={e => e.currentTarget.style.color = ORANGE} onMouseOut={e => e.currentTarget.style.color = NAVY}>
+                  📞 {d.phone}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:768px){.ld-div-grid{grid-template-columns:1fr!important}}`}</style>
+    </section>
+  )
+}
+
 // ─── Why Us ───────────────────────────────────────────────────
 function WhyUs() {
   return (
@@ -317,7 +409,7 @@ function WhyUs() {
           </div>
 
           <div>
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Roofing team" style={{ width: '100%', height: 480, objectFit: 'cover', borderRadius: 8 }}/>
+            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80" alt="LD Roofing team" style={{ width: '100%', height: 480, objectFit: 'cover', borderRadius: 8 }}/>
           </div>
         </div>
       </div>
@@ -543,6 +635,8 @@ export default function App() {
       <Nav onSchedule={() => setScheduleOpen(true)}/>
       <Hero onSchedule={() => setScheduleOpen(true)}/>
       <Services onSchedule={() => setScheduleOpen(true)}/>
+      <Divisions/>
+      <Gallery/>
       <WhyUs/>
       <Process onSchedule={() => setScheduleOpen(true)}/>
       <Reviews/>
