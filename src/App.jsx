@@ -14,7 +14,7 @@ const WHITE   = '#FFFFFF'
 
 const PHONE = '(469) 585-8908'
 const EMAIL = 'Info@ld-roofing.com'
-const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/LD%20Logo.png'
+const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_19_58%20PM.png'
 
 const REVIEWS = [
   { name:'Rick', role:'Business Owner', stars:5, text:'"LD Roofing & Exteriors are the most professional and friendly contractors I have ever worked with. Top quality work and great pricing. Lane the owner really cares about helping his clients."' },
@@ -145,7 +145,7 @@ function Hero({ onSchedule }) {
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
       {/* Real aerial roof replacement photo */}
       <img
-        src="https://images.unsplash.com/photo-1632889657688-a6e65b22bcb2?w=1920&q=85"
+        src="https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_22_52%20PM.png"
         alt="Roof replacement Texas"
         style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.4 }}
       />
@@ -273,8 +273,8 @@ function Divisions() {
         </div>
         <div className="ld-div" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
           {[
-            { city:'Houston', accent:NAVY, name:'Lane Pauly', title:'Owner, Houston Division', desc:'Lane and his wife Dana founded LD Roofing to be the company they\'d want working on their own home — honest, responsive, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg },
-            { city:'Dallas', accent:ORANGE, name:'Robert & Lauren Wolf', title:'Owners, Dallas Division', desc:'Robert and Lauren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg },
+            { city:'Houston', accent:NAVY, name:'Lane & Dana Pauly', title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home — honest, responsive, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg },
+            { city:'Dallas', accent:ORANGE, name:'Robert & Lauren Wolf', title:'Dallas Division', desc:'Robert and Lauren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg },
           ].map((d,i)=>(
             <div key={i} style={{ background:WHITE, border:`1px solid ${BORDER}`, overflow:'hidden' }}>
               <div style={{ position:'relative', height:320, overflow:'hidden' }}>
@@ -374,7 +374,7 @@ function Reviews() {
             <div style={{ display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end', marginBottom:4 }}>
               <Stars/><span style={{ fontSize:18, fontWeight:800, color:NAVY }}>5.0</span>
             </div>
-            <div style={{ fontSize:12, color:MUTED }}>Google Rating</div>
+            <div style={{ fontSize:12, color:MUTED }}>63 Google Reviews</div>
           </div>
         </div>
         <div className="ld-rev3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20, marginBottom:20 }}>
