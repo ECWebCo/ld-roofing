@@ -76,7 +76,7 @@ function Nav({ onSchedule }) {
     <>
       <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
         <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height:72, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <img src={LOGO} alt="LD Roofing" style={{ height:44, width:'auto', objectFit:'contain', cursor:'pointer', filter:'brightness(0) invert(1)' }}
+          <img src={LOGO} alt="LD Roofing" style={{ height:44, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none' }}
             onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
             onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
           <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
@@ -145,9 +145,9 @@ function Hero({ onSchedule }) {
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
       {/* Real aerial roof replacement photo */}
       <img
-        src="https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_22_52%20PM.png"
+        src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=85"
         alt="Roof replacement Texas"
-        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.4 }}
+        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.1 }}
       />
       <div style={{ position:'absolute', inset:0, background:`linear-gradient(100deg, ${NAVY}F2 40%, ${NAVY}C0 65%, rgba(15,31,75,0.55) 100%)` }}/>
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>
@@ -480,7 +480,7 @@ function Footer() {
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div className="ld-ft" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:56, marginBottom:56, paddingBottom:56, borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
           <div>
-            <img src={LOGO} alt="LD Roofing & Exteriors" style={{ height:48, width:'auto', objectFit:'contain', marginBottom:20, filter:'brightness(0) invert(1)' }}
+            <img src={LOGO} alt="LD Roofing & Exteriors" style={{ height:48, width:'auto', objectFit:'contain', marginBottom:20, filter:'none' }}
               onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='block'}}/>
             <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:20, fontWeight:700, color:WHITE, display:'block', marginBottom:20 }}>LD Roofing & Exteriors</span>
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.38)', lineHeight:1.9, maxWidth:300, marginBottom:24 }}>Family-owned roofing contractor serving Houston and Dallas. Free inspections, honest estimates, and work we stand behind.</p>
