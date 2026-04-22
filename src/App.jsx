@@ -79,7 +79,7 @@ function Nav({ onSchedule }) {
           <img src={LOGO} alt="LD Roofing" style={{ height:44, width:'auto', objectFit:'contain', cursor:'pointer', filter:'brightness(0) invert(1)' }}
             onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
             onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
-          <span style={{ display:'none', fontFamily:'Georgia,serif', fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
+          <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
 
           <div className="ld-links" style={{ display:'flex', gap:36 }}>
             {[['services','Services'],['process','Process'],['reviews','Reviews'],['service-areas','Areas']].map(([id,label])=>(
@@ -118,10 +118,12 @@ function Nav({ onSchedule }) {
       )}
 
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
         img{display:block;max-width:100%}
-        @media(max-width:900px){.ld-links{display:none!important}.ld-cta{display:none!important}.ld-ham{display:flex!important}nav>div>div:first-child{padding:0 24px!important}}
+        body{font-family:'Barlow',sans-serif}
+        @media(max-width:900px){.ld-links{display:none!important}.ld-cta{display:none!important}.ld-ham{display:flex!important}}
       `}</style>
     </>
   )
@@ -129,48 +131,88 @@ function Nav({ onSchedule }) {
 
 // ─── Hero ─────────────────────────────────────────────────────
 function Hero({ onSchedule }) {
+  const [form, setForm] = useState({ name:'', phone:'', service:'' })
+  const [sent, setSent] = useState(false)
+  const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
+  const submit = () => {
+    const body = `Name: ${form.name}%0APhone: ${form.phone}%0AService: ${form.service}`
+    window.location.href = `mailto:${EMAIL}?subject=Free Roof Inspection Request&body=${body}`
+    setSent(true)
+  }
+  const inp = { width:'100%', padding:'13px 16px', fontSize:14, fontFamily:"'Barlow',sans-serif", border:'none', outline:'none', background:'rgba(255,255,255,0.95)', color:DARK, boxSizing:'border-box', marginBottom:10, borderRadius:2 }
+
   return (
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
-      <img src="https://images.unsplash.com/photo-1632889657688-a6e65b22bcb2?w=1920&q=85" alt=""
-        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 40%', opacity:0.32 }}/>
-      <div style={{ position:'absolute', inset:0, background:`linear-gradient(105deg, ${NAVY}F8 35%, ${NAVY}B0 65%, rgba(15,31,75,0.4) 100%)` }}/>
-      <div style={{ position:'absolute', left:0, top:0, bottom:0, width:4, background:ORANGE }}/>
+      {/* Real aerial roof replacement photo */}
+      <img
+        src="https://images.unsplash.com/photo-1632889657688-a6e65b22bcb2?w=1920&q=85"
+        alt="Roof replacement Texas"
+        style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 35%', opacity:0.4 }}
+      />
+      <div style={{ position:'absolute', inset:0, background:`linear-gradient(100deg, ${NAVY}F2 40%, ${NAVY}C0 65%, rgba(15,31,75,0.55) 100%)` }}/>
+      <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>
 
       <div style={{ position:'relative', maxWidth:1200, margin:'0 auto', padding:'140px 48px 100px', width:'100%' }}>
-        <div style={{ maxWidth:620 }}>
-          <div style={{ display:'inline-flex', alignItems:'center', gap:12, marginBottom:28 }}>
-            <div style={{ width:28, height:2, background:ORANGE }}/>
-            <span style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE }}>Houston & Dallas, Texas</span>
+        <div className="ld-hero-grid" style={{ display:'grid', gridTemplateColumns:'1fr 400px', gap:64, alignItems:'center' }}>
+
+          {/* Left — copy */}
+          <div>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:12, marginBottom:20 }}>
+              <div style={{ width:28, height:3, background:ORANGE }}/>
+              <span style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, fontFamily:"'Barlow',sans-serif" }}>Houston & Dallas, Texas</span>
+            </div>
+            <h1 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(48px,7vw,88px)', fontWeight:800, color:WHITE, lineHeight:0.95, marginBottom:24, textTransform:'uppercase', letterSpacing:'-0.5px' }}>
+              Roofing You<br/>Can Actually<br/><span style={{ color:ORANGE }}>Trust.</span>
+            </h1>
+            <p style={{ fontSize:17, color:'rgba(255,255,255,0.7)', lineHeight:1.75, marginBottom:36, maxWidth:460, fontFamily:"'Barlow',sans-serif" }}>
+              Family-owned. BBB A+ rated. Free inspections with zero pressure. Residential and commercial roofing done right — the first time.
+            </p>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px 28px', maxWidth:380 }}>
+              {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Licensed & Insured','Texas Certified'],['Free Inspections','No Commitment']].map(([a,b])=>(
+                <div key={a} style={{ display:'flex', gap:10, alignItems:'flex-start' }}>
+                  <span style={{ color:ORANGE, marginTop:2, flexShrink:0, fontSize:14 }}>✓</span>
+                  <div>
+                    <div style={{ fontSize:13, fontWeight:700, color:WHITE, fontFamily:"'Barlow',sans-serif" }}>{a}</div>
+                    <div style={{ fontSize:11, color:'rgba(255,255,255,0.4)', marginTop:1 }}>{b}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <h1 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(40px,5.5vw,70px)', fontWeight:700, color:WHITE, lineHeight:1.08, marginBottom:24 }}>
-            Roofing You Can<br/>Actually Trust.
-          </h1>
-          <p style={{ fontSize:18, color:'rgba(255,255,255,0.68)', lineHeight:1.8, marginBottom:44, maxWidth:480 }}>
-            Family-owned. BBB A+ rated. Free inspections with zero pressure. Residential and commercial roofing done right — the first time.
-          </p>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px 32px', marginBottom:48, maxWidth:400 }}>
-            {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Licensed & Insured','Texas Certified'],['Free Inspections','No Commitment']].map(([a,b])=>(
-              <div key={a} style={{ display:'flex', gap:10, alignItems:'flex-start' }}>
-                <span style={{ color:ORANGE, marginTop:2, flexShrink:0 }}>✓</span>
-                <div>
-                  <div style={{ fontSize:13, fontWeight:700, color:WHITE }}>{a}</div>
-                  <div style={{ fontSize:11, color:'rgba(255,255,255,0.45)', marginTop:1 }}>{b}</div>
+
+          {/* Right — inline form */}
+          <div style={{ background:WHITE, borderRadius:4, overflow:'hidden', boxShadow:'0 24px 64px rgba(0,0,0,0.35)' }}>
+            <div style={{ background:NAVY, borderBottom:`4px solid ${ORANGE}`, padding:'22px 24px' }}>
+              <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:22, fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', color:WHITE, marginBottom:2 }}>Get a Free Inspection</div>
+              <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)' }}>We respond within 24 hours</div>
+            </div>
+            {sent ? (
+              <div style={{ padding:'40px 24px', textAlign:'center' }}>
+                <div style={{ fontSize:36, marginBottom:12 }}>✅</div>
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:22, fontWeight:700, color:NAVY, textTransform:'uppercase', marginBottom:8 }}>Request Sent!</div>
+                <p style={{ fontSize:14, color:MUTED, lineHeight:1.7 }}>We'll call you within 24 hours to schedule your free inspection.</p>
+              </div>
+            ) : (
+              <div style={{ padding:'24px' }}>
+                <input style={inp} placeholder="Your Name *" value={form.name} onChange={set('name')}/>
+                <input style={{...inp, background:'#f0f0f0'}} placeholder="Phone Number *" value={form.phone} onChange={set('phone')}/>
+                <select style={{...inp, color:form.service?DARK:MUTED}} value={form.service} onChange={set('service')}>
+                  <option value="">Service Needed</option>
+                  {['Free Roof Inspection','Roof Repair','Roof Replacement','Roof Leak Repair','Attic Venting','Commercial Roofing','Free Estimate'].map(s=><option key={s}>{s}</option>)}
+                </select>
+                <button onClick={submit} style={{ width:'100%', background:ORANGE, color:WHITE, border:'none', padding:'15px', fontSize:14, fontWeight:700, fontFamily:"'Barlow',sans-serif", cursor:'pointer', borderRadius:2, letterSpacing:'0.5px', textTransform:'uppercase', transition:'background 0.2s', marginBottom:12 }}
+                  onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
+                  Request Free Inspection →
+                </button>
+                <div style={{ textAlign:'center', fontSize:13, color:MUTED }}>
+                  Or call: <a href={`tel:${PHONE}`} style={{ color:ORANGE, fontWeight:700, textDecoration:'none' }}>{PHONE}</a>
                 </div>
               </div>
-            ))}
-          </div>
-          <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
-            <button onClick={onSchedule} style={{...BTN, padding:'16px 32px', fontSize:14}}
-              onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
-              Get Free Inspection
-            </button>
-            <a href={`tel:${PHONE}`} style={{ display:'inline-flex', alignItems:'center', gap:8, background:'transparent', color:WHITE, border:'1px solid rgba(255,255,255,0.4)', padding:'15px 22px', fontSize:13, fontWeight:600, textDecoration:'none', borderRadius:2, transition:'all 0.2s', letterSpacing:'0.3px' }}
-              onMouseOver={e=>e.currentTarget.style.background='rgba(255,255,255,0.08)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
-              ↗ {PHONE}
-            </a>
+            )}
           </div>
         </div>
       </div>
+      <style>{`@media(max-width:900px){.ld-hero-grid{grid-template-columns:1fr!important}}`}</style>
     </section>
   )
 }
@@ -196,7 +238,7 @@ function Services({ onSchedule }) {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:56, flexWrap:'wrap', gap:24 }}>
           <div>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>What We Do</div>
-            <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4vw,44px)', color:NAVY, lineHeight:1.1 }}>Complete Roofing<br/>Services</h2>
+            <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY, lineHeight:1.1 }}>Complete Roofing<br/>Services</h2>
           </div>
           <button onClick={onSchedule} style={BTN}
             onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
@@ -208,7 +250,7 @@ function Services({ onSchedule }) {
             <div key={i} style={{ background:WHITE, padding:'36px 32px', transition:'background 0.2s' }}
               onMouseOver={e=>e.currentTarget.style.background=OFF} onMouseOut={e=>e.currentTarget.style.background=WHITE}>
               <div style={{ width:36, height:3, background:ORANGE, marginBottom:24 }}/>
-              <h3 style={{ fontFamily:'Georgia,serif', fontSize:18, color:NAVY, marginBottom:12, lineHeight:1.3 }}>{s.title}</h3>
+              <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:18, color:NAVY, marginBottom:12, lineHeight:1.3 }}>{s.title}</h3>
               <p style={{ fontSize:14, color:MUTED, lineHeight:1.85 }}>{s.desc}</p>
             </div>
           ))}
@@ -226,7 +268,7 @@ function Divisions() {
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div style={{ textAlign:'center', marginBottom:64 }}>
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Our Teams</div>
-          <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Two Divisions. One Standard.</h2>
+          <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Two Divisions. One Standard.</h2>
           <p style={{ fontSize:16, color:MUTED, maxWidth:480, margin:'16px auto 0', lineHeight:1.8 }}>Two family-run teams. When you call, you reach a real person who owns the business.</p>
         </div>
         <div className="ld-div" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
@@ -242,7 +284,7 @@ function Divisions() {
                 <div style={{ position:'absolute', bottom:18, left:22, fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:WHITE, background:d.accent, padding:'5px 12px' }}>{d.city}</div>
               </div>
               <div style={{ padding:'32px' }}>
-                <div style={{ fontFamily:'Georgia,serif', fontSize:21, color:NAVY, marginBottom:4 }}>{d.name}</div>
+                <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:21, color:NAVY, marginBottom:4 }}>{d.name}</div>
                 <div style={{ fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:20 }}>{d.title}</div>
                 <p style={{ fontSize:14, color:MUTED, lineHeight:1.85, marginBottom:24 }}>{d.desc}</p>
                 <a href={`tel:${PHONE}`} style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none', transition:'color 0.2s' }}
@@ -265,7 +307,7 @@ function Gallery() {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:40, flexWrap:'wrap', gap:16 }}>
           <div>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:10 }}>Portfolio</div>
-            <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(26px,3.5vw,40px)', color:WHITE }}>Recent Projects</h2>
+            <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(26px,3.5vw,40px)', color:WHITE }}>Recent Projects</h2>
           </div>
           <p style={{ fontSize:13, color:'rgba(255,255,255,0.35)', maxWidth:280, textAlign:'right', lineHeight:1.7 }}>Residential and commercial across Houston & Dallas.</p>
         </div>
@@ -293,7 +335,7 @@ function Process({ onSchedule }) {
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:80, alignItems:'start' }} className="ld-proc">
           <div>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>How It Works</div>
-            <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4vw,46px)', color:WHITE, lineHeight:1.12, marginBottom:24 }}>Our 5-Step<br/>Process</h2>
+            <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,46px)', color:WHITE, lineHeight:1.12, marginBottom:24 }}>Our 5-Step<br/>Process</h2>
             <p style={{ fontSize:16, color:'rgba(255,255,255,0.55)', lineHeight:1.8, marginBottom:40, maxWidth:380 }}>Every step is designed to make your experience transparent, easy, and stress-free.</p>
             <button onClick={onSchedule} style={{...BTN, padding:'16px 28px'}}
               onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
@@ -305,7 +347,7 @@ function Process({ onSchedule }) {
               <div key={i} style={{ display:'flex', gap:24, paddingBottom:30, borderBottom:i<PROCESS.length-1?'1px solid rgba(255,255,255,0.08)':'none', marginBottom:i<PROCESS.length-1?30:0 }}>
                 <div style={{ fontSize:11, fontWeight:700, color:ORANGE, letterSpacing:'2px', minWidth:26, paddingTop:2 }}>{p.n}</div>
                 <div>
-                  <div style={{ fontSize:16, fontWeight:700, color:WHITE, marginBottom:6, fontFamily:'Georgia,serif' }}>{p.title}</div>
+                  <div style={{ fontSize:16, fontWeight:700, color:WHITE, marginBottom:6, fontFamily:"'Source Serif 4',serif" }}>{p.title}</div>
                   <div style={{ fontSize:14, color:'rgba(255,255,255,0.5)', lineHeight:1.75 }}>{p.desc}</div>
                 </div>
               </div>
@@ -326,7 +368,7 @@ function Reviews() {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:56, flexWrap:'wrap', gap:24 }}>
           <div>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Testimonials</div>
-            <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>What Our Customers Say</h2>
+            <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>What Our Customers Say</h2>
           </div>
           <div style={{ textAlign:'right' }}>
             <div style={{ display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end', marginBottom:4 }}>
@@ -339,7 +381,7 @@ function Reviews() {
           {REVIEWS.slice(0,3).map((r,i)=>(
             <div key={i} style={{ background:WHITE, padding:'30px 26px', border:`1px solid ${BORDER}` }}>
               <Stars/>
-              <p style={{ fontSize:14, color:DARK, lineHeight:1.85, margin:'18px 0 22px', fontFamily:'Georgia,serif', fontStyle:'italic' }}>{r.text}</p>
+              <p style={{ fontSize:14, color:DARK, lineHeight:1.85, margin:'18px 0 22px', fontFamily:"'Source Serif 4',serif", fontStyle:'italic' }}>{r.text}</p>
               <div style={{ borderTop:`1px solid ${BORDER}`, paddingTop:18, display:'flex', alignItems:'center', gap:12 }}>
                 <div style={{ width:36, height:36, borderRadius:'50%', background:NAVY, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                   <span style={{ fontSize:13, fontWeight:700, color:WHITE }}>{r.name[0]}</span>
@@ -356,7 +398,7 @@ function Reviews() {
           {REVIEWS.slice(3).map((r,i)=>(
             <div key={i} style={{ background:WHITE, padding:'30px 26px', border:`1px solid ${BORDER}` }}>
               <Stars/>
-              <p style={{ fontSize:14, color:DARK, lineHeight:1.85, margin:'18px 0 22px', fontFamily:'Georgia,serif', fontStyle:'italic' }}>{r.text}</p>
+              <p style={{ fontSize:14, color:DARK, lineHeight:1.85, margin:'18px 0 22px', fontFamily:"'Source Serif 4',serif", fontStyle:'italic' }}>{r.text}</p>
               <div style={{ borderTop:`1px solid ${BORDER}`, paddingTop:18, display:'flex', alignItems:'center', gap:12 }}>
                 <div style={{ width:36, height:36, borderRadius:'50%', background:ORANGE, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                   <span style={{ fontSize:13, fontWeight:700, color:WHITE }}>{r.name[0]}</span>
@@ -382,7 +424,7 @@ function ServiceAreas() {
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div style={{ textAlign:'center', marginBottom:64 }}>
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Coverage</div>
-          <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Serving Houston & Dallas</h2>
+          <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Serving Houston & Dallas</h2>
         </div>
         <div className="ld-area" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
           {[
@@ -392,7 +434,7 @@ function ServiceAreas() {
             <div key={city} style={{ border:`1px solid ${BORDER}`, padding:'36px 32px' }}>
               <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:28 }}>
                 <div style={{ width:4, height:36, background:color, borderRadius:2 }}/>
-                <h3 style={{ fontFamily:'Georgia,serif', fontSize:22, color:NAVY }}>{city} Metro</h3>
+                <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY }}>{city} Metro</h3>
               </div>
               <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
                 {areas.map(a=><span key={a} style={{ fontSize:12, background:OFF, border:`1px solid ${BORDER}`, padding:'5px 12px', color:DARK }}>{a}</span>)}
@@ -414,7 +456,7 @@ function CTA({ onSchedule }) {
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:4, background:ORANGE }}/>
       <div style={{ position:'relative', maxWidth:700, margin:'0 auto', textAlign:'center' }}>
         <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:20 }}>Get Started Today</div>
-        <h2 style={{ fontFamily:'Georgia,serif', fontSize:'clamp(28px,4.5vw,54px)', color:WHITE, lineHeight:1.12, marginBottom:20 }}>Your Roof Deserves<br/>a Second Opinion.</h2>
+        <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4.5vw,54px)', color:WHITE, lineHeight:1.12, marginBottom:20 }}>Your Roof Deserves<br/>a Second Opinion.</h2>
         <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.8, marginBottom:44 }}>Our inspection is completely free — no obligation, no pressure. Just an honest assessment from people who care.</p>
         <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
           <button onClick={onSchedule} style={{...BTN, padding:'16px 36px', fontSize:14}}
@@ -440,7 +482,7 @@ function Footer() {
           <div>
             <img src={LOGO} alt="LD Roofing & Exteriors" style={{ height:48, width:'auto', objectFit:'contain', marginBottom:20, filter:'brightness(0) invert(1)' }}
               onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='block'}}/>
-            <span style={{ display:'none', fontFamily:'Georgia,serif', fontSize:20, fontWeight:700, color:WHITE, display:'block', marginBottom:20 }}>LD Roofing & Exteriors</span>
+            <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:20, fontWeight:700, color:WHITE, display:'block', marginBottom:20 }}>LD Roofing & Exteriors</span>
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.38)', lineHeight:1.9, maxWidth:300, marginBottom:24 }}>Family-owned roofing contractor serving Houston and Dallas. Free inspections, honest estimates, and work we stand behind.</p>
             <a href={`tel:${PHONE}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:6, transition:'color 0.2s' }}
               onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE}</a>
@@ -489,14 +531,14 @@ function ScheduleModal({ onClose }) {
         <div style={{ background:NAVY, padding:'24px 28px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
           <div>
             <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:4 }}>Free — No Obligation</div>
-            <div style={{ fontFamily:'Georgia,serif', fontSize:20, color:WHITE }}>Schedule Your Inspection</div>
+            <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:20, color:WHITE }}>Schedule Your Inspection</div>
           </div>
           <button onClick={onClose} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.5)', fontSize:22, cursor:'pointer', lineHeight:1 }}>✕</button>
         </div>
         {sent ? (
           <div style={{ padding:'48px 32px', textAlign:'center' }}>
             <div style={{ fontSize:40, marginBottom:16 }}>✅</div>
-            <div style={{ fontFamily:'Georgia,serif', fontSize:22, color:NAVY, marginBottom:12 }}>Request Sent</div>
+            <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY, marginBottom:12 }}>Request Sent</div>
             <p style={{ fontSize:14, color:MUTED, lineHeight:1.7, marginBottom:24 }}>We'll be in touch within 24 hours to confirm your free inspection.</p>
             <button onClick={onClose} style={BTN} onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Close</button>
           </div>
@@ -542,7 +584,7 @@ function StickyBar({ onSchedule }) {
 export default function App() {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ fontFamily:'"Helvetica Neue", Arial, sans-serif', color:DARK, overflowX:'hidden' }}>
+    <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK, overflowX:'hidden' }}>
       <Nav onSchedule={()=>setOpen(true)}/>
       <Hero onSchedule={()=>setOpen(true)}/>
       <TrustBar/>
