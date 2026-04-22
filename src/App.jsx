@@ -14,7 +14,7 @@ const WHITE   = '#FFFFFF'
 
 const PHONE = '(469) 585-8908'
 const EMAIL = 'Info@ld-roofing.com'
-const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_36_58%20PM.png'
+const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_42_57%20PM.png'
 
 const REVIEWS = [
   { name:'Rick', role:'Business Owner', stars:5, text:'"LD Roofing & Exteriors are the most professional and friendly contractors I have ever worked with. Top quality work and great pricing. Lane the owner really cares about helping his clients."' },
