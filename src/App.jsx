@@ -76,7 +76,7 @@ function Nav({ onSchedule }) {
     <>
       <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
         <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height:72, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <img src={LOGO} alt="LD Roofing" style={{ height:44, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none' }}
+          <img src={LOGO} alt="LD Roofing" style={{ height:44, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', opacity:scrolled?1:0, transition:'opacity 0.4s ease' }}
             onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
             onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
           <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
@@ -157,6 +157,9 @@ function Hero({ onSchedule }) {
 
           {/* Left — copy */}
           <div>
+            {/* Large hero logo — visible only before scroll */}
+            <img src={LOGO} alt="LD Roofing & Exteriors"
+              style={{ height:110, width:'auto', objectFit:'contain', marginBottom:32, display:'block' }}/>
             <div style={{ display:'inline-flex', alignItems:'center', gap:12, marginBottom:20 }}>
               <div style={{ width:28, height:3, background:ORANGE }}/>
               <span style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, fontFamily:"'Barlow',sans-serif" }}>Houston & Dallas, Texas</span>
