@@ -938,7 +938,7 @@ function StickyBar({ onSchedule }) {
 export default function App() {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK, overflowX:'hidden' }}>
+    <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK }}>
       <Nav onSchedule={()=>setOpen(true)}/>
       <Hero onSchedule={()=>setOpen(true)}/>
       <TrustBar/>
