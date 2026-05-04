@@ -49,15 +49,16 @@ const COM_SERVICES = [
 ]
 
 // Roof types showcase — every type LD installs
+// Image URLs are placeholders — swap with Supabase URLs of real LD jobs when ready.
 const ROOF_TYPES = [
-  { name:'Asphalt Shingle', tag:'Most popular', img:'https://images.unsplash.com/photo-1635424710928-0544e8761d6d?w=1600&q=80', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
-  { name:'Standing Seam Metal', tag:'Premium look', img:'https://images.unsplash.com/photo-1632113898172-30a31dbc05d8?w=1600&q=80', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
-  { name:'Corrugated Metal', tag:'Workhorse', img:'https://images.unsplash.com/photo-1632112728206-72d5da92e6ef?w=1600&q=80', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
-  { name:'Clay & Concrete Tile', tag:'Mediterranean', img:'https://images.unsplash.com/photo-1605274151981-1762d7593cb1?w=1600&q=80', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
-  { name:'TPO Membrane', tag:'Commercial flat', img:'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1600&q=80', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
-  { name:'EPDM Rubber', tag:'Proven flat', img:'https://images.unsplash.com/photo-1632113898172-30a31dbc05d8?w=1600&q=80', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
-  { name:'Modified Bitumen', tag:'Flat & low-slope', img:'https://images.unsplash.com/photo-1635424710928-0544e8761d6d?w=1600&q=80', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
-  { name:'Slate & Cedar Shake', tag:'Specialty', img:'https://images.unsplash.com/photo-1605114114099-fbb2bd2c9b27?w=1600&q=80', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
+  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://images.unsplash.com/photo-1632759145355-8b8f3fc3a4f0?w=1600&q=80', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
+  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1600&q=80', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
+  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1600&q=80', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
+  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
+  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
+  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
+  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
+  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
 ]
 
 const PROCESS = [
@@ -408,18 +409,26 @@ function RoofTypes() {
       if (!el) return
       const rect = el.getBoundingClientRect()
       const vh = window.innerHeight
-      const total = el.offsetHeight - vh
-      // 0 when section top hits viewport top, 1 when bottom hits viewport bottom
-      const scrolled = -rect.top
+      const total = Math.max(1, el.offsetHeight - vh)
+      // Section top above viewport top = positive scrolled value
+      const scrolled = Math.max(0, -rect.top)
       const p = Math.max(0, Math.min(1, scrolled / total))
       setProgress(p)
-      const idx = Math.min(ROOF_TYPES.length - 1, Math.floor(p * ROOF_TYPES.length))
+      // Each roof type gets an equal slice of the scroll range
+      const slice = 1 / ROOF_TYPES.length
+      const idx = Math.min(ROOF_TYPES.length - 1, Math.floor(p / slice))
       setActive(idx)
     }
+    // Run after layout settles
     fn()
+    const t = setTimeout(fn, 100)
     window.addEventListener('scroll', fn, { passive:true })
     window.addEventListener('resize', fn)
-    return () => { window.removeEventListener('scroll', fn); window.removeEventListener('resize', fn) }
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('scroll', fn)
+      window.removeEventListener('resize', fn)
+    }
   }, [])
 
   return (
@@ -428,15 +437,26 @@ function RoofTypes() {
       ref={sectionRef}
       style={{ position:'relative', background:DARK, height:`${ROOF_TYPES.length * 80}vh` }}
     >
-      <div style={{ position:'sticky', top:0, height:'100vh', overflow:'hidden' }}>
-        {/* Layered images cross-fade */}
+      <div style={{ position:'sticky', top:0, height:'100vh', overflow:'hidden', background:DARK }}>
+        {/* Layered images cross-fade — all rendered, opacity controls visibility */}
         {ROOF_TYPES.map((t,i)=>(
           <div key={i} style={{
             position:'absolute', inset:0,
             opacity: i===active ? 1 : 0,
             transition:'opacity 0.7s ease',
+            zIndex: i===active ? 2 : 1,
           }}>
-            <img src={t.img} alt={t.name} style={{ width:'100%', height:'100%', objectFit:'cover', transform:`scale(${i===active ? 1.05 : 1})`, transition:'transform 6s ease-out' }}/>
+            <img
+              src={t.img}
+              alt={t.name}
+              loading={i < 2 ? 'eager' : 'lazy'}
+              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+              onError={e => {
+                // Fallback to a colored block if image fails to load
+                e.target.style.display = 'none'
+                e.target.parentElement.style.background = `linear-gradient(135deg, ${NAVY} 0%, ${DARK} 100%)`
+              }}
+            />
             <div style={{ position:'absolute', inset:0, background:`linear-gradient(115deg, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.3) 100%)` }}/>
           </div>
         ))}
