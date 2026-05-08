@@ -16,10 +16,9 @@ const PHONE = '(469) 585-8908'
 const EMAIL = 'Info@ld-roofing.com'
 const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_48_39%20PM.png'
 
-// PLACEHOLDER images — swap with Supabase URLs when ready.
-// These intentionally show suburban / mid-market Texas homes, not luxury.
-const HERO_IMG = 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1920&q=80'
-const CTA_IMG  = 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1600&q=80'
+// Real LD Roofing photos from Supabase
+const HERO_IMG = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
+const CTA_IMG  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199361435-0-Our-Work.jpg'
 
 const REVIEWS = [
   { name:'Rick', role:'Business Owner', stars:5, text:'"LD Roofing & Exteriors are the most professional and friendly contractors I have ever worked with. Top quality work and great pricing. Lane the owner really cares about helping his clients."' },
@@ -49,16 +48,26 @@ const COM_SERVICES = [
 ]
 
 // Roof types showcase — every type LD installs
-// Image URLs are placeholders — swap with Supabase URLs of real LD jobs when ready.
+// Photos split: residential photos for residential-style roofs, commercial for commercial-style
+const RES_PHOTO_1 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199338635-0-R-photo-gallery-3.jpg'
+const RES_PHOTO_2 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199341205-0-R-photo-gallery-5.jpg'
+const RES_PHOTO_3 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199344049-0-R-photo-gallery-6.jpg'
+const RES_PHOTO_4 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
+const COM_PHOTO_1 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199373951-0-C-photo-gallery-1.jpg'
+const COM_PHOTO_2 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199380131-0-C-Photo-gallery-5.jpg'
+const COM_PHOTO_3 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199388156-0-C-photo-gallery-9.jpg'
+const COM_PHOTO_4 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199484168-0-C-Photo-gallery-6.jpg'
+const COM_PHOTO_5 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199367549-0-InstallationMore2.jpg'
+
 const ROOF_TYPES = [
-  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://images.unsplash.com/photo-1632759145355-8b8f3fc3a4f0?w=1600&q=80', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
-  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1600&q=80', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
-  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1600&q=80', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
-  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
-  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
-  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
-  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
-  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
+  { name:'Asphalt Shingle',      tag:'Most popular',     img:RES_PHOTO_4, desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
+  { name:'Standing Seam Metal',  tag:'Premium look',     img:RES_PHOTO_1, desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
+  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:RES_PHOTO_2, desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
+  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:RES_PHOTO_3, desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
+  { name:'TPO Membrane',         tag:'Commercial flat',  img:COM_PHOTO_1, desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
+  { name:'EPDM Rubber',          tag:'Proven flat',      img:COM_PHOTO_2, desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
+  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:COM_PHOTO_3, desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
+  { name:'Corrugated Metal',     tag:'Workhorse',        img:COM_PHOTO_5, desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
 ]
 
 const PROCESS = [
@@ -76,20 +85,16 @@ const STATS = [
 ]
 
 const GALLERY = [
-  { src:'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=85', label:'Residential · Houston' },
-  { src:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85', label:'Commercial Flat · Dallas' },
-  { src:'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=900&q=85', label:'Storm Repair · Katy' },
-  { src:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=85', label:'Full Replacement · Sugar Land' },
-  { src:'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=900&q=85', label:'Shingle Install · Plano' },
-  { src:'https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=900&q=85', label:'TPO Coating · Frisco' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199338635-0-R-photo-gallery-3.jpg', label:'Residential Roof · Houston' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199484168-0-C-Photo-gallery-6.jpg', label:'Commercial Project · Dallas' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199330797-0-gutter-rapair.jpg', label:'Gutter Repair · Residential' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199373951-0-C-photo-gallery-1.jpg', label:'Commercial Flat · DFW' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199341205-0-R-photo-gallery-5.jpg', label:'Residential · Sugar Land' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199367549-0-InstallationMore2.jpg', label:'Commercial Install · Houston' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199334228-0-siding.jpg', label:'Siding Project · Residential' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199380131-0-C-Photo-gallery-5.jpg', label:'Commercial · Plano' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199344049-0-R-photo-gallery-6.jpg', label:'Roof Replacement · Katy' },
 ]
-
-// Before/after pair (placeholder — replace with real Supabase URLs)
-const BEFORE_AFTER = {
-  before: 'https://images.unsplash.com/photo-1632113898172-30a31dbc05d8?w=1400&q=85',
-  after:  'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=85',
-  label:  'Storm-damaged shingle replacement · Houston'
-}
 
 function Stars() {
   return <span style={{ color:ORANGE, fontSize:15, letterSpacing:3 }}>★★★★★</span>
@@ -564,78 +569,6 @@ function Divisions() {
   )
 }
 
-// ─── Before/After Slider ──────────────────────────────────────
-function BeforeAfter() {
-  const [pos, setPos] = useState(50)
-  const containerRef = useRef(null)
-  const dragging = useRef(false)
-  const [ref, shown] = useReveal(0.2)
-
-  const update = clientX => {
-    const el = containerRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const x = clientX - rect.left
-    setPos(Math.max(0, Math.min(100, (x / rect.width) * 100)))
-  }
-  const onDown = e => { dragging.current = true; e.preventDefault() }
-  const onMove = e => { if (!dragging.current) return; const x = e.touches ? e.touches[0].clientX : e.clientX; update(x) }
-  const onUp = () => { dragging.current = false }
-
-  useEffect(() => {
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseup', onUp)
-    window.addEventListener('touchmove', onMove)
-    window.addEventListener('touchend', onUp)
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseup', onUp)
-      window.removeEventListener('touchmove', onMove)
-      window.removeEventListener('touchend', onUp)
-    }
-  }, [])
-
-  return (
-    <section ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:WHITE, padding:'96px 48px' }}>
-      <div style={{ maxWidth:1200, margin:'0 auto' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:40, flexWrap:'wrap', gap:16 }}>
-          <div>
-            <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Before & After</div>
-            <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>See the Difference</h2>
-          </div>
-          <p style={{ fontSize:14, color:MUTED, maxWidth:340, lineHeight:1.7 }}>Drag the slider to compare. Real project — real results.</p>
-        </div>
-
-        <div
-          ref={containerRef}
-          onMouseDown={onDown}
-          onTouchStart={e=>{ dragging.current=true; update(e.touches[0].clientX) }}
-          onClick={e=>update(e.clientX)}
-          style={{ position:'relative', width:'100%', aspectRatio:'16/9', overflow:'hidden', cursor:'ew-resize', userSelect:'none', border:`1px solid ${BORDER}`, background:DARK }}
-        >
-          <img src={BEFORE_AFTER.after} alt="After" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', pointerEvents:'none' }}/>
-          <div style={{ position:'absolute', inset:0, width:`${pos}%`, overflow:'hidden' }}>
-            <img src={BEFORE_AFTER.before} alt="Before" style={{ position:'absolute', top:0, left:0, height:'100%', width:`${100*100/pos}%`, maxWidth:'none', objectFit:'cover', pointerEvents:'none' }}/>
-            <div style={{ position:'absolute', top:18, left:18, background:'rgba(13,13,13,0.85)', color:WHITE, fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', padding:'6px 12px' }}>Before</div>
-          </div>
-          <div style={{ position:'absolute', top:18, right:18, background:`${ORANGE}E0`, color:WHITE, fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', padding:'6px 12px' }}>After</div>
-
-          {/* Divider line + handle */}
-          <div style={{ position:'absolute', top:0, bottom:0, left:`${pos}%`, width:3, background:WHITE, transform:'translateX(-50%)', boxShadow:'0 0 24px rgba(0,0,0,0.5)' }}/>
-          <div
-            onMouseDown={onDown}
-            onTouchStart={e=>{ dragging.current=true; e.stopPropagation() }}
-            style={{ position:'absolute', top:'50%', left:`${pos}%`, transform:'translate(-50%,-50%)', width:48, height:48, borderRadius:'50%', background:WHITE, border:`3px solid ${ORANGE}`, display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 6px 20px rgba(0,0,0,0.35)', cursor:'ew-resize' }}
-          >
-            <span style={{ color:ORANGE, fontSize:18, fontWeight:800 }}>⇆</span>
-          </div>
-        </div>
-        <div style={{ marginTop:18, fontSize:12, color:MUTED, textAlign:'center' }}>{BEFORE_AFTER.label}</div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Gallery ──────────────────────────────────────────────────
 function Gallery() {
   const [ref, shown] = useReveal(0.1)
@@ -946,7 +879,6 @@ export default function App() {
       <Services onSchedule={()=>setOpen(true)}/>
       <RoofTypes/>
       <Divisions/>
-      <BeforeAfter/>
       <Gallery/>
       <Process onSchedule={()=>setOpen(true)}/>
       <Reviews/>
