@@ -49,14 +49,14 @@ const COM_SERVICES = [
 
 // Roof types showcase — every type LD installs, with material-specific photos
 const ROOF_TYPES = [
-  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200764896-0-images.jpg', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
-  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200795740-0-download.jpg', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
-  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200814499-0-download.jpg', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
-  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200835387-0-images.jpg', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
-  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200880005-0-images.jpg', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
-  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200904597-0-download.jpg', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
-  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778200939320-0-images.jpg', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
-  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778200967423-0-download.jpg', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
+  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202331445-0-shingle.png', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
+  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202322708-0-metal.png', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
+  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202315029-0-clay.png', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
+  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202309750-0-cedar.png', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
+  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202336712-0-tpo.png', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
+  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202327587-0-rubber.png', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
+  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202325195-0-modified-bitumen.png', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
+  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202318420-0-corrugated-metal.png', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
 ]
 
 const PROCESS = [
@@ -414,8 +414,44 @@ function RoofTypes() {
             Every Type of Roof.<br/>Every Budget.
           </h2>
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.8, maxWidth:560 }}>
-            From asphalt shingle to standing seam metal, we install the right roof for your property — and your wallet. Click any type to learn more.
+            From asphalt shingle to standing seam metal, we install the right roof for your property — and your wallet. Pick a type below to learn more.
           </p>
+        </div>
+
+        {/* Mobile-only dropdown selector */}
+        <div className="ld-rt-mobile-select" style={{ display:'none', marginBottom:0 }}>
+          <label style={{ display:'block', fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.55)', marginBottom:10 }}>
+            Choose a roof type
+          </label>
+          <div style={{ position:'relative' }}>
+            <select
+              value={active}
+              onChange={e => setActive(Number(e.target.value))}
+              style={{
+                width:'100%',
+                padding:'16px 44px 16px 18px',
+                fontSize:16,
+                fontFamily:'inherit',
+                fontWeight:700,
+                background:NAVY,
+                color:WHITE,
+                border:`2px solid ${ORANGE}`,
+                borderRadius:2,
+                appearance:'none',
+                WebkitAppearance:'none',
+                MozAppearance:'none',
+                cursor:'pointer',
+                outline:'none',
+              }}
+            >
+              {ROOF_TYPES.map((rt,i)=>(
+                <option key={i} value={i} style={{ background:NAVY, color:WHITE }}>
+                  {String(i+1).padStart(2,'0')} — {rt.name} · {rt.tag}
+                </option>
+              ))}
+            </select>
+            <span style={{ position:'absolute', right:18, top:'50%', transform:'translateY(-50%)', color:ORANGE, fontSize:14, pointerEvents:'none' }}>▼</span>
+          </div>
         </div>
 
         <div className="ld-rt-grid" style={{ display:'grid', gridTemplateColumns:'320px 1fr', gap:0, border:'1px solid rgba(255,255,255,0.08)' }}>
@@ -513,9 +549,9 @@ function RoofTypes() {
       <style>{`
         @keyframes rtFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
         @media(max-width:900px){
+          .ld-rt-mobile-select{display:block!important;margin-bottom:24px!important}
           .ld-rt-grid{grid-template-columns:1fr!important}
-          .ld-rt-grid > div:first-child{border-right:none!important;border-bottom:1px solid rgba(255,255,255,0.08)!important;display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory}
-          .ld-rt-grid > div:first-child > button{min-width:200px;flex-shrink:0;scroll-snap-align:start;border-bottom:none!important;border-right:1px solid rgba(255,255,255,0.06)}
+          .ld-rt-grid > div:first-child{display:none!important}
         }
       `}</style>
     </section>
