@@ -47,27 +47,16 @@ const COM_SERVICES = [
   { title:'Maintenance Programs', desc:'Scheduled commercial maintenance to catch small issues before they become major capital expenses.' },
 ]
 
-// Roof types showcase — every type LD installs
-// Photos split: residential photos for residential-style roofs, commercial for commercial-style
-const RES_PHOTO_1 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199338635-0-R-photo-gallery-3.jpg'
-const RES_PHOTO_2 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199341205-0-R-photo-gallery-5.jpg'
-const RES_PHOTO_3 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199344049-0-R-photo-gallery-6.jpg'
-const RES_PHOTO_4 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
-const COM_PHOTO_1 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199373951-0-C-photo-gallery-1.jpg'
-const COM_PHOTO_2 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199380131-0-C-Photo-gallery-5.jpg'
-const COM_PHOTO_3 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199388156-0-C-photo-gallery-9.jpg'
-const COM_PHOTO_4 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199484168-0-C-Photo-gallery-6.jpg'
-const COM_PHOTO_5 = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199367549-0-InstallationMore2.jpg'
-
+// Roof types showcase — every type LD installs, with material-specific photos
 const ROOF_TYPES = [
-  { name:'Asphalt Shingle',      tag:'Most popular',     img:RES_PHOTO_4, desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
-  { name:'Standing Seam Metal',  tag:'Premium look',     img:RES_PHOTO_1, desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
-  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:RES_PHOTO_2, desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
-  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:RES_PHOTO_3, desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
-  { name:'TPO Membrane',         tag:'Commercial flat',  img:COM_PHOTO_1, desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
-  { name:'EPDM Rubber',          tag:'Proven flat',      img:COM_PHOTO_2, desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
-  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:COM_PHOTO_3, desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
-  { name:'Corrugated Metal',     tag:'Workhorse',        img:COM_PHOTO_5, desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
+  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200764896-0-images.jpg', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
+  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200795740-0-download.jpg', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
+  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778200814499-0-download.jpg', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
+  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200835387-0-images.jpg', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
+  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200880005-0-images.jpg', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
+  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778200904597-0-download.jpg', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
+  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778200939320-0-images.jpg', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
+  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778200967423-0-download.jpg', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
 ]
 
 const PROCESS = [
@@ -402,133 +391,137 @@ function Services({ onSchedule }) {
   )
 }
 
-// ─── Roof Types — scroll-driven showcase ──────────────────────
+// ─── Roof Types — tabbed grid ─────────────────────────────────
 function RoofTypes() {
-  const sectionRef = useRef(null)
   const [active, setActive] = useState(0)
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const fn = () => {
-      const el = sectionRef.current
-      if (!el) return
-      const rect = el.getBoundingClientRect()
-      const vh = window.innerHeight
-      const total = Math.max(1, el.offsetHeight - vh)
-      // Section top above viewport top = positive scrolled value
-      const scrolled = Math.max(0, -rect.top)
-      const p = Math.max(0, Math.min(1, scrolled / total))
-      setProgress(p)
-      // Each roof type gets an equal slice of the scroll range
-      const slice = 1 / ROOF_TYPES.length
-      const idx = Math.min(ROOF_TYPES.length - 1, Math.floor(p / slice))
-      setActive(idx)
-    }
-    // Run after layout settles
-    fn()
-    const t = setTimeout(fn, 100)
-    window.addEventListener('scroll', fn, { passive:true })
-    window.addEventListener('resize', fn)
-    return () => {
-      clearTimeout(t)
-      window.removeEventListener('scroll', fn)
-      window.removeEventListener('resize', fn)
-    }
-  }, [])
+  const [ref, shown] = useReveal(0.1)
+  const t = ROOF_TYPES[active]
 
   return (
     <section
       id="roof-types"
-      ref={sectionRef}
-      style={{ position:'relative', background:DARK, height:`${ROOF_TYPES.length * 80}vh` }}
+      ref={ref}
+      className={`reveal ${shown?'is-in':''}`}
+      style={{ background:DARK, padding:'96px 48px', position:'relative', overflow:'hidden' }}
     >
-      <div style={{ position:'sticky', top:0, height:'100vh', overflow:'hidden', background:DARK }}>
-        {/* Layered images cross-fade — all rendered, opacity controls visibility */}
-        {ROOF_TYPES.map((t,i)=>(
-          <div key={i} style={{
-            position:'absolute', inset:0,
-            opacity: i===active ? 1 : 0,
-            transition:'opacity 0.7s ease',
-            zIndex: i===active ? 2 : 1,
-          }}>
-            <img
-              src={t.img}
-              alt={t.name}
-              loading={i < 2 ? 'eager' : 'lazy'}
-              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
-              onError={e => {
-                // Fallback to a colored block if image fails to load
-                e.target.style.display = 'none'
-                e.target.parentElement.style.background = `linear-gradient(135deg, ${NAVY} 0%, ${DARK} 100%)`
-              }}
-            />
-            <div style={{ position:'absolute', inset:0, background:`linear-gradient(115deg, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.3) 100%)` }}/>
+      {/* Subtle background accent */}
+      <div style={{ position:'absolute', top:0, right:0, width:'40%', height:'100%', background:`linear-gradient(135deg, transparent 0%, ${NAVY}40 100%)`, pointerEvents:'none' }}/>
+
+      <div style={{ maxWidth:1200, margin:'0 auto', position:'relative' }}>
+        <div style={{ marginBottom:48 }}>
+          <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:14 }}>Roof Types We Install</div>
+          <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,46px)', color:WHITE, lineHeight:1.1, marginBottom:18, maxWidth:720 }}>
+            Every Type of Roof.<br/>Every Budget.
+          </h2>
+          <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.8, maxWidth:560 }}>
+            From asphalt shingle to standing seam metal, we install the right roof for your property — and your wallet. Click any type to learn more.
+          </p>
+        </div>
+
+        <div className="ld-rt-grid" style={{ display:'grid', gridTemplateColumns:'320px 1fr', gap:0, border:'1px solid rgba(255,255,255,0.08)' }}>
+          {/* Tab list */}
+          <div style={{ background:'rgba(0,0,0,0.3)', borderRight:'1px solid rgba(255,255,255,0.08)' }}>
+            {ROOF_TYPES.map((rt, i) => {
+              const isActive = i === active
+              return (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  style={{
+                    display:'block', width:'100%', textAlign:'left',
+                    background: isActive ? ORANGE : 'transparent',
+                    border:'none', borderBottom: i < ROOF_TYPES.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                    padding:'18px 24px', cursor:'pointer', fontFamily:'inherit',
+                    transition:'all 0.25s ease', position:'relative',
+                  }}
+                  onMouseOver={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
+                  onMouseOut={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
+                >
+                  <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+                    <span style={{
+                      fontSize:11, fontWeight:700, letterSpacing:'1px',
+                      color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.3)',
+                      minWidth:24,
+                    }}>
+                      {String(i+1).padStart(2,'0')}
+                    </span>
+                    <div style={{ flex:1 }}>
+                      <div style={{
+                        fontSize:15, fontWeight:700,
+                        color: isActive ? WHITE : 'rgba(255,255,255,0.85)',
+                        fontFamily:"'Barlow Condensed',sans-serif",
+                        letterSpacing:'0.5px', textTransform:'uppercase',
+                        marginBottom:2,
+                      }}>
+                        {rt.name}
+                      </div>
+                      <div style={{
+                        fontSize:11, fontWeight:600,
+                        color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)',
+                        letterSpacing:'0.5px',
+                      }}>
+                        {rt.tag}
+                      </div>
+                    </div>
+                    {isActive && <span style={{ color:WHITE, fontSize:18 }}>→</span>}
+                  </div>
+                </button>
+              )
+            })}
           </div>
-        ))}
 
-        {/* Top progress bar */}
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:'rgba(255,255,255,0.08)', zIndex:5 }}>
-          <div style={{ height:'100%', width:`${progress*100}%`, background:ORANGE, transition:'width 0.1s linear' }}/>
-        </div>
-
-        {/* Side dot index */}
-        <div className="ld-rt-dots" style={{ position:'absolute', right:48, top:'50%', transform:'translateY(-50%)', display:'flex', flexDirection:'column', gap:14, zIndex:5 }}>
-          {ROOF_TYPES.map((t,i)=>(
-            <div key={i} style={{ display:'flex', alignItems:'center', gap:12, opacity: i===active ? 1 : 0.35, transition:'opacity 0.4s' }}>
-              <span style={{ fontSize:10, fontWeight:700, color:WHITE, letterSpacing:'2px', textTransform:'uppercase', minWidth:140, textAlign:'right' }}>{t.name}</span>
-              <span style={{ width: i===active ? 28 : 8, height:2, background: i===active ? ORANGE : WHITE, transition:'all 0.4s' }}/>
-            </div>
-          ))}
-        </div>
-
-        {/* Content */}
-        <div style={{ position:'relative', height:'100%', display:'flex', alignItems:'center', padding:'0 48px', zIndex:4 }}>
-          <div style={{ maxWidth:1200, margin:'0 auto', width:'100%' }}>
-            <div className="ld-rt-content" style={{ maxWidth:580 }}>
-              <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:18 }}>
-                Roof Types We Install · {String(active+1).padStart(2,'0')} / {String(ROOF_TYPES.length).padStart(2,'0')}
-              </div>
-              <div key={active} style={{ animation:'rtFade 0.6s ease' }}>
-                <div style={{ display:'inline-block', fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:WHITE, background:'rgba(232,112,26,0.85)', padding:'5px 12px', marginBottom:18 }}>
-                  {ROOF_TYPES[active].tag}
+          {/* Detail panel */}
+          <div style={{ position:'relative', minHeight:520, background:NAVY, overflow:'hidden' }}>
+            <div key={active} style={{ animation:'rtFade 0.5s ease' }}>
+              {/* Image */}
+              <div style={{ position:'relative', height:340, overflow:'hidden' }}>
+                <img
+                  src={t.img}
+                  alt={t.name}
+                  style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+                  onError={e => { e.target.style.display='none'; e.target.parentElement.style.background = `linear-gradient(135deg, ${NAVY} 0%, ${DARK} 100%)` }}
+                />
+                <div style={{ position:'absolute', inset:0, background:`linear-gradient(180deg, transparent 50%, rgba(15,31,75,0.85) 100%)` }}/>
+                <div style={{ position:'absolute', top:20, left:20, background:`${ORANGE}E6`, color:WHITE, fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', padding:'6px 12px' }}>
+                  {t.tag}
                 </div>
-                <h2 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(44px,6vw,82px)', fontWeight:800, color:WHITE, lineHeight:0.95, marginBottom:20, textTransform:'uppercase', letterSpacing:'-0.5px' }}>
-                  {ROOF_TYPES[active].name}
-                </h2>
-                <p style={{ fontSize:16, color:'rgba(255,255,255,0.78)', lineHeight:1.8, marginBottom:28, maxWidth:520 }}>
-                  {ROOF_TYPES[active].desc}
+              </div>
+
+              {/* Content */}
+              <div style={{ padding:'32px 40px' }}>
+                <h3 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(32px,3.5vw,42px)', fontWeight:800, color:WHITE, marginBottom:16, textTransform:'uppercase', letterSpacing:'-0.3px', lineHeight:1 }}>
+                  {t.name}
+                </h3>
+                <p style={{ fontSize:15, color:'rgba(255,255,255,0.72)', lineHeight:1.8, marginBottom:24 }}>
+                  {t.desc}
                 </p>
-                <div style={{ display:'flex', gap:32, flexWrap:'wrap' }}>
+                <div style={{ display:'flex', gap:40, flexWrap:'wrap', paddingTop:20, borderTop:'1px solid rgba(255,255,255,0.1)' }}>
                   <div>
-                    <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.5)', marginBottom:6 }}>Best For</div>
-                    <div style={{ fontSize:14, color:WHITE, fontWeight:600 }}>{ROOF_TYPES[active].good}</div>
+                    <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.45)', marginBottom:6 }}>Best For</div>
+                    <div style={{ fontSize:14, color:WHITE, fontWeight:600 }}>{t.good}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.5)', marginBottom:6 }}>Lifespan</div>
-                    <div style={{ fontSize:14, color:WHITE, fontWeight:600 }}>{ROOF_TYPES[active].life}</div>
+                    <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.45)', marginBottom:6 }}>Lifespan</div>
+                    <div style={{ fontSize:14, color:ORANGE, fontWeight:700 }}>{t.life}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Scroll hint */}
-        {progress < 0.05 && (
-          <div style={{ position:'absolute', bottom:32, left:'50%', transform:'translateX(-50%)', fontSize:11, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:'rgba(255,255,255,0.6)', display:'flex', flexDirection:'column', alignItems:'center', gap:8, animation:'bounce 2s infinite' }}>
-            Scroll to explore
-            <span style={{ fontSize:18 }}>↓</span>
-          </div>
-        )}
       </div>
       <style>{`
-        @keyframes rtFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-        @media(max-width:900px){.ld-rt-dots{display:none!important}}
+        @keyframes rtFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+        @media(max-width:900px){
+          .ld-rt-grid{grid-template-columns:1fr!important}
+          .ld-rt-grid > div:first-child{border-right:none!important;border-bottom:1px solid rgba(255,255,255,0.08)!important;display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory}
+          .ld-rt-grid > div:first-child > button{min-width:200px;flex-shrink:0;scroll-snap-align:start;border-bottom:none!important;border-right:1px solid rgba(255,255,255,0.06)}
+        }
       `}</style>
     </section>
   )
 }
+
 
 // ─── Divisions ────────────────────────────────────────────────
 function Divisions() {
@@ -693,25 +686,110 @@ function Reviews() {
 // ─── Areas ────────────────────────────────────────────────────
 function ServiceAreas() {
   const [ref, shown] = useReveal(0.1)
+  // Google Maps embed URLs centered on each metro at zoom level that fits ~75mi radius
+  // Houston: 29.7604, -95.3698 · Dallas: 32.7767, -96.7970
+  const houstonMap = 'https://www.google.com/maps?q=Houston,TX&t=&z=8&ie=UTF8&iwloc=&output=embed'
+  const dallasMap  = 'https://www.google.com/maps?q=Dallas,TX&t=&z=8&ie=UTF8&iwloc=&output=embed'
+
+  const metros = [
+    { city:'Houston', color:NAVY, accent:NAVY, src:houstonMap, hub:'Houston, TX', cities:['Houston','Sugar Land','Katy','The Woodlands','Pearland','Cypress','Spring','League City','Galveston','Conroe','Baytown'] },
+    { city:'Dallas',  color:ORANGE, accent:ORANGE, src:dallasMap, hub:'Dallas-Fort Worth, TX', cities:['Dallas','Fort Worth','Plano','Frisco','Allen','McKinney','Arlington','Irving','Denton','Waco','Tyler'] },
+  ]
+
   return (
     <section id="service-areas" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:WHITE, padding:'96px 48px' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
-        <div style={{ textAlign:'center', marginBottom:64 }}>
+        <div style={{ textAlign:'center', marginBottom:56 }}>
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Coverage</div>
-          <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Serving Houston & Dallas</h2>
+          <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY, marginBottom:14 }}>Serving Houston & Dallas</h2>
+          <p style={{ fontSize:16, color:MUTED, maxWidth:560, margin:'0 auto', lineHeight:1.8 }}>
+            We service a <strong style={{ color:NAVY }}>75-mile radius</strong> around each metro — covering most of east and central Texas. Don't see your city? <a href={`tel:${PHONE}`} style={{ color:ORANGE, fontWeight:700, textDecoration:'none' }}>Give us a call</a> — we likely cover you.
+          </p>
         </div>
-        <div className="ld-area" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24 }}>
-          {[
-            { city:'Houston', color:NAVY, areas:['Houston','Bellaire','Sugar Land','Katy','The Woodlands','Pearland','Cypress','Missouri City','Spring','Friendswood','Clear Lake','Pasadena','Humble','League City','Memorial','River Oaks'] },
-            { city:'Dallas', color:ORANGE, areas:['Dallas','Plano','Frisco','Allen','McKinney','Irving','Garland','Mesquite','Carrollton','Richardson','Grand Prairie','Arlington','Denton','Lewisville','Grapevine','Southlake'] },
-          ].map(({city,color,areas})=>(
-            <div key={city} style={{ border:`1px solid ${BORDER}`, padding:'36px 32px' }}>
-              <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:28 }}>
-                <div style={{ width:4, height:36, background:color, borderRadius:2 }}/>
-                <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY }}>{city} Metro</h3>
+
+        <div className="ld-area" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
+          {metros.map(m => (
+            <div key={m.city} style={{ border:`1px solid ${BORDER}`, overflow:'hidden', background:WHITE }}>
+              {/* Header */}
+              <div style={{ padding:'24px 28px', borderBottom:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:14 }}>
+                <div style={{ width:4, height:32, background:m.accent, borderRadius:2 }}/>
+                <div style={{ flex:1 }}>
+                  <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY, lineHeight:1.2 }}>{m.city} Metro</h3>
+                  <div style={{ fontSize:12, color:MUTED, marginTop:2 }}>75-mile service radius</div>
+                </div>
+                <div style={{ fontSize:11, fontWeight:700, color:m.accent, letterSpacing:'2px', textTransform:'uppercase' }}>Active</div>
               </div>
-              <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-                {areas.map(a=><span key={a} style={{ fontSize:12, background:OFF, border:`1px solid ${BORDER}`, padding:'5px 12px', color:DARK }}>{a}</span>)}
+
+              {/* Map with overlay circle */}
+              <div style={{ position:'relative', width:'100%', aspectRatio:'4/3', background:OFF, overflow:'hidden' }}>
+                <iframe
+                  src={m.src}
+                  title={`${m.city} service area`}
+                  width="100%"
+                  height="100%"
+                  style={{ border:0, position:'absolute', inset:0, width:'100%', height:'100%' }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+                {/* Overlay branded circle — pointer-events:none so users can still pan map */}
+                <div style={{
+                  position:'absolute', top:'50%', left:'50%',
+                  transform:'translate(-50%,-50%)',
+                  width:'62%', aspectRatio:'1',
+                  borderRadius:'50%',
+                  border:`3px solid ${m.accent}`,
+                  background:`${m.accent}1A`,
+                  boxShadow:`0 0 0 2px ${WHITE}, 0 4px 24px rgba(0,0,0,0.15)`,
+                  pointerEvents:'none',
+                }}/>
+                {/* Center pin */}
+                <div style={{
+                  position:'absolute', top:'50%', left:'50%',
+                  transform:'translate(-50%,-100%)',
+                  pointerEvents:'none',
+                  display:'flex', flexDirection:'column', alignItems:'center',
+                }}>
+                  <div style={{
+                    background:m.accent, color:WHITE,
+                    padding:'6px 14px', fontSize:11, fontWeight:700,
+                    letterSpacing:'1px', textTransform:'uppercase',
+                    borderRadius:2, whiteSpace:'nowrap',
+                    boxShadow:'0 4px 12px rgba(0,0,0,0.25)',
+                    marginBottom:4,
+                  }}>{m.hub}</div>
+                  <div style={{
+                    width:0, height:0,
+                    borderLeft:'6px solid transparent',
+                    borderRight:'6px solid transparent',
+                    borderTop:`8px solid ${m.accent}`,
+                  }}/>
+                </div>
+                {/* Radius label */}
+                <div style={{
+                  position:'absolute', bottom:14, right:14,
+                  background:'rgba(255,255,255,0.95)',
+                  padding:'6px 12px',
+                  fontSize:11, fontWeight:700,
+                  color:NAVY, letterSpacing:'0.5px',
+                  border:`1px solid ${BORDER}`,
+                  pointerEvents:'none',
+                }}>
+                  ⌖ 75 mi radius
+                </div>
+              </div>
+
+              {/* Cities served */}
+              <div style={{ padding:'24px 28px' }}>
+                <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:14 }}>
+                  Cities Served (Including)
+                </div>
+                <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
+                  {m.cities.map(c=>(
+                    <span key={c} style={{ fontSize:12, background:OFF, border:`1px solid ${BORDER}`, padding:'5px 12px', color:DARK }}>{c}</span>
+                  ))}
+                  <span style={{ fontSize:12, padding:'5px 12px', color:MUTED, fontStyle:'italic' }}>and many more...</span>
+                </div>
               </div>
             </div>
           ))}
