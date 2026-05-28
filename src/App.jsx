@@ -147,8 +147,8 @@ function Nav({ onSchedule }) {
   return (
     <>
       <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
-        <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height: scrolled ? 72 : 110, display:'flex', alignItems:'center', justifyContent:'space-between', transition:'height 0.4s ease' }}>
-          <img src={LOGO} alt="LD Roofing" style={{ height: scrolled ? 44 : 110, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', transition:'height 0.4s ease' }}
+        <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height: (scrolled || open) ? 72 : 110, display:'flex', alignItems:'center', justifyContent:'space-between', transition:'height 0.4s ease' }}>
+          <img src={LOGO} alt="LD Roofing" style={{ height: (scrolled || open) ? 44 : 110, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', transition:'height 0.4s ease' }}
             onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
             onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
           <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
