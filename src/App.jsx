@@ -12,7 +12,8 @@ const MUTED   = '#6B7280'
 const BORDER  = '#E2E0DB'
 const WHITE   = '#FFFFFF'
 
-const PHONE = '(469) 585-8908'
+const PHONE_HOUSTON = '(469) 585-8908'
+const PHONE_DALLAS  = '(214) 755-3159'
 const EMAIL = 'Info@ld-roofing.com'
 const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_48_39%20PM.png'
 
@@ -133,8 +134,46 @@ function Counter({ to, suffix = '' }) {
   return <span ref={ref}>{val}{suffix}</span>
 }
 
+// ─── Call Picker Modal ────────────────────────────────────────
+function CallPicker({ onClose }) {
+  useEffect(()=>{ document.body.style.overflow='hidden'; return ()=>{ document.body.style.overflow='' } },[])
+  const options = [
+    { city:'Houston Division', subtitle:'Lane & Dana Pauly', phone:PHONE_HOUSTON, accent:NAVY },
+    { city:'Dallas Division',  subtitle:'Robert & Loren Wolf', phone:PHONE_DALLAS, accent:ORANGE },
+  ]
+  return (
+    <div style={{ position:'fixed', inset:0, zIndex:600, display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.7)', backdropFilter:'blur(6px)' }} onClick={onClose}/>
+      <div style={{ position:'relative', width:'min(420px,94vw)', background:WHITE, overflow:'hidden' }}>
+        <div style={{ background:NAVY, padding:'24px 28px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+          <div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:4 }}>Call Us</div>
+            <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:20, color:WHITE }}>Which Division?</div>
+          </div>
+          <button onClick={onClose} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.5)', fontSize:22, cursor:'pointer', lineHeight:1 }}>✕</button>
+        </div>
+        <div>
+          {options.map(d => (
+            <a key={d.city} href={`tel:${d.phone}`} onClick={onClose}
+              style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'22px 28px', textDecoration:'none', borderBottom:`1px solid ${BORDER}`, transition:'background 0.2s' }}
+              onMouseOver={e=>e.currentTarget.style.background=OFF}
+              onMouseOut={e=>e.currentTarget.style.background=WHITE}>
+              <div>
+                <div style={{ fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:d.accent, marginBottom:4 }}>{d.city}</div>
+                <div style={{ fontSize:18, fontWeight:700, color:DARK, marginBottom:2 }}>{d.phone}</div>
+                <div style={{ fontSize:12, color:MUTED }}>{d.subtitle}</div>
+              </div>
+              <span style={{ fontSize:20, color:d.accent, fontWeight:700 }}>→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Nav ──────────────────────────────────────────────────────
-function Nav({ onSchedule }) {
+function Nav({ onSchedule, onCall }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   useEffect(() => {
@@ -161,7 +200,7 @@ function Nav({ onSchedule }) {
           </div>
 
           <div className="ld-cta" style={{ display:'flex', gap:20, alignItems:'center' }}>
-            <a href={`tel:${PHONE}`} style={{ fontSize:14, fontWeight:700, color:WHITE, textDecoration:'none' }}>{PHONE}</a>
+            <button onClick={onCall} style={{ background:'none', border:'none', fontSize:14, fontWeight:700, color:WHITE, cursor:'pointer', fontFamily:'inherit' }}>Call Us</button>
             <button onClick={onSchedule} style={{...BTN, padding:'10px 20px'}}
               onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
               Free Inspection
@@ -180,7 +219,7 @@ function Nav({ onSchedule }) {
             <button key={id} onClick={()=>go(id)} style={{ background:'none', border:'none', borderBottom:'1px solid rgba(255,255,255,0.08)', padding:'20px 32px', textAlign:'left', fontFamily:'inherit', fontSize:16, fontWeight:600, color:WHITE, cursor:'pointer' }}>{label}</button>
           ))}
           <div style={{ padding:'28px 32px', display:'flex', flexDirection:'column', gap:12 }}>
-            <a href={`tel:${PHONE}`} style={{ fontSize:18, fontWeight:700, color:ORANGE, textDecoration:'none' }}>{PHONE}</a>
+            <button onClick={()=>{onCall();setOpen(false)}} style={{ background:'none', border:'none', fontSize:18, fontWeight:700, color:ORANGE, cursor:'pointer', textAlign:'left', padding:0, fontFamily:'inherit' }}>Call Us →</button>
             <button onClick={()=>{onSchedule();setOpen(false)}} style={{...BTN, textAlign:'center'}}
               onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
               Schedule Free Inspection
@@ -204,7 +243,7 @@ function Nav({ onSchedule }) {
 }
 
 // ─── Hero ─────────────────────────────────────────────────────
-function Hero({ onSchedule }) {
+function Hero({ onSchedule, onCall }) {
   const [form, setForm] = useState({ name:'', phone:'', service:'' })
   const [sent, setSent] = useState(false)
   const [scrollY, setScrollY] = useState(0)
@@ -282,7 +321,7 @@ function Hero({ onSchedule }) {
                   Request Free Inspection →
                 </button>
                 <div style={{ textAlign:'center', fontSize:13, color:MUTED }}>
-                  Or call: <a href={`tel:${PHONE}`} style={{ color:ORANGE, fontWeight:700, textDecoration:'none' }}>{PHONE}</a>
+                  Or <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:13, padding:0 }}>call us →</button>
                 </div>
               </div>
             )}
@@ -560,6 +599,7 @@ function RoofTypes() {
 
 
 // ─── Divisions ────────────────────────────────────────────────
+// Each division card calls its own direct number (no picker — context is clear here).
 function Divisions() {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -572,8 +612,8 @@ function Divisions() {
         </div>
         <div className="ld-div" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
           {[
-            { city:'Houston', accent:NAVY, name:'Lane & Dana Pauly', title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home — honest, responsive, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg },
-            { city:'Dallas', accent:ORANGE, name:'Robert & Lauren Wolf', title:'Dallas Division', desc:'Robert and Lauren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg },
+            { city:'Houston', accent:NAVY,   name:'Lane & Dana Pauly',     title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home — honest, responsive, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg, phone:PHONE_HOUSTON },
+            { city:'Dallas',  accent:ORANGE, name:'Robert & Loren Wolf',   title:'Dallas Division',  desc:'Robert and Loren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg, phone:PHONE_DALLAS },
           ].map((d,i)=>(
             <div key={i} style={{ background:WHITE, border:`1px solid ${BORDER}`, overflow:'hidden' }}>
               <div style={{ position:'relative', height:320, overflow:'hidden' }}>
@@ -586,8 +626,8 @@ function Divisions() {
                 <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:21, color:NAVY, marginBottom:4 }}>{d.name}</div>
                 <div style={{ fontSize:11, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:20 }}>{d.title}</div>
                 <p style={{ fontSize:14, color:MUTED, lineHeight:1.85, marginBottom:24 }}>{d.desc}</p>
-                <a href={`tel:${PHONE}`} style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none', transition:'color 0.2s' }}
-                  onMouseOver={e=>e.currentTarget.style.color=ORANGE} onMouseOut={e=>e.currentTarget.style.color=NAVY}>{PHONE} →</a>
+                <a href={`tel:${d.phone}`} style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none', transition:'color 0.2s' }}
+                  onMouseOver={e=>e.currentTarget.style.color=ORANGE} onMouseOut={e=>e.currentTarget.style.color=NAVY}>{d.phone} →</a>
               </div>
             </div>
           ))}
@@ -720,7 +760,7 @@ function Reviews() {
 }
 
 // ─── Areas ────────────────────────────────────────────────────
-function ServiceAreas() {
+function ServiceAreas({ onCall }) {
   const [ref, shown] = useReveal(0.1)
   // Google Maps embed URLs centered on each metro at zoom level that fits ~75mi radius
   // Houston: 29.7604, -95.3698 · Dallas: 32.7767, -96.7970
@@ -739,7 +779,7 @@ function ServiceAreas() {
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Coverage</div>
           <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY, marginBottom:14 }}>Serving Houston & Dallas</h2>
           <p style={{ fontSize:16, color:MUTED, maxWidth:560, margin:'0 auto', lineHeight:1.8 }}>
-            We service a <strong style={{ color:NAVY }}>75-mile radius</strong> around each metro — covering most of east and central Texas. Don't see your city? <a href={`tel:${PHONE}`} style={{ color:ORANGE, fontWeight:700, textDecoration:'none' }}>Give us a call</a> — we likely cover you.
+            We service a <strong style={{ color:NAVY }}>75-mile radius</strong> around each metro — covering most of east and central Texas. Don't see your city? <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:16, padding:0 }}>Give us a call</button> — we likely cover you.
           </p>
         </div>
 
@@ -837,7 +877,7 @@ function ServiceAreas() {
 }
 
 // ─── CTA ──────────────────────────────────────────────────────
-function CTA({ onSchedule }) {
+function CTA({ onSchedule, onCall }) {
   const [scrollY, setScrollY] = useState(0)
   const ref = useRef(null)
   useEffect(() => {
@@ -864,10 +904,10 @@ function CTA({ onSchedule }) {
             onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
             Schedule Free Inspection
           </button>
-          <a href={`tel:${PHONE}`} style={{ display:'inline-flex', alignItems:'center', gap:8, background:'transparent', color:WHITE, border:'1px solid rgba(255,255,255,0.4)', padding:'15px 22px', fontSize:13, fontWeight:600, textDecoration:'none', borderRadius:2, transition:'all 0.2s' }}
+          <button onClick={onCall} style={{ display:'inline-flex', alignItems:'center', gap:8, background:'transparent', color:WHITE, border:'1px solid rgba(255,255,255,0.4)', padding:'15px 22px', fontSize:13, fontWeight:600, cursor:'pointer', fontFamily:'inherit', borderRadius:2, transition:'all 0.2s' }}
             onMouseOver={e=>e.currentTarget.style.background='rgba(255,255,255,0.08)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
-            ↗ {PHONE}
-          </a>
+            ↗ Call Us
+          </button>
         </div>
       </div>
     </section>
@@ -875,7 +915,7 @@ function CTA({ onSchedule }) {
 }
 
 // ─── Footer ───────────────────────────────────────────────────
-function Footer() {
+function Footer({ onCall }) {
   return (
     <footer style={{ background:DARK, padding:'72px 48px 32px' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
@@ -885,8 +925,16 @@ function Footer() {
               onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='block'}}/>
             <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:20, fontWeight:700, color:WHITE, marginBottom:20 }}>LD Roofing & Exteriors</span>
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.38)', lineHeight:1.9, maxWidth:300, marginBottom:24 }}>Family-owned roofing contractor serving Houston and Dallas. Free inspections, honest estimates, and work we stand behind.</p>
-            <a href={`tel:${PHONE}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:6, transition:'color 0.2s' }}
-              onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE}</a>
+            <div style={{ marginBottom:14 }}>
+              <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:ORANGE, marginBottom:6 }}>Houston</div>
+              <a href={`tel:${PHONE_HOUSTON}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', transition:'color 0.2s' }}
+                onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_HOUSTON}</a>
+            </div>
+            <div style={{ marginBottom:18 }}>
+              <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:ORANGE, marginBottom:6 }}>Dallas</div>
+              <a href={`tel:${PHONE_DALLAS}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', transition:'color 0.2s' }}
+                onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_DALLAS}</a>
+            </div>
             <a href={`mailto:${EMAIL}`} style={{ fontSize:13, color:'rgba(255,255,255,0.38)', textDecoration:'none', transition:'color 0.2s' }}
               onMouseOver={e=>e.target.style.color=WHITE} onMouseOut={e=>e.target.style.color='rgba(255,255,255,0.38)'}>{EMAIL}</a>
           </div>
@@ -914,7 +962,7 @@ function Footer() {
 }
 
 // ─── Schedule Modal ───────────────────────────────────────────
-function ScheduleModal({ onClose }) {
+function ScheduleModal({ onClose, onCall }) {
   const [form, setForm] = useState({ name:'', phone:'', email:'', address:'', service:'', message:'' })
   const [sent, setSent] = useState(false)
   const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
@@ -959,7 +1007,7 @@ function ScheduleModal({ onClose }) {
               Request Free Inspection →
             </button>
             <div style={{ textAlign:'center', marginTop:14, fontSize:13, color:MUTED }}>
-              Or call: <a href={`tel:${PHONE}`} style={{ color:ORANGE, fontWeight:700 }}>{PHONE}</a>
+              Or <button onClick={()=>{onClose();onCall && onCall()}} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:13, padding:0 }}>call us →</button>
             </div>
           </div>
         )}
@@ -969,11 +1017,11 @@ function ScheduleModal({ onClose }) {
 }
 
 // ─── Mobile Sticky ────────────────────────────────────────────
-function StickyBar({ onSchedule }) {
+function StickyBar({ onSchedule, onCall }) {
   return (
     <>
       <div className="ld-sticky" style={{ position:'fixed', bottom:0, left:0, right:0, zIndex:200, display:'none', paddingBottom:'env(safe-area-inset-bottom)' }}>
-        <a href={`tel:${PHONE}`} style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:'15px', background:NAVY, color:WHITE, textDecoration:'none', fontFamily:'inherit', fontSize:12, fontWeight:700, letterSpacing:'1px', textTransform:'uppercase' }}>Call</a>
+        <button onClick={onCall} style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:'15px', background:NAVY, color:WHITE, border:'none', cursor:'pointer', fontFamily:'inherit', fontSize:12, fontWeight:700, letterSpacing:'1px', textTransform:'uppercase' }}>Call</button>
         <button onClick={onSchedule} style={{ flex:2, display:'flex', alignItems:'center', justifyContent:'center', padding:'15px', background:ORANGE, color:WHITE, border:'none', cursor:'pointer', fontFamily:'inherit', fontSize:12, fontWeight:700, letterSpacing:'1px', textTransform:'uppercase' }}>Free Inspection →</button>
       </div>
       <style>{`@media(max-width:768px){.ld-sticky{display:flex!important}}`}</style>
@@ -983,24 +1031,26 @@ function StickyBar({ onSchedule }) {
 
 // ─── App ──────────────────────────────────────────────────────
 export default function App() {
-  const [open, setOpen] = useState(false)
+  const [scheduleOpen, setScheduleOpen] = useState(false)
+  const [callOpen, setCallOpen] = useState(false)
   return (
     <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK }}>
-      <Nav onSchedule={()=>setOpen(true)}/>
-      <Hero onSchedule={()=>setOpen(true)}/>
+      <Nav onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
+      <Hero onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
       <TrustBar/>
       <StatsStrip/>
-      <Services onSchedule={()=>setOpen(true)}/>
+      <Services onSchedule={()=>setScheduleOpen(true)}/>
       <RoofTypes/>
       <Divisions/>
       <Gallery/>
-      <Process onSchedule={()=>setOpen(true)}/>
+      <Process onSchedule={()=>setScheduleOpen(true)}/>
       <Reviews/>
-      <ServiceAreas/>
-      <CTA onSchedule={()=>setOpen(true)}/>
-      <Footer/>
-      <StickyBar onSchedule={()=>setOpen(true)}/>
-      {open && <ScheduleModal onClose={()=>setOpen(false)}/>}
+      <ServiceAreas onCall={()=>setCallOpen(true)}/>
+      <CTA onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
+      <Footer onCall={()=>setCallOpen(true)}/>
+      <StickyBar onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
+      {scheduleOpen && <ScheduleModal onClose={()=>setScheduleOpen(false)} onCall={()=>setCallOpen(true)}/>}
+      {callOpen && <CallPicker onClose={()=>setCallOpen(false)}/>}
     </div>
   )
 }
