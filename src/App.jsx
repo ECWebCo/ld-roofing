@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'
 import laneFamilyImg from './lane-family.png'
 import wolfFamilyImg from './wolf-family.png'
+import FAQ from './components/FAQ'
+import BlogList from './components/BlogList'
+import BlogPost from './components/BlogPost'
 
 const NAVY    = '#0F1F4B'
 const NAVY2   = '#1a3070'
@@ -19,7 +23,6 @@ const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public
 
 const TOP_BAR_HEIGHT = 36
 
-// Real LD Roofing photos from Supabase
 const HERO_IMG = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
 const CTA_IMG  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199361435-0-Our-Work.jpg'
 
@@ -31,7 +34,6 @@ const REVIEWS = [
   { name:'Robert', role:'Homeowner, Dallas', stars:5, text:'"Robert Wolf was a great communicator, quick to answer questions and walk us through everything. Could not be happier with how the project turned out."' },
 ]
 
-// Residential & Commercial split (em-dashes removed)
 const RES_SERVICES = [
   { title:'Free Roof Inspection', desc:'Thorough inspection at zero cost. We document every issue with photos and give you a complete report. No pressure, no upselling.' },
   { title:'Roof Replacement', desc:'Full residential replacement using the right material for your home and your budget. Done right the first time.' },
@@ -50,7 +52,6 @@ const COM_SERVICES = [
   { title:'Maintenance Programs', desc:'Scheduled commercial maintenance to catch small issues before they become major capital expenses.' },
 ]
 
-// Roof types showcase (em-dashes removed)
 const ROOF_TYPES = [
   { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202331445-0-shingle.png', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25 to 50 year warranties available depending on the line.', good:'Most homes, Best value', life:'25-50 yrs' },
   { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202322708-0-metal.png', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2 to 3 times longer than shingles.', good:'Modern homes, Coastal, High-end', life:'40-70 yrs' },
@@ -102,7 +103,6 @@ const BTN = {
   letterSpacing:'0.5px', textTransform:'uppercase', transition:'background 0.2s',
 }
 
-// ─── Reveal-on-scroll hook ────────────────────────────────────
 function useReveal(threshold = 0.15) {
   const ref = useRef(null)
   const [shown, setShown] = useState(false)
@@ -118,7 +118,6 @@ function useReveal(threshold = 0.15) {
   return [ref, shown]
 }
 
-// ─── Animated counter ─────────────────────────────────────────
 function Counter({ to, suffix = '' }) {
   const [ref, shown] = useReveal(0.4)
   const [val, setVal] = useState(0)
@@ -139,7 +138,6 @@ function Counter({ to, suffix = '' }) {
   return <span ref={ref}>{val}{suffix}</span>
 }
 
-// ─── Top Phone Bar ────────────────────────────────────────────
 function TopBar() {
   return (
     <div style={{
@@ -172,7 +170,6 @@ function TopBar() {
   )
 }
 
-// ─── Call Picker Modal ────────────────────────────────────────
 function CallPicker({ onClose }) {
   useEffect(()=>{ document.body.style.overflow='hidden'; return ()=>{ document.body.style.overflow='' } },[])
   const options = [
@@ -210,31 +207,50 @@ function CallPicker({ onClose }) {
   )
 }
 
-// ─── Nav ──────────────────────────────────────────────────────
+// ─── Nav (shared between all pages) ───────────────────────────
 function Nav({ onSchedule, onCall }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isHome = location.pathname === '/'
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', fn, { passive:true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
-  const go = id => { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); setOpen(false) }
-  const bg = scrolled || open
+
+  // On non-home pages, nav should always be opaque
+  const bg = scrolled || open || !isHome
+
+  const go = id => {
+    setOpen(false)
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({behavior:'smooth'})
+    } else {
+      navigate('/')
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({behavior:'smooth'}), 100)
+    }
+  }
+
   return (
     <>
       <nav style={{ position:'fixed', top:TOP_BAR_HEIGHT, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
-        <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height: (scrolled || open) ? 72 : 110, display:'flex', alignItems:'center', justifyContent:'space-between', transition:'height 0.4s ease' }}>
-          <img src={LOGO} alt="LD Roofing" style={{ height: (scrolled || open) ? 44 : 110, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', transition:'height 0.4s ease' }}
-            onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
-            onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
-          <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE, cursor:'pointer' }} onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>LD Roofing</span>
+        <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height: bg ? 72 : 110, display:'flex', alignItems:'center', justifyContent:'space-between', transition:'height 0.4s ease' }}>
+          <Link to="/" style={{ display:'flex', alignItems:'center' }} onClick={()=>setOpen(false)}>
+            <img src={LOGO} alt="LD Roofing" style={{ height: bg ? 44 : 110, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', transition:'height 0.4s ease' }}
+              onError={e=>{e.target.style.display='none'; e.target.nextSibling.style.display='block'}}/>
+            <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:18, fontWeight:700, color:WHITE }}>LD Roofing</span>
+          </Link>
 
           <div className="ld-links" style={{ display:'flex', gap:36 }}>
-            {[['services','Services'],['roof-types','Roof Types'],['process','Process'],['reviews','Reviews'],['service-areas','Areas']].map(([id,label])=>(
+            {[['services','Services'],['roof-types','Roof Types'],['process','Process'],['reviews','Reviews'],['faq','FAQ']].map(([id,label])=>(
               <button key={id} onClick={()=>go(id)} style={{ background:'none', border:'none', fontFamily:'inherit', fontSize:13, fontWeight:500, letterSpacing:'0.5px', color:'rgba(255,255,255,0.7)', cursor:'pointer', transition:'color 0.2s' }}
                 onMouseOver={e=>e.target.style.color=WHITE} onMouseOut={e=>e.target.style.color='rgba(255,255,255,0.7)'}>{label}</button>
             ))}
+            <Link to="/blog" onClick={()=>setOpen(false)} style={{ background:'none', border:'none', fontFamily:'inherit', fontSize:13, fontWeight:500, letterSpacing:'0.5px', color: location.pathname.startsWith('/blog') ? WHITE : 'rgba(255,255,255,0.7)', cursor:'pointer', transition:'color 0.2s', textDecoration:'none' }}
+              onMouseOver={e=>e.target.style.color=WHITE} onMouseOut={e=>e.target.style.color = location.pathname.startsWith('/blog') ? WHITE : 'rgba(255,255,255,0.7)'}>Blog</Link>
           </div>
 
           <div className="ld-cta" style={{ display:'flex', gap:20, alignItems:'center' }}>
@@ -253,9 +269,10 @@ function Nav({ onSchedule, onCall }) {
 
       {open && (
         <div style={{ position:'fixed', inset:0, top:72+TOP_BAR_HEIGHT, background:NAVY, zIndex:299, display:'flex', flexDirection:'column', padding:'8px 0 32px' }}>
-          {[['services','Services'],['roof-types','Roof Types'],['process','Our Process'],['reviews','Reviews'],['service-areas','Areas Served']].map(([id,label])=>(
+          {[['services','Services'],['roof-types','Roof Types'],['process','Our Process'],['reviews','Reviews'],['faq','FAQ']].map(([id,label])=>(
             <button key={id} onClick={()=>go(id)} style={{ background:'none', border:'none', borderBottom:'1px solid rgba(255,255,255,0.08)', padding:'20px 32px', textAlign:'left', fontFamily:'inherit', fontSize:16, fontWeight:600, color:WHITE, cursor:'pointer' }}>{label}</button>
           ))}
+          <Link to="/blog" onClick={()=>setOpen(false)} style={{ borderBottom:'1px solid rgba(255,255,255,0.08)', padding:'20px 32px', fontFamily:'inherit', fontSize:16, fontWeight:600, color:WHITE, textDecoration:'none' }}>Blog</Link>
           <div style={{ padding:'28px 32px', display:'flex', flexDirection:'column', gap:12 }}>
             <button onClick={()=>{onCall();setOpen(false)}} style={{ background:'none', border:'none', fontSize:18, fontWeight:700, color:ORANGE, cursor:'pointer', textAlign:'left', padding:0, fontFamily:'inherit' }}>Call Us →</button>
             <button onClick={()=>{onSchedule();setOpen(false)}} style={{...BTN, textAlign:'center'}}
@@ -280,8 +297,8 @@ function Nav({ onSchedule, onCall }) {
   )
 }
 
-// ─── Inspection Form (shared between Hero and Schedule Modal) ─
-function InspectionForm({ onSent, compact = false, onCall }) {
+// ─── Shared Inspection Form ──────────────────────────────────
+function InspectionForm({ onCall, compact = false }) {
   const [form, setForm] = useState({ name:'', phone:'', email:'', address:'', service:'', message:'' })
   const [sent, setSent] = useState(false)
   const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
@@ -290,7 +307,6 @@ function InspectionForm({ onSent, compact = false, onCall }) {
     const body = `Name: ${form.name}%0APhone: ${form.phone}%0AEmail: ${form.email}%0AAddress: ${form.address}%0AService: ${form.service}%0AMessage: ${form.message}`
     window.location.href = `mailto:${EMAIL}?subject=Free Roof Inspection Request&body=${body}`
     setSent(true)
-    onSent && onSent()
   }
   const inp = {
     width:'100%', padding:'13px 16px', fontSize:14, fontFamily:"'Barlow',sans-serif",
@@ -304,10 +320,10 @@ function InspectionForm({ onSent, compact = false, onCall }) {
     return (
       <div style={{ padding:compact ? '40px 24px' : '48px 32px', textAlign:'center' }}>
         <div style={{ fontSize:compact ? 36 : 40, marginBottom:compact ? 12 : 16 }}>✅</div>
-        <div style={{ fontFamily:compact ? "'Barlow Condensed',sans-serif" : "'Source Serif 4',serif", fontSize:compact ? 22 : 22, fontWeight:compact ? 700 : 400, color:NAVY, textTransform:compact ? 'uppercase' : 'none', marginBottom:compact ? 8 : 12 }}>
+        <div style={{ fontFamily:compact ? "'Barlow Condensed',sans-serif" : "'Source Serif 4',serif", fontSize:22, fontWeight:compact ? 700 : 400, color:NAVY, textTransform:compact ? 'uppercase' : 'none', marginBottom:compact ? 8 : 12 }}>
           {compact ? 'Request Sent!' : 'Request Sent'}
         </div>
-        <p style={{ fontSize:14, color:MUTED, lineHeight:1.7 }}>We'll be in touch within 24 hours to confirm your free inspection.</p>
+        <p style={{ fontSize:14, color:MUTED, lineHeight:1.7 }}>We will be in touch within 24 hours to confirm your free inspection.</p>
       </div>
     )
   }
@@ -343,7 +359,6 @@ function InspectionForm({ onSent, compact = false, onCall }) {
   )
 }
 
-// ─── Hero ─────────────────────────────────────────────────────
 function Hero({ onCall }) {
   const [scrollY, setScrollY] = useState(0)
   useEffect(() => {
@@ -403,7 +418,6 @@ function Hero({ onCall }) {
   )
 }
 
-// ─── Trust Bar ────────────────────────────────────────────────
 function TrustBar() {
   return (
     <div style={{ background:ORANGE, padding:'16px 48px' }}>
@@ -416,7 +430,6 @@ function TrustBar() {
   )
 }
 
-// ─── Stats Strip ──────────────────────────────────────────────
 function StatsStrip() {
   const [ref, shown] = useReveal(0.2)
   return (
@@ -436,7 +449,6 @@ function StatsStrip() {
   )
 }
 
-// ─── Services ─────────────────────────────────────────────────
 function Services({ onSchedule }) {
   const [tab, setTab] = useState('residential')
   const [ref, shown] = useReveal(0.1)
@@ -499,21 +511,14 @@ function Services({ onSchedule }) {
   )
 }
 
-// ─── Roof Types ───────────────────────────────────────────────
 function RoofTypes() {
   const [active, setActive] = useState(0)
   const [ref, shown] = useReveal(0.1)
   const t = ROOF_TYPES[active]
 
   return (
-    <section
-      id="roof-types"
-      ref={ref}
-      className={`reveal ${shown?'is-in':''}`}
-      style={{ background:DARK, padding:'96px 48px', position:'relative', overflow:'hidden' }}
-    >
+    <section id="roof-types" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:DARK, padding:'96px 48px', position:'relative', overflow:'hidden' }}>
       <div style={{ position:'absolute', top:0, right:0, width:'40%', height:'100%', background:`linear-gradient(135deg, transparent 0%, ${NAVY}40 100%)`, pointerEvents:'none' }}/>
-
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative' }}>
         <div style={{ marginBottom:48 }}>
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:14 }}>Roof Types We Install</div>
@@ -526,26 +531,11 @@ function RoofTypes() {
         </div>
 
         <div className="ld-rt-mobile-select" style={{ display:'none', marginBottom:0 }}>
-          <label style={{ display:'block', fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.55)', marginBottom:10 }}>
-            Choose a roof type
-          </label>
+          <label style={{ display:'block', fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.55)', marginBottom:10 }}>Choose a roof type</label>
           <div style={{ position:'relative' }}>
-            <select
-              value={active}
-              onChange={e => setActive(Number(e.target.value))}
-              style={{
-                width:'100%', padding:'16px 44px 16px 18px', fontSize:16,
-                fontFamily:'inherit', fontWeight:700, background:NAVY, color:WHITE,
-                border:`2px solid ${ORANGE}`, borderRadius:2,
-                appearance:'none', WebkitAppearance:'none', MozAppearance:'none',
-                cursor:'pointer', outline:'none',
-              }}
-            >
-              {ROOF_TYPES.map((rt,i)=>(
-                <option key={i} value={i} style={{ background:NAVY, color:WHITE }}>
-                  {String(i+1).padStart(2,'0')} - {rt.name} · {rt.tag}
-                </option>
-              ))}
+            <select value={active} onChange={e => setActive(Number(e.target.value))}
+              style={{ width:'100%', padding:'16px 44px 16px 18px', fontSize:16, fontFamily:'inherit', fontWeight:700, background:NAVY, color:WHITE, border:`2px solid ${ORANGE}`, borderRadius:2, appearance:'none', WebkitAppearance:'none', MozAppearance:'none', cursor:'pointer', outline:'none' }}>
+              {ROOF_TYPES.map((rt,i)=>(<option key={i} value={i} style={{ background:NAVY, color:WHITE }}>{String(i+1).padStart(2,'0')} - {rt.name} · {rt.tag}</option>))}
             </select>
             <span style={{ position:'absolute', right:18, top:'50%', transform:'translateY(-50%)', color:ORANGE, fontSize:14, pointerEvents:'none' }}>▼</span>
           </div>
@@ -556,44 +546,15 @@ function RoofTypes() {
             {ROOF_TYPES.map((rt, i) => {
               const isActive = i === active
               return (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  style={{
-                    display:'block', width:'100%', textAlign:'left',
-                    background: isActive ? ORANGE : 'transparent',
-                    border:'none', borderBottom: i < ROOF_TYPES.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                    padding:'18px 24px', cursor:'pointer', fontFamily:'inherit',
-                    transition:'all 0.25s ease', position:'relative',
-                  }}
+                <button key={i} onClick={() => setActive(i)}
+                  style={{ display:'block', width:'100%', textAlign:'left', background: isActive ? ORANGE : 'transparent', border:'none', borderBottom: i < ROOF_TYPES.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none', padding:'18px 24px', cursor:'pointer', fontFamily:'inherit', transition:'all 0.25s ease', position:'relative' }}
                   onMouseOver={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
-                  onMouseOut={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
-                >
+                  onMouseOut={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:14 }}>
-                    <span style={{
-                      fontSize:11, fontWeight:700, letterSpacing:'1px',
-                      color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.3)',
-                      minWidth:24,
-                    }}>
-                      {String(i+1).padStart(2,'0')}
-                    </span>
+                    <span style={{ fontSize:11, fontWeight:700, letterSpacing:'1px', color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.3)', minWidth:24 }}>{String(i+1).padStart(2,'0')}</span>
                     <div style={{ flex:1 }}>
-                      <div style={{
-                        fontSize:15, fontWeight:700,
-                        color: isActive ? WHITE : 'rgba(255,255,255,0.85)',
-                        fontFamily:"'Barlow Condensed',sans-serif",
-                        letterSpacing:'0.5px', textTransform:'uppercase',
-                        marginBottom:2,
-                      }}>
-                        {rt.name}
-                      </div>
-                      <div style={{
-                        fontSize:11, fontWeight:600,
-                        color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)',
-                        letterSpacing:'0.5px',
-                      }}>
-                        {rt.tag}
-                      </div>
+                      <div style={{ fontSize:15, fontWeight:700, color: isActive ? WHITE : 'rgba(255,255,255,0.85)', fontFamily:"'Barlow Condensed',sans-serif", letterSpacing:'0.5px', textTransform:'uppercase', marginBottom:2 }}>{rt.name}</div>
+                      <div style={{ fontSize:11, fontWeight:600, color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)', letterSpacing:'0.5px' }}>{rt.tag}</div>
                     </div>
                     {isActive && <span style={{ color:WHITE, fontSize:18 }}>→</span>}
                   </div>
@@ -605,25 +566,14 @@ function RoofTypes() {
           <div style={{ position:'relative', minHeight:520, background:NAVY, overflow:'hidden' }}>
             <div key={active} style={{ animation:'rtFade 0.5s ease' }}>
               <div style={{ position:'relative', height:340, overflow:'hidden' }}>
-                <img
-                  src={t.img}
-                  alt={t.name}
-                  style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
-                  onError={e => { e.target.style.display='none'; e.target.parentElement.style.background = `linear-gradient(135deg, ${NAVY} 0%, ${DARK} 100%)` }}
-                />
+                <img src={t.img} alt={t.name} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+                  onError={e => { e.target.style.display='none'; e.target.parentElement.style.background = `linear-gradient(135deg, ${NAVY} 0%, ${DARK} 100%)` }}/>
                 <div style={{ position:'absolute', inset:0, background:`linear-gradient(180deg, transparent 50%, rgba(15,31,75,0.85) 100%)` }}/>
-                <div style={{ position:'absolute', top:20, left:20, background:`${ORANGE}E6`, color:WHITE, fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', padding:'6px 12px' }}>
-                  {t.tag}
-                </div>
+                <div style={{ position:'absolute', top:20, left:20, background:`${ORANGE}E6`, color:WHITE, fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', padding:'6px 12px' }}>{t.tag}</div>
               </div>
-
               <div style={{ padding:'32px 40px' }}>
-                <h3 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(32px,3.5vw,42px)', fontWeight:800, color:WHITE, marginBottom:16, textTransform:'uppercase', letterSpacing:'-0.3px', lineHeight:1 }}>
-                  {t.name}
-                </h3>
-                <p style={{ fontSize:15, color:'rgba(255,255,255,0.72)', lineHeight:1.8, marginBottom:24 }}>
-                  {t.desc}
-                </p>
+                <h3 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(32px,3.5vw,42px)', fontWeight:800, color:WHITE, marginBottom:16, textTransform:'uppercase', letterSpacing:'-0.3px', lineHeight:1 }}>{t.name}</h3>
+                <p style={{ fontSize:15, color:'rgba(255,255,255,0.72)', lineHeight:1.8, marginBottom:24 }}>{t.desc}</p>
                 <div style={{ display:'flex', gap:40, flexWrap:'wrap', paddingTop:20, borderTop:'1px solid rgba(255,255,255,0.1)' }}>
                   <div>
                     <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.45)', marginBottom:6 }}>Best For</div>
@@ -641,17 +591,12 @@ function RoofTypes() {
       </div>
       <style>{`
         @keyframes rtFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-        @media(max-width:900px){
-          .ld-rt-mobile-select{display:block!important;margin-bottom:24px!important}
-          .ld-rt-grid{grid-template-columns:1fr!important}
-          .ld-rt-grid > div:first-child{display:none!important}
-        }
+        @media(max-width:900px){.ld-rt-mobile-select{display:block!important;margin-bottom:24px!important}.ld-rt-grid{grid-template-columns:1fr!important}.ld-rt-grid > div:first-child{display:none!important}}
       `}</style>
     </section>
   )
 }
 
-// ─── Divisions ────────────────────────────────────────────────
 function Divisions() {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -664,8 +609,8 @@ function Divisions() {
         </div>
         <div className="ld-div" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
           {[
-            { city:'Houston', accent:NAVY,   name:'Lane & Dana Pauly',     title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home. Responsive, customer-focused, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg, phone:PHONE_HOUSTON },
-            { city:'Dallas',  accent:ORANGE, name:'Robert & Loren Wolf',   title:'Dallas Division',  desc:'Robert and Loren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg, phone:PHONE_DALLAS },
+            { city:'Houston', accent:NAVY,   name:'Lane & Dana Pauly',     title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they would want working on their own home. Responsive, customer-focused, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg, phone:PHONE_HOUSTON },
+            { city:'Dallas',  accent:ORANGE, name:'Robert & Loren Wolf',   title:'Dallas Division',  desc:'Robert and Loren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they have built their reputation on communication and clean, lasting work.', img:wolfFamilyImg, phone:PHONE_DALLAS },
           ].map((d,i)=>(
             <div key={i} style={{ background:WHITE, border:`1px solid ${BORDER}`, overflow:'hidden' }}>
               <div style={{ position:'relative', height:320, overflow:'hidden' }}>
@@ -690,7 +635,6 @@ function Divisions() {
   )
 }
 
-// ─── Gallery ──────────────────────────────────────────────────
 function Gallery() {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -719,7 +663,6 @@ function Gallery() {
   )
 }
 
-// ─── Process ──────────────────────────────────────────────────
 function Process({ onSchedule }) {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -731,9 +674,7 @@ function Process({ onSchedule }) {
             <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,46px)', color:WHITE, lineHeight:1.12, marginBottom:24 }}>Our 4-Step<br/>Process</h2>
             <p style={{ fontSize:16, color:'rgba(255,255,255,0.55)', lineHeight:1.8, marginBottom:40, maxWidth:380 }}>Every step is designed to make your experience transparent, easy, and stress-free.</p>
             <button onClick={onSchedule} style={{...BTN, padding:'16px 28px'}}
-              onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
-              Start with Free Inspection
-            </button>
+              onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Start with Free Inspection</button>
           </div>
           <div>
             {PROCESS.map((p,i)=>(
@@ -753,7 +694,6 @@ function Process({ onSchedule }) {
   )
 }
 
-// ─── Reviews ──────────────────────────────────────────────────
 function Reviews() {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -811,7 +751,6 @@ function Reviews() {
   )
 }
 
-// ─── Service Areas ────────────────────────────────────────────
 function ServiceAreas({ onCall }) {
   const [ref, shown] = useReveal(0.1)
   const houstonMap = 'https://www.google.com/maps?q=Houston,TX&t=&z=8&ie=UTF8&iwloc=&output=embed'
@@ -846,47 +785,19 @@ function ServiceAreas({ onCall }) {
               </div>
 
               <div style={{ position:'relative', width:'100%', aspectRatio:'4/3', background:OFF, overflow:'hidden' }}>
-                <iframe
-                  src={m.src}
-                  title={`${m.city} service area`}
-                  width="100%"
-                  height="100%"
+                <iframe src={m.src} title={`${m.city} service area`} width="100%" height="100%"
                   style={{ border:0, position:'absolute', inset:0, width:'100%', height:'100%' }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
-                <div style={{
-                  position:'absolute', top:'50%', left:'50%',
-                  transform:'translate(-50%,-100%)',
-                  pointerEvents:'none',
-                  display:'flex', flexDirection:'column', alignItems:'center',
-                }}>
-                  <div style={{
-                    background:m.accent, color:WHITE,
-                    padding:'6px 14px', fontSize:11, fontWeight:700,
-                    letterSpacing:'1px', textTransform:'uppercase',
-                    borderRadius:2, whiteSpace:'nowrap',
-                    boxShadow:'0 4px 12px rgba(0,0,0,0.25)',
-                    marginBottom:4,
-                  }}>{m.hub}</div>
-                  <div style={{
-                    width:0, height:0,
-                    borderLeft:'6px solid transparent',
-                    borderRight:'6px solid transparent',
-                    borderTop:`8px solid ${m.accent}`,
-                  }}/>
+                  loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen/>
+                <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-100%)', pointerEvents:'none', display:'flex', flexDirection:'column', alignItems:'center' }}>
+                  <div style={{ background:m.accent, color:WHITE, padding:'6px 14px', fontSize:11, fontWeight:700, letterSpacing:'1px', textTransform:'uppercase', borderRadius:2, whiteSpace:'nowrap', boxShadow:'0 4px 12px rgba(0,0,0,0.25)', marginBottom:4 }}>{m.hub}</div>
+                  <div style={{ width:0, height:0, borderLeft:'6px solid transparent', borderRight:'6px solid transparent', borderTop:`8px solid ${m.accent}` }}/>
                 </div>
               </div>
 
               <div style={{ padding:'24px 28px' }}>
-                <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:14 }}>
-                  Cities Served (Including)
-                </div>
+                <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:14 }}>Cities Served (Including)</div>
                 <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
-                  {m.cities.map(c=>(
-                    <span key={c} style={{ fontSize:12, background:OFF, border:`1px solid ${BORDER}`, padding:'5px 12px', color:DARK }}>{c}</span>
-                  ))}
+                  {m.cities.map(c=>(<span key={c} style={{ fontSize:12, background:OFF, border:`1px solid ${BORDER}`, padding:'5px 12px', color:DARK }}>{c}</span>))}
                   <span style={{ fontSize:12, padding:'5px 12px', color:MUTED, fontStyle:'italic' }}>and many more...</span>
                 </div>
               </div>
@@ -899,7 +810,6 @@ function ServiceAreas({ onCall }) {
   )
 }
 
-// ─── CTA ──────────────────────────────────────────────────────
 function CTA({ onSchedule, onCall }) {
   const [scrollY, setScrollY] = useState(0)
   const ref = useRef(null)
@@ -924,20 +834,15 @@ function CTA({ onSchedule, onCall }) {
         <p style={{ fontSize:16, color:'rgba(255,255,255,0.65)', lineHeight:1.8, marginBottom:44 }}>Free, thorough inspections from a team built on customer service. Schedule yours today.</p>
         <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
           <button onClick={onSchedule} style={{...BTN, padding:'16px 36px', fontSize:14}}
-            onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
-            Schedule Free Inspection
-          </button>
+            onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Schedule Free Inspection</button>
           <button onClick={onCall} style={{ display:'inline-flex', alignItems:'center', gap:8, background:'transparent', color:WHITE, border:'1px solid rgba(255,255,255,0.4)', padding:'15px 22px', fontSize:13, fontWeight:600, cursor:'pointer', fontFamily:'inherit', borderRadius:2, transition:'all 0.2s' }}
-            onMouseOver={e=>e.currentTarget.style.background='rgba(255,255,255,0.08)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
-            ↗ Call Us
-          </button>
+            onMouseOver={e=>e.currentTarget.style.background='rgba(255,255,255,0.08)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>↗ Call Us</button>
         </div>
       </div>
     </section>
   )
 }
 
-// ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
     <footer style={{ background:DARK, padding:'72px 48px 32px' }}>
@@ -956,23 +861,20 @@ function Footer() {
             <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Houston</div>
             <a href={`tel:${PHONE_HOUSTON}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:14, transition:'color 0.2s' }}
               onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_HOUSTON}</a>
-            {HOUSTON_CITIES.map(c=>(
-              <div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>
-            ))}
+            {HOUSTON_CITIES.map(c=>(<div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>))}
           </div>
 
           <div>
             <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Dallas</div>
             <a href={`tel:${PHONE_DALLAS}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:14, transition:'color 0.2s' }}
               onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_DALLAS}</a>
-            {DALLAS_CITIES.map(c=>(
-              <div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>
-            ))}
+            {DALLAS_CITIES.map(c=>(<div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>))}
           </div>
 
           <div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Services</div>
-            {['Free Roof Inspection','Roof Replacement','Roof Repair','Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help'].map(s=>(
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Resources</div>
+            <Link to="/blog" style={{ fontSize:12, color:'rgba(255,255,255,0.38)', textDecoration:'none', marginBottom:8, display:'block' }}>Blog</Link>
+            {['Free Roof Inspection','Roof Replacement','Roof Repair','Leak Repair','Commercial Roofing','Insurance Claim Help'].map(s=>(
               <div key={s} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{s}</div>
             ))}
           </div>
@@ -988,7 +890,6 @@ function Footer() {
   )
 }
 
-// ─── Schedule Modal ───────────────────────────────────────────
 function ScheduleModal({ onClose, onCall }) {
   useEffect(()=>{ document.body.style.overflow='hidden'; return ()=>{ document.body.style.overflow='' } },[])
   return (
@@ -1008,7 +909,6 @@ function ScheduleModal({ onClose, onCall }) {
   )
 }
 
-// ─── Mobile Sticky ────────────────────────────────────────────
 function StickyBar({ onSchedule, onCall }) {
   return (
     <>
@@ -1021,6 +921,26 @@ function StickyBar({ onSchedule, onCall }) {
   )
 }
 
+// ─── HomePage (full home content) ─────────────────────────────
+function HomePage({ onSchedule, onCall }) {
+  return (
+    <>
+      <Hero onCall={onCall}/>
+      <TrustBar/>
+      <StatsStrip/>
+      <Services onSchedule={onSchedule}/>
+      <RoofTypes/>
+      <Divisions/>
+      <Gallery/>
+      <Process onSchedule={onSchedule}/>
+      <Reviews/>
+      <FAQ/>
+      <ServiceAreas onCall={onCall}/>
+      <CTA onSchedule={onSchedule} onCall={onCall}/>
+    </>
+  )
+}
+
 // ─── App ──────────────────────────────────────────────────────
 export default function App() {
   const [scheduleOpen, setScheduleOpen] = useState(false)
@@ -1029,17 +949,13 @@ export default function App() {
     <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK, paddingTop:TOP_BAR_HEIGHT }}>
       <TopBar/>
       <Nav onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
-      <Hero onCall={()=>setCallOpen(true)}/>
-      <TrustBar/>
-      <StatsStrip/>
-      <Services onSchedule={()=>setScheduleOpen(true)}/>
-      <RoofTypes/>
-      <Divisions/>
-      <Gallery/>
-      <Process onSchedule={()=>setScheduleOpen(true)}/>
-      <Reviews/>
-      <ServiceAreas onCall={()=>setCallOpen(true)}/>
-      <CTA onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
+
+      <Routes>
+        <Route path="/" element={<HomePage onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>}/>
+        <Route path="/blog" element={<BlogList/>}/>
+        <Route path="/blog/:slug" element={<BlogPost onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>}/>
+      </Routes>
+
       <Footer/>
       <StickyBar onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
       {scheduleOpen && <ScheduleModal onClose={()=>setScheduleOpen(false)} onCall={()=>setCallOpen(true)}/>}
