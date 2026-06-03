@@ -17,6 +17,8 @@ const PHONE_DALLAS  = '(214) 755-3159'
 const EMAIL = 'Info@ld-roofing.com'
 const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_48_39%20PM.png'
 
+const TOP_BAR_HEIGHT = 36
+
 // Real LD Roofing photos from Supabase
 const HERO_IMG = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
 const CTA_IMG  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199361435-0-Our-Work.jpg'
@@ -25,43 +27,43 @@ const REVIEWS = [
   { name:'Rick', role:'Business Owner', stars:5, text:'"LD Roofing & Exteriors are the most professional and friendly contractors I have ever worked with. Top quality work and great pricing. Lane the owner really cares about helping his clients."' },
   { name:'Jason', role:'Homeowner, Houston', stars:5, text:'"Lane was superb. He kept us informed and was timely along the way. We will certainly use his service again and recommend LD Roofing and Exteriors."' },
   { name:'Ruben', role:'Property Manager', stars:5, text:'"LD Roofing offered a free roof assessment after a hailstorm. Very professional, provided full assistance with our claim process. Our roof was completed in a single day."' },
-  { name:'ABNB Owner', role:'Airbnb Host', stars:5, text:'"Lane sent progress photos throughout and made the whole process seamless. It was important they finished the same day — they did, and left everything spotless."' },
-  { name:'Robert', role:'Homeowner, Dallas', stars:5, text:'"Robert Wolf was a great communicator — quick to answer questions and walk us through everything. Could not be happier with how the project turned out."' },
+  { name:'ABNB Owner', role:'Airbnb Host', stars:5, text:'"Lane sent progress photos throughout and made the whole process seamless. It was important they finished the same day, they did, and left everything spotless."' },
+  { name:'Robert', role:'Homeowner, Dallas', stars:5, text:'"Robert Wolf was a great communicator, quick to answer questions and walk us through everything. Could not be happier with how the project turned out."' },
 ]
 
-// Residential & Commercial split
+// Residential & Commercial split (em-dashes removed)
 const RES_SERVICES = [
-  { title:'Free Roof Inspection', desc:'Thorough inspection at zero cost. We document every issue with photos and give you an honest report — no pressure, no upselling.' },
+  { title:'Free Roof Inspection', desc:'Thorough inspection at zero cost. We document every issue with photos and give you a complete report. No pressure, no upselling.' },
   { title:'Roof Replacement', desc:'Full residential replacement using the right material for your home and your budget. Done right the first time.' },
-  { title:'Roof Repair', desc:'From minor leaks to major storm damage, our crew diagnoses and fixes the root cause — not just the symptom.' },
+  { title:'Roof Repair', desc:'From minor leaks to major storm damage, our crew diagnoses and fixes the root cause, not just the symptom.' },
   { title:'Roof Leak Repair', desc:'Emergency response available. We stop active leaks fast and provide a lasting repair, not a temporary patch.' },
   { title:'Attic Venting', desc:'Improper ventilation is a leading cause of premature roof failure in Texas. We design and install systems that work.' },
-  { title:'Insurance Claims Help', desc:'We work with your insurance carrier and guide you through the claim process — most homeowners pay only their deductible.' },
+  { title:'Insurance Claims Help', desc:'We work with your insurance carrier and guide you through the claim process. Most homeowners pay only their deductible.' },
 ]
 
 const COM_SERVICES = [
   { title:'Commercial Inspection', desc:'Free, detailed inspection for property managers and business owners. Photo-documented report you can keep on file.' },
   { title:'Flat Roof Systems', desc:'TPO, EPDM, and modified bitumen installation for warehouses, retail, restaurants, and office buildings.' },
   { title:'Commercial Repair', desc:'Fast turnaround on leaks, ponding water, membrane damage, and storm repairs. We minimize disruption to your operations.' },
-  { title:'Roof Coatings', desc:'Extend the life of your existing flat roof with a silicone or acrylic coating system — often half the cost of replacement.' },
+  { title:'Roof Coatings', desc:'Extend the life of your existing flat roof with a silicone or acrylic coating system, often half the cost of replacement.' },
   { title:'Metal Commercial Roofs', desc:'Standing seam and corrugated metal systems for industrial and agricultural buildings. Long-life, low maintenance.' },
   { title:'Maintenance Programs', desc:'Scheduled commercial maintenance to catch small issues before they become major capital expenses.' },
 ]
 
-// Roof types showcase — every type LD installs, with material-specific photos
+// Roof types showcase (em-dashes removed)
 const ROOF_TYPES = [
-  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202331445-0-shingle.png', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25–50 year warranties available depending on the line.', good:'Most homes · Best value', life:'25–50 yrs' },
-  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202322708-0-metal.png', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2–3x longer than shingles.', good:'Modern homes · Coastal · High-end', life:'40–70 yrs' },
-  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202315029-0-clay.png', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes · Spanish style', life:'50–100 yrs' },
-  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202309750-0-cedar.png', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic · Custom · Estate homes', life:'30–100+ yrs' },
-  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202336712-0-tpo.png', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses · Retail · Offices', life:'20–30 yrs' },
-  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202327587-0-rubber.png', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial · Industrial', life:'25–30 yrs' },
-  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202325195-0-modified-bitumen.png', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages · Additions · Small commercial', life:'15–25 yrs' },
-  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202318420-0-corrugated-metal.png', desc:'Exposed-fastener metal panels — economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings · Rural · Budget', life:'30–50 yrs' },
+  { name:'Asphalt Shingle',      tag:'Most popular',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202331445-0-shingle.png', desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25 to 50 year warranties available depending on the line.', good:'Most homes, Best value', life:'25-50 yrs' },
+  { name:'Standing Seam Metal',  tag:'Premium look',     img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202322708-0-metal.png', desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2 to 3 times longer than shingles.', good:'Modern homes, Coastal, High-end', life:'40-70 yrs' },
+  { name:'Clay & Concrete Tile', tag:'Mediterranean',    img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202315029-0-clay.png', desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.', good:'Stucco homes, Spanish style', life:'50-100 yrs' },
+  { name:'Slate & Cedar Shake',  tag:'Specialty',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202309750-0-cedar.png', desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.', good:'Historic, Custom, Estate homes', life:'30-100+ yrs' },
+  { name:'TPO Membrane',         tag:'Commercial flat',  img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_3-1778202336712-0-tpo.png', desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.', good:'Warehouses, Retail, Offices', life:'20-30 yrs' },
+  { name:'EPDM Rubber',          tag:'Proven flat',      img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202327587-0-rubber.png', desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.', good:'Commercial, Industrial', life:'25-30 yrs' },
+  { name:'Modified Bitumen',     tag:'Flat & low-slope', img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_2-1778202325195-0-modified-bitumen.png', desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.', good:'Garages, Additions, Small commercial', life:'15-25 yrs' },
+  { name:'Corrugated Metal',     tag:'Workhorse',        img:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9/collage_1-1778202318420-0-corrugated-metal.png', desc:'Exposed-fastener metal panels, economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.', good:'Outbuildings, Rural, Budget', life:'30-50 yrs' },
 ]
 
 const PROCESS = [
-  { n:'01', title:'Free Inspection & Honest Assessment', desc:'Call or submit a form. We arrive on time, inspect thoroughly, document everything with photos, and explain exactly what we find — clearly and honestly.' },
+  { n:'01', title:'Free Inspection & Honest Assessment', desc:'Call or submit a form. We arrive on time, inspect thoroughly, document everything with photos, and explain exactly what we find, clearly and honestly.' },
   { n:'02', title:'Clear Estimate', desc:'You receive a detailed, itemized quote. No hidden fees, no high-pressure sales, no surprises. Financing and insurance-claim support available.' },
   { n:'03', title:'Expert Installation', desc:'Our certified crew works efficiently using the right materials for your roof and your budget, protecting your property throughout.' },
   { n:'04', title:'Final Walkthrough', desc:'We review the completed work with you and leave your property cleaner than we found it. Workmanship warranty included.' },
@@ -75,16 +77,19 @@ const STATS = [
 ]
 
 const GALLERY = [
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199338635-0-R-photo-gallery-3.jpg', label:'Residential Roof · Houston' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199484168-0-C-Photo-gallery-6.jpg', label:'Commercial Project · Dallas' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199330797-0-gutter-rapair.jpg', label:'Gutter Repair · Residential' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199373951-0-C-photo-gallery-1.jpg', label:'Commercial Flat · DFW' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199341205-0-R-photo-gallery-5.jpg', label:'Residential · Sugar Land' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199367549-0-InstallationMore2.jpg', label:'Commercial Install · Houston' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199334228-0-siding.jpg', label:'Siding Project · Residential' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199380131-0-C-Photo-gallery-5.jpg', label:'Commercial · Plano' },
-  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199344049-0-R-photo-gallery-6.jpg', label:'Roof Replacement · Katy' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199338635-0-R-photo-gallery-3.jpg', label:'Residential Roof, Houston' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199484168-0-C-Photo-gallery-6.jpg', label:'Commercial Project, Dallas' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199330797-0-gutter-rapair.jpg', label:'Gutter Repair, Residential' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199373951-0-C-photo-gallery-1.jpg', label:'Commercial Flat, DFW' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199341205-0-R-photo-gallery-5.jpg', label:'Residential, Sugar Land' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_3-1778199367549-0-InstallationMore2.jpg', label:'Commercial Install, Houston' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199334228-0-siding.jpg', label:'Siding Project, Residential' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_4-1778199380131-0-C-Photo-gallery-5.jpg', label:'Commercial, Plano' },
+  { src:'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_2-1778199344049-0-R-photo-gallery-6.jpg', label:'Roof Replacement, Katy' },
 ]
+
+const HOUSTON_CITIES = ['Houston','Sugar Land','Katy','The Woodlands','Pearland','Cypress','Spring','League City','Galveston','Conroe','Baytown']
+const DALLAS_CITIES = ['Dallas','Fort Worth','Plano','Frisco','Allen','McKinney','Arlington','Irving','Denton','Waco','Tyler']
 
 function Stars() {
   return <span style={{ color:ORANGE, fontSize:15, letterSpacing:3 }}>★★★★★</span>
@@ -124,7 +129,7 @@ function Counter({ to, suffix = '' }) {
     let raf
     const tick = now => {
       const p = Math.min((now - start) / dur, 1)
-      const eased = 1 - Math.pow(1 - p, 3) // easeOutCubic
+      const eased = 1 - Math.pow(1 - p, 3)
       setVal(Math.round(to * eased))
       if (p < 1) raf = requestAnimationFrame(tick)
     }
@@ -132,6 +137,39 @@ function Counter({ to, suffix = '' }) {
     return () => cancelAnimationFrame(raf)
   }, [shown, to])
   return <span ref={ref}>{val}{suffix}</span>
+}
+
+// ─── Top Phone Bar ────────────────────────────────────────────
+function TopBar() {
+  return (
+    <div style={{
+      position:'fixed', top:0, left:0, right:0, height:TOP_BAR_HEIGHT, zIndex:301,
+      background:DARK, display:'flex', alignItems:'center', justifyContent:'center',
+      gap:24, padding:'0 16px', borderBottom:`1px solid rgba(255,255,255,0.06)`,
+    }}>
+      <a href={`tel:${PHONE_HOUSTON}`} className="ld-topbar-link" style={{
+        fontFamily:"'Barlow',sans-serif", fontSize:12, fontWeight:600,
+        color:WHITE, textDecoration:'none', letterSpacing:'0.3px',
+      }}>
+        <span style={{ color:ORANGE, marginRight:6, fontWeight:700, letterSpacing:'1px' }}>HOUSTON</span>
+        {PHONE_HOUSTON}
+      </a>
+      <span style={{ color:'rgba(255,255,255,0.25)' }}>·</span>
+      <a href={`tel:${PHONE_DALLAS}`} className="ld-topbar-link" style={{
+        fontFamily:"'Barlow',sans-serif", fontSize:12, fontWeight:600,
+        color:WHITE, textDecoration:'none', letterSpacing:'0.3px',
+      }}>
+        <span style={{ color:ORANGE, marginRight:6, fontWeight:700, letterSpacing:'1px' }}>DALLAS</span>
+        {PHONE_DALLAS}
+      </a>
+      <style>{`
+        .ld-topbar-link:hover{color:${ORANGE} !important}
+        @media(max-width:480px){
+          .ld-topbar-link{font-size:11px !important}
+        }
+      `}</style>
+    </div>
+  )
 }
 
 // ─── Call Picker Modal ────────────────────────────────────────
@@ -185,7 +223,7 @@ function Nav({ onSchedule, onCall }) {
   const bg = scrolled || open
   return (
     <>
-      <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
+      <nav style={{ position:'fixed', top:TOP_BAR_HEIGHT, left:0, right:0, zIndex:300, background:bg?'rgba(15,31,75,0.97)':'transparent', backdropFilter:bg?'blur(12px)':'none', borderBottom:bg?'1px solid rgba(255,255,255,0.08)':'none', transition:'all 0.35s ease' }}>
         <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 48px', height: (scrolled || open) ? 72 : 110, display:'flex', alignItems:'center', justifyContent:'space-between', transition:'height 0.4s ease' }}>
           <img src={LOGO} alt="LD Roofing" style={{ height: (scrolled || open) ? 44 : 110, width:'auto', objectFit:'contain', cursor:'pointer', filter:'none', transition:'height 0.4s ease' }}
             onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
@@ -214,7 +252,7 @@ function Nav({ onSchedule, onCall }) {
       </nav>
 
       {open && (
-        <div style={{ position:'fixed', inset:0, top:72, background:NAVY, zIndex:299, display:'flex', flexDirection:'column', padding:'8px 0 32px' }}>
+        <div style={{ position:'fixed', inset:0, top:72+TOP_BAR_HEIGHT, background:NAVY, zIndex:299, display:'flex', flexDirection:'column', padding:'8px 0 32px' }}>
           {[['services','Services'],['roof-types','Roof Types'],['process','Our Process'],['reviews','Reviews'],['service-areas','Areas Served']].map(([id,label])=>(
             <button key={id} onClick={()=>go(id)} style={{ background:'none', border:'none', borderBottom:'1px solid rgba(255,255,255,0.08)', padding:'20px 32px', textAlign:'left', fontFamily:'inherit', fontSize:16, fontWeight:600, color:WHITE, cursor:'pointer' }}>{label}</button>
           ))}
@@ -242,23 +280,77 @@ function Nav({ onSchedule, onCall }) {
   )
 }
 
-// ─── Hero ─────────────────────────────────────────────────────
-function Hero({ onSchedule, onCall }) {
-  const [form, setForm] = useState({ name:'', phone:'', service:'' })
+// ─── Inspection Form (shared between Hero and Schedule Modal) ─
+function InspectionForm({ onSent, compact = false, onCall }) {
+  const [form, setForm] = useState({ name:'', phone:'', email:'', address:'', service:'', message:'' })
   const [sent, setSent] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
   const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
   const submit = () => {
-    const body = `Name: ${form.name}%0APhone: ${form.phone}%0AService: ${form.service}`
+    if (!form.name || !form.phone) return
+    const body = `Name: ${form.name}%0APhone: ${form.phone}%0AEmail: ${form.email}%0AAddress: ${form.address}%0AService: ${form.service}%0AMessage: ${form.message}`
     window.location.href = `mailto:${EMAIL}?subject=Free Roof Inspection Request&body=${body}`
     setSent(true)
+    onSent && onSent()
   }
+  const inp = {
+    width:'100%', padding:'13px 16px', fontSize:14, fontFamily:"'Barlow',sans-serif",
+    border:compact ? 'none' : `1px solid ${BORDER}`,
+    outline:'none',
+    background:compact ? 'rgba(255,255,255,0.95)' : WHITE,
+    color:DARK, boxSizing:'border-box', marginBottom:12, borderRadius:2,
+  }
+
+  if (sent) {
+    return (
+      <div style={{ padding:compact ? '40px 24px' : '48px 32px', textAlign:'center' }}>
+        <div style={{ fontSize:compact ? 36 : 40, marginBottom:compact ? 12 : 16 }}>✅</div>
+        <div style={{ fontFamily:compact ? "'Barlow Condensed',sans-serif" : "'Source Serif 4',serif", fontSize:compact ? 22 : 22, fontWeight:compact ? 700 : 400, color:NAVY, textTransform:compact ? 'uppercase' : 'none', marginBottom:compact ? 8 : 12 }}>
+          {compact ? 'Request Sent!' : 'Request Sent'}
+        </div>
+        <p style={{ fontSize:14, color:MUTED, lineHeight:1.7 }}>We'll be in touch within 24 hours to confirm your free inspection.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div style={{ padding:compact ? '24px' : '28px' }}>
+      <input style={inp} placeholder="Full Name *" value={form.name} onChange={set('name')}/>
+      <input style={inp} placeholder="Phone Number *" value={form.phone} onChange={set('phone')}/>
+      <input style={inp} placeholder="Email Address" value={form.email} onChange={set('email')}/>
+      <input style={inp} placeholder="Property Address" value={form.address} onChange={set('address')}/>
+      <select style={{...inp, color:form.service?DARK:MUTED}} value={form.service} onChange={set('service')}>
+        <option value="">Service Needed</option>
+        {['Free Roof Inspection','Roof Repair','Roof Replacement','Roof Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help','Free Estimate'].map(s=><option key={s}>{s}</option>)}
+      </select>
+      <textarea style={{...inp, resize:'vertical', minHeight:80, marginBottom:20}} placeholder="Additional notes (optional)" value={form.message} onChange={set('message')}/>
+      <button onClick={submit} disabled={!form.name || !form.phone}
+        style={{
+          width:'100%', background:ORANGE, color:WHITE, border:'none',
+          padding:'15px', fontSize:14, fontWeight:700, fontFamily:"'Barlow',sans-serif",
+          cursor:(!form.name||!form.phone)?'not-allowed':'pointer',
+          opacity:(!form.name||!form.phone)?0.6:1,
+          borderRadius:2, letterSpacing:'0.5px', textTransform:'uppercase',
+          transition:'background 0.2s', marginBottom:12,
+        }}
+        onMouseOver={e=>{ if(form.name && form.phone) e.currentTarget.style.background=ORANGE2 }}
+        onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
+        Request Free Inspection →
+      </button>
+      <div style={{ textAlign:'center', fontSize:13, color:MUTED }}>
+        Or <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:13, padding:0 }}>call us →</button>
+      </div>
+    </div>
+  )
+}
+
+// ─── Hero ─────────────────────────────────────────────────────
+function Hero({ onCall }) {
+  const [scrollY, setScrollY] = useState(0)
   useEffect(() => {
     const fn = () => setScrollY(window.scrollY)
     window.addEventListener('scroll', fn, { passive:true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
-  const inp = { width:'100%', padding:'13px 16px', fontSize:14, fontFamily:"'Barlow',sans-serif", border:'none', outline:'none', background:'rgba(255,255,255,0.95)', color:DARK, boxSizing:'border-box', marginBottom:10, borderRadius:2 }
 
   return (
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
@@ -282,7 +374,7 @@ function Hero({ onSchedule, onCall }) {
               Roofing You<br/>Can Actually<br/><span style={{ color:ORANGE }}>Trust.</span>
             </h1>
             <p style={{ fontSize:17, color:'rgba(255,255,255,0.78)', lineHeight:1.75, marginBottom:36, maxWidth:480, fontFamily:"'Barlow',sans-serif" }}>
-              Family-owned. BBB A+ rated. Free inspections, honest estimates, and roofing for every budget — from asphalt shingle to standing seam metal. Financing and insurance-claim help available.
+              Family-owned. BBB A+ rated. Free inspections, customer-service-oriented estimates, and roofing for every budget, from asphalt shingle to standing seam metal. Financing and insurance-claim help available.
             </p>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px 28px', maxWidth:380 }}>
               {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Licensed & Insured','Fully Bonded'],['Free Inspections','No Commitment']].map(([a,b])=>(
@@ -302,29 +394,7 @@ function Hero({ onSchedule, onCall }) {
               <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:22, fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', color:WHITE, marginBottom:2 }}>Get a Free Inspection</div>
               <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)' }}>We respond within 24 hours</div>
             </div>
-            {sent ? (
-              <div style={{ padding:'40px 24px', textAlign:'center' }}>
-                <div style={{ fontSize:36, marginBottom:12 }}>✅</div>
-                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:22, fontWeight:700, color:NAVY, textTransform:'uppercase', marginBottom:8 }}>Request Sent!</div>
-                <p style={{ fontSize:14, color:MUTED, lineHeight:1.7 }}>We'll call you within 24 hours to schedule your free inspection.</p>
-              </div>
-            ) : (
-              <div style={{ padding:'24px' }}>
-                <input style={inp} placeholder="Your Name *" value={form.name} onChange={set('name')}/>
-                <input style={{...inp, background:'#f0f0f0'}} placeholder="Phone Number *" value={form.phone} onChange={set('phone')}/>
-                <select style={{...inp, color:form.service?DARK:MUTED}} value={form.service} onChange={set('service')}>
-                  <option value="">Service Needed</option>
-                  {['Free Roof Inspection','Roof Repair','Roof Replacement','Roof Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help','Free Estimate'].map(s=><option key={s}>{s}</option>)}
-                </select>
-                <button onClick={submit} style={{ width:'100%', background:ORANGE, color:WHITE, border:'none', padding:'15px', fontSize:14, fontWeight:700, fontFamily:"'Barlow',sans-serif", cursor:'pointer', borderRadius:2, letterSpacing:'0.5px', textTransform:'uppercase', transition:'background 0.2s', marginBottom:12 }}
-                  onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
-                  Request Free Inspection →
-                </button>
-                <div style={{ textAlign:'center', fontSize:13, color:MUTED }}>
-                  Or <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:13, padding:0 }}>call us →</button>
-                </div>
-              </div>
-            )}
+            <InspectionForm onCall={onCall}/>
           </div>
         </div>
       </div>
@@ -338,7 +408,7 @@ function TrustBar() {
   return (
     <div style={{ background:ORANGE, padding:'16px 48px' }}>
       <div style={{ maxWidth:1200, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
-        {['Free Inspections — No Commitment','Licensed, Bonded & Insured','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited'].map((t,i)=>(
+        {['Free Inspections, No Commitment','Licensed, Bonded & Insured','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited'].map((t,i)=>(
           <span key={i} style={{ fontSize:12, fontWeight:600, color:'rgba(255,255,255,0.92)', letterSpacing:'0.3px' }}>✓ {t}</span>
         ))}
       </div>
@@ -366,7 +436,7 @@ function StatsStrip() {
   )
 }
 
-// ─── Services with Residential/Commercial toggle ──────────────
+// ─── Services ─────────────────────────────────────────────────
 function Services({ onSchedule }) {
   const [tab, setTab] = useState('residential')
   const [ref, shown] = useReveal(0.1)
@@ -386,7 +456,6 @@ function Services({ onSchedule }) {
           </button>
         </div>
 
-        {/* Toggle */}
         <div style={{ display:'inline-flex', background:OFF, border:`1px solid ${BORDER}`, padding:4, marginBottom:40, borderRadius:2 }}>
           {[['residential','Residential'],['commercial','Commercial']].map(([k,label])=>{
             const active = tab===k
@@ -407,7 +476,7 @@ function Services({ onSchedule }) {
 
         <div style={{ marginBottom:24, fontSize:14, color:MUTED, maxWidth:600 }}>
           {tab === 'residential'
-            ? 'Roofing for homeowners across Houston & Dallas. From simple repairs to full replacements, every type of roof, every budget.'
+            ? 'Roofing for homeowners across Houston and Dallas. From simple repairs to full replacements, every type of roof, every budget.'
             : 'Roofing for property managers, business owners, and commercial buildings. Flat systems, metal, coatings, and maintenance programs.'}
         </div>
 
@@ -430,7 +499,7 @@ function Services({ onSchedule }) {
   )
 }
 
-// ─── Roof Types — tabbed grid ─────────────────────────────────
+// ─── Roof Types ───────────────────────────────────────────────
 function RoofTypes() {
   const [active, setActive] = useState(0)
   const [ref, shown] = useReveal(0.1)
@@ -443,7 +512,6 @@ function RoofTypes() {
       className={`reveal ${shown?'is-in':''}`}
       style={{ background:DARK, padding:'96px 48px', position:'relative', overflow:'hidden' }}
     >
-      {/* Subtle background accent */}
       <div style={{ position:'absolute', top:0, right:0, width:'40%', height:'100%', background:`linear-gradient(135deg, transparent 0%, ${NAVY}40 100%)`, pointerEvents:'none' }}/>
 
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative' }}>
@@ -453,11 +521,10 @@ function RoofTypes() {
             Every Type of Roof.<br/>Every Budget.
           </h2>
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.8, maxWidth:560 }}>
-            From asphalt shingle to standing seam metal, we install the right roof for your property — and your wallet. Pick a type below to learn more.
+            From asphalt shingle to standing seam metal, we install the right roof for your property and your wallet. Pick a type below to learn more.
           </p>
         </div>
 
-        {/* Mobile-only dropdown selector */}
         <div className="ld-rt-mobile-select" style={{ display:'none', marginBottom:0 }}>
           <label style={{ display:'block', fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:'rgba(255,255,255,0.55)', marginBottom:10 }}>
             Choose a roof type
@@ -467,25 +534,16 @@ function RoofTypes() {
               value={active}
               onChange={e => setActive(Number(e.target.value))}
               style={{
-                width:'100%',
-                padding:'16px 44px 16px 18px',
-                fontSize:16,
-                fontFamily:'inherit',
-                fontWeight:700,
-                background:NAVY,
-                color:WHITE,
-                border:`2px solid ${ORANGE}`,
-                borderRadius:2,
-                appearance:'none',
-                WebkitAppearance:'none',
-                MozAppearance:'none',
-                cursor:'pointer',
-                outline:'none',
+                width:'100%', padding:'16px 44px 16px 18px', fontSize:16,
+                fontFamily:'inherit', fontWeight:700, background:NAVY, color:WHITE,
+                border:`2px solid ${ORANGE}`, borderRadius:2,
+                appearance:'none', WebkitAppearance:'none', MozAppearance:'none',
+                cursor:'pointer', outline:'none',
               }}
             >
               {ROOF_TYPES.map((rt,i)=>(
                 <option key={i} value={i} style={{ background:NAVY, color:WHITE }}>
-                  {String(i+1).padStart(2,'0')} — {rt.name} · {rt.tag}
+                  {String(i+1).padStart(2,'0')} - {rt.name} · {rt.tag}
                 </option>
               ))}
             </select>
@@ -494,7 +552,6 @@ function RoofTypes() {
         </div>
 
         <div className="ld-rt-grid" style={{ display:'grid', gridTemplateColumns:'320px 1fr', gap:0, border:'1px solid rgba(255,255,255,0.08)' }}>
-          {/* Tab list */}
           <div style={{ background:'rgba(0,0,0,0.3)', borderRight:'1px solid rgba(255,255,255,0.08)' }}>
             {ROOF_TYPES.map((rt, i) => {
               const isActive = i === active
@@ -545,10 +602,8 @@ function RoofTypes() {
             })}
           </div>
 
-          {/* Detail panel */}
           <div style={{ position:'relative', minHeight:520, background:NAVY, overflow:'hidden' }}>
             <div key={active} style={{ animation:'rtFade 0.5s ease' }}>
-              {/* Image */}
               <div style={{ position:'relative', height:340, overflow:'hidden' }}>
                 <img
                   src={t.img}
@@ -562,7 +617,6 @@ function RoofTypes() {
                 </div>
               </div>
 
-              {/* Content */}
               <div style={{ padding:'32px 40px' }}>
                 <h3 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(32px,3.5vw,42px)', fontWeight:800, color:WHITE, marginBottom:16, textTransform:'uppercase', letterSpacing:'-0.3px', lineHeight:1 }}>
                   {t.name}
@@ -597,9 +651,7 @@ function RoofTypes() {
   )
 }
 
-
 // ─── Divisions ────────────────────────────────────────────────
-// Each division card calls its own direct number (no picker — context is clear here).
 function Divisions() {
   const [ref, shown] = useReveal(0.1)
   return (
@@ -608,11 +660,11 @@ function Divisions() {
         <div style={{ textAlign:'center', marginBottom:64 }}>
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Our Teams</div>
           <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY }}>Two Divisions. One Standard.</h2>
-          <p style={{ fontSize:16, color:MUTED, maxWidth:480, margin:'16px auto 0', lineHeight:1.8 }}>Two family-run teams. When you call, you reach a real person who owns the business.</p>
+          <p style={{ fontSize:16, color:MUTED, maxWidth:520, margin:'16px auto 0', lineHeight:1.8 }}>Get the customer service you deserve. Lane and Robert make sure your needs are met.</p>
         </div>
         <div className="ld-div" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
           {[
-            { city:'Houston', accent:NAVY,   name:'Lane & Dana Pauly',     title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home — honest, responsive, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg, phone:PHONE_HOUSTON },
+            { city:'Houston', accent:NAVY,   name:'Lane & Dana Pauly',     title:'Houston Division', desc:'Lane and Dana founded LD Roofing to be the company they\'d want working on their own home. Responsive, customer-focused, and detail-oriented. Lane personally oversees every Houston job from inspection to final walkthrough.', img:laneFamilyImg, phone:PHONE_HOUSTON },
             { city:'Dallas',  accent:ORANGE, name:'Robert & Loren Wolf',   title:'Dallas Division',  desc:'Robert and Loren Wolf bring the same family-first values to DFW. Their team specializes in both residential and commercial roofing, and they\'ve built their reputation on communication and clean, lasting work.', img:wolfFamilyImg, phone:PHONE_DALLAS },
           ].map((d,i)=>(
             <div key={i} style={{ background:WHITE, border:`1px solid ${BORDER}`, overflow:'hidden' }}>
@@ -649,7 +701,7 @@ function Gallery() {
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:10 }}>Portfolio</div>
             <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(26px,3.5vw,40px)', color:WHITE }}>Recent Projects</h2>
           </div>
-          <p style={{ fontSize:13, color:'rgba(255,255,255,0.35)', maxWidth:280, textAlign:'right', lineHeight:1.7 }}>Residential and commercial across Houston & Dallas.</p>
+          <p style={{ fontSize:13, color:'rgba(255,255,255,0.35)', maxWidth:280, textAlign:'right', lineHeight:1.7 }}>Residential and commercial across Houston and Dallas.</p>
         </div>
       </div>
       <div className="ld-gal" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)' }}>
@@ -759,17 +811,15 @@ function Reviews() {
   )
 }
 
-// ─── Areas ────────────────────────────────────────────────────
+// ─── Service Areas ────────────────────────────────────────────
 function ServiceAreas({ onCall }) {
   const [ref, shown] = useReveal(0.1)
-  // Google Maps embed URLs centered on each metro at zoom level that fits ~75mi radius
-  // Houston: 29.7604, -95.3698 · Dallas: 32.7767, -96.7970
   const houstonMap = 'https://www.google.com/maps?q=Houston,TX&t=&z=8&ie=UTF8&iwloc=&output=embed'
   const dallasMap  = 'https://www.google.com/maps?q=Dallas,TX&t=&z=8&ie=UTF8&iwloc=&output=embed'
 
   const metros = [
-    { city:'Houston', color:NAVY, accent:NAVY, src:houstonMap, hub:'Houston, TX', cities:['Houston','Sugar Land','Katy','The Woodlands','Pearland','Cypress','Spring','League City','Galveston','Conroe','Baytown'] },
-    { city:'Dallas',  color:ORANGE, accent:ORANGE, src:dallasMap, hub:'Dallas-Fort Worth, TX', cities:['Dallas','Fort Worth','Plano','Frisco','Allen','McKinney','Arlington','Irving','Denton','Waco','Tyler'] },
+    { city:'Houston', color:NAVY, accent:NAVY, src:houstonMap, hub:'Houston, TX', cities:HOUSTON_CITIES },
+    { city:'Dallas',  color:ORANGE, accent:ORANGE, src:dallasMap, hub:'Dallas-Fort Worth, TX', cities:DALLAS_CITIES },
   ]
 
   return (
@@ -779,24 +829,22 @@ function ServiceAreas({ onCall }) {
           <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:12 }}>Coverage</div>
           <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4vw,44px)', color:NAVY, marginBottom:14 }}>Serving Houston & Dallas</h2>
           <p style={{ fontSize:16, color:MUTED, maxWidth:560, margin:'0 auto', lineHeight:1.8 }}>
-            We service a <strong style={{ color:NAVY }}>75-mile radius</strong> around each metro — covering most of east and central Texas. Don't see your city? <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:16, padding:0 }}>Give us a call</button> — we likely cover you.
+            We service the greater Houston and Dallas-Fort Worth metro areas, plus surrounding cities across Texas. <button onClick={onCall} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:16, padding:0 }}>Give us a call</button> to discuss your project.
           </p>
         </div>
 
         <div className="ld-area" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32 }}>
           {metros.map(m => (
             <div key={m.city} style={{ border:`1px solid ${BORDER}`, overflow:'hidden', background:WHITE }}>
-              {/* Header */}
               <div style={{ padding:'24px 28px', borderBottom:`1px solid ${BORDER}`, display:'flex', alignItems:'center', gap:14 }}>
                 <div style={{ width:4, height:32, background:m.accent, borderRadius:2 }}/>
                 <div style={{ flex:1 }}>
                   <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY, lineHeight:1.2 }}>{m.city} Metro</h3>
-                  <div style={{ fontSize:12, color:MUTED, marginTop:2 }}>75-mile service radius</div>
+                  <div style={{ fontSize:12, color:MUTED, marginTop:2 }}>Greater metro area & surrounding cities</div>
                 </div>
                 <div style={{ fontSize:11, fontWeight:700, color:m.accent, letterSpacing:'2px', textTransform:'uppercase' }}>Active</div>
               </div>
 
-              {/* Map with overlay circle */}
               <div style={{ position:'relative', width:'100%', aspectRatio:'4/3', background:OFF, overflow:'hidden' }}>
                 <iframe
                   src={m.src}
@@ -808,18 +856,6 @@ function ServiceAreas({ onCall }) {
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 />
-                {/* Overlay branded circle — pointer-events:none so users can still pan map */}
-                <div style={{
-                  position:'absolute', top:'50%', left:'50%',
-                  transform:'translate(-50%,-50%)',
-                  width:'62%', aspectRatio:'1',
-                  borderRadius:'50%',
-                  border:`3px solid ${m.accent}`,
-                  background:`${m.accent}1A`,
-                  boxShadow:`0 0 0 2px ${WHITE}, 0 4px 24px rgba(0,0,0,0.15)`,
-                  pointerEvents:'none',
-                }}/>
-                {/* Center pin */}
                 <div style={{
                   position:'absolute', top:'50%', left:'50%',
                   transform:'translate(-50%,-100%)',
@@ -841,21 +877,8 @@ function ServiceAreas({ onCall }) {
                     borderTop:`8px solid ${m.accent}`,
                   }}/>
                 </div>
-                {/* Radius label */}
-                <div style={{
-                  position:'absolute', bottom:14, right:14,
-                  background:'rgba(255,255,255,0.95)',
-                  padding:'6px 12px',
-                  fontSize:11, fontWeight:700,
-                  color:NAVY, letterSpacing:'0.5px',
-                  border:`1px solid ${BORDER}`,
-                  pointerEvents:'none',
-                }}>
-                  ⌖ 75 mi radius
-                </div>
               </div>
 
-              {/* Cities served */}
               <div style={{ padding:'24px 28px' }}>
                 <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:MUTED, marginBottom:14 }}>
                   Cities Served (Including)
@@ -898,7 +921,7 @@ function CTA({ onSchedule, onCall }) {
       <div style={{ position:'relative', maxWidth:700, margin:'0 auto', textAlign:'center' }}>
         <div style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, marginBottom:20 }}>Get Started Today</div>
         <h2 style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(28px,4.5vw,54px)', color:WHITE, lineHeight:1.12, marginBottom:20 }}>Your Roof Deserves<br/>a Second Opinion.</h2>
-        <p style={{ fontSize:16, color:'rgba(255,255,255,0.65)', lineHeight:1.8, marginBottom:44 }}>Our inspection is completely free — no obligation, no pressure. Just an honest assessment from people who care.</p>
+        <p style={{ fontSize:16, color:'rgba(255,255,255,0.65)', lineHeight:1.8, marginBottom:44 }}>Free, thorough inspections from a team built on customer service. Schedule yours today.</p>
         <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
           <button onClick={onSchedule} style={{...BTN, padding:'16px 36px', fontSize:14}}
             onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
@@ -915,102 +938,71 @@ function CTA({ onSchedule, onCall }) {
 }
 
 // ─── Footer ───────────────────────────────────────────────────
-function Footer({ onCall }) {
+function Footer() {
   return (
     <footer style={{ background:DARK, padding:'72px 48px 32px' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
-        <div className="ld-ft" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:56, marginBottom:56, paddingBottom:56, borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
+        <div className="ld-ft" style={{ display:'grid', gridTemplateColumns:'1.4fr 1fr 1fr 1fr', gap:48, marginBottom:56, paddingBottom:56, borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
           <div>
             <img src={LOGO} alt="LD Roofing & Exteriors" style={{ height:48, width:'auto', objectFit:'contain', marginBottom:20, filter:'none' }}
               onError={e=>{e.target.style.display='none';e.target.nextSibling.style.display='block'}}/>
             <span style={{ display:'none', fontFamily:"'Source Serif 4',serif", fontSize:20, fontWeight:700, color:WHITE, marginBottom:20 }}>LD Roofing & Exteriors</span>
-            <p style={{ fontSize:13, color:'rgba(255,255,255,0.38)', lineHeight:1.9, maxWidth:300, marginBottom:24 }}>Family-owned roofing contractor serving Houston and Dallas. Free inspections, honest estimates, and work we stand behind.</p>
-            <div style={{ marginBottom:14 }}>
-              <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:ORANGE, marginBottom:6 }}>Houston</div>
-              <a href={`tel:${PHONE_HOUSTON}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', transition:'color 0.2s' }}
-                onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_HOUSTON}</a>
-            </div>
-            <div style={{ marginBottom:18 }}>
-              <div style={{ fontSize:10, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', color:ORANGE, marginBottom:6 }}>Dallas</div>
-              <a href={`tel:${PHONE_DALLAS}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', transition:'color 0.2s' }}
-                onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_DALLAS}</a>
-            </div>
+            <p style={{ fontSize:13, color:'rgba(255,255,255,0.38)', lineHeight:1.9, maxWidth:280, marginBottom:20 }}>Family-owned roofing contractor serving Houston and Dallas. Free inspections, customer-service oriented, and work we stand behind.</p>
             <a href={`mailto:${EMAIL}`} style={{ fontSize:13, color:'rgba(255,255,255,0.38)', textDecoration:'none', transition:'color 0.2s' }}
               onMouseOver={e=>e.target.style.color=WHITE} onMouseOut={e=>e.target.style.color='rgba(255,255,255,0.38)'}>{EMAIL}</a>
           </div>
+
           <div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:20 }}>Services</div>
-            {['Free Roof Inspection','Roof Replacement','Roof Repair','Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help'].map(s=>(
-              <div key={s} style={{ fontSize:13, color:'rgba(255,255,255,0.38)', marginBottom:10 }}>{s}</div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Houston</div>
+            <a href={`tel:${PHONE_HOUSTON}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:14, transition:'color 0.2s' }}
+              onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_HOUSTON}</a>
+            {HOUSTON_CITIES.map(c=>(
+              <div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>
             ))}
           </div>
+
           <div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:20 }}>Locations</div>
-            {['Houston Metro','Katy · Sugar Land','The Woodlands','Pearland · Cypress','Dallas · Plano','Frisco · McKinney','DFW Metroplex'].map(a=>(
-              <div key={a} style={{ fontSize:13, color:'rgba(255,255,255,0.38)', marginBottom:10 }}>{a}</div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Dallas</div>
+            <a href={`tel:${PHONE_DALLAS}`} style={{ fontSize:15, fontWeight:700, color:WHITE, textDecoration:'none', display:'block', marginBottom:14, transition:'color 0.2s' }}
+              onMouseOver={e=>e.target.style.color=ORANGE} onMouseOut={e=>e.target.style.color=WHITE}>{PHONE_DALLAS}</a>
+            {DALLAS_CITIES.map(c=>(
+              <div key={c} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{c}</div>
+            ))}
+          </div>
+
+          <div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:16 }}>Services</div>
+            {['Free Roof Inspection','Roof Replacement','Roof Repair','Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help'].map(s=>(
+              <div key={s} style={{ fontSize:12, color:'rgba(255,255,255,0.38)', marginBottom:6 }}>{s}</div>
             ))}
           </div>
         </div>
+
         <div style={{ display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:12 }}>
           <div style={{ fontSize:12, color:'rgba(255,255,255,0.2)' }}>© {new Date().getFullYear()} LD Roofing & Exteriors LLC · BBB A+ Accredited</div>
           <div style={{ fontSize:12, color:'rgba(255,255,255,0.2)' }}>Website by <a href="https://ecwebco.com" target="_blank" rel="noreferrer" style={{ color:ORANGE, textDecoration:'none' }}>EC Web Co</a></div>
         </div>
       </div>
-      <style>{`@media(max-width:768px){.ld-ft{grid-template-columns:1fr!important}}`}</style>
+      <style>{`@media(max-width:768px){.ld-ft{grid-template-columns:1fr 1fr!important}}@media(max-width:480px){.ld-ft{grid-template-columns:1fr!important}}`}</style>
     </footer>
   )
 }
 
 // ─── Schedule Modal ───────────────────────────────────────────
 function ScheduleModal({ onClose, onCall }) {
-  const [form, setForm] = useState({ name:'', phone:'', email:'', address:'', service:'', message:'' })
-  const [sent, setSent] = useState(false)
-  const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
-  const submit = () => {
-    const body = `Name: ${form.name}%0APhone: ${form.phone}%0AEmail: ${form.email}%0AAddress: ${form.address}%0AService: ${form.service}%0AMessage: ${form.message}`
-    window.location.href = `mailto:${EMAIL}?subject=Free Roof Inspection Request&body=${body}`
-    setSent(true)
-  }
   useEffect(()=>{ document.body.style.overflow='hidden'; return ()=>{ document.body.style.overflow='' } },[])
-  const inp = { width:'100%', padding:'13px 16px', fontSize:14, fontFamily:'inherit', border:`1px solid ${BORDER}`, outline:'none', background:WHITE, color:DARK, boxSizing:'border-box', marginBottom:12, borderRadius:2 }
   return (
     <div style={{ position:'fixed', inset:0, zIndex:500, display:'flex', alignItems:'center', justifyContent:'center' }}>
       <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.7)', backdropFilter:'blur(6px)' }} onClick={onClose}/>
       <div style={{ position:'relative', width:'min(480px,94vw)', maxHeight:'90vh', overflowY:'auto', background:WHITE }}>
         <div style={{ background:NAVY, padding:'24px 28px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
           <div>
-            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:4 }}>Free — No Obligation</div>
+            <div style={{ fontSize:10, fontWeight:700, letterSpacing:'3px', textTransform:'uppercase', color:ORANGE, marginBottom:4 }}>Free, No Obligation</div>
             <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:20, color:WHITE }}>Schedule Your Inspection</div>
           </div>
           <button onClick={onClose} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.5)', fontSize:22, cursor:'pointer', lineHeight:1 }}>✕</button>
         </div>
-        {sent ? (
-          <div style={{ padding:'48px 32px', textAlign:'center' }}>
-            <div style={{ fontSize:40, marginBottom:16 }}>✅</div>
-            <div style={{ fontFamily:"'Source Serif 4',serif", fontSize:22, color:NAVY, marginBottom:12 }}>Request Sent</div>
-            <p style={{ fontSize:14, color:MUTED, lineHeight:1.7, marginBottom:24 }}>We'll be in touch within 24 hours to confirm your free inspection.</p>
-            <button onClick={onClose} style={BTN} onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Close</button>
-          </div>
-        ) : (
-          <div style={{ padding:'28px' }}>
-            <input style={inp} placeholder="Full Name *" value={form.name} onChange={set('name')}/>
-            <input style={inp} placeholder="Phone Number *" value={form.phone} onChange={set('phone')}/>
-            <input style={inp} placeholder="Email Address" value={form.email} onChange={set('email')}/>
-            <input style={inp} placeholder="Property Address" value={form.address} onChange={set('address')}/>
-            <select style={{...inp, color:form.service?DARK:MUTED}} value={form.service} onChange={set('service')}>
-              <option value="">Service Needed</option>
-              {['Free Roof Inspection','Roof Repair','Roof Replacement','Roof Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help','Free Estimate'].map(s=><option key={s}>{s}</option>)}
-            </select>
-            <textarea style={{...inp, resize:'vertical', minHeight:80, marginBottom:20}} placeholder="Additional notes (optional)" value={form.message} onChange={set('message')}/>
-            <button onClick={submit} style={{...BTN, width:'100%', padding:'15px', fontSize:14, textAlign:'center'}}
-              onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
-              Request Free Inspection →
-            </button>
-            <div style={{ textAlign:'center', marginTop:14, fontSize:13, color:MUTED }}>
-              Or <button onClick={()=>{onClose();onCall && onCall()}} style={{ background:'none', border:'none', color:ORANGE, fontWeight:700, cursor:'pointer', fontFamily:'inherit', fontSize:13, padding:0 }}>call us →</button>
-            </div>
-          </div>
-        )}
+        <InspectionForm onCall={()=>{onClose();onCall && onCall()}}/>
       </div>
     </div>
   )
@@ -1034,9 +1026,10 @@ export default function App() {
   const [scheduleOpen, setScheduleOpen] = useState(false)
   const [callOpen, setCallOpen] = useState(false)
   return (
-    <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK }}>
+    <div style={{ fontFamily:"'Barlow', sans-serif", color:DARK, paddingTop:TOP_BAR_HEIGHT }}>
+      <TopBar/>
       <Nav onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
-      <Hero onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
+      <Hero onCall={()=>setCallOpen(true)}/>
       <TrustBar/>
       <StatsStrip/>
       <Services onSchedule={()=>setScheduleOpen(true)}/>
@@ -1047,7 +1040,7 @@ export default function App() {
       <Reviews/>
       <ServiceAreas onCall={()=>setCallOpen(true)}/>
       <CTA onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
-      <Footer onCall={()=>setCallOpen(true)}/>
+      <Footer/>
       <StickyBar onSchedule={()=>setScheduleOpen(true)} onCall={()=>setCallOpen(true)}/>
       {scheduleOpen && <ScheduleModal onClose={()=>setScheduleOpen(false)} onCall={()=>setCallOpen(true)}/>}
       {callOpen && <CallPicker onClose={()=>setCallOpen(false)}/>}
