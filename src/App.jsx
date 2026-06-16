@@ -392,7 +392,7 @@ function Hero({ onCall }) {
               Family-owned. BBB A+ rated. Free inspections, customer-service-oriented estimates, and roofing for every budget, from asphalt shingle to standing seam metal. Financing and insurance-claim help available.
             </p>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px 28px', maxWidth:380 }}>
-              {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Licensed & Insured','Fully Bonded'],['Free Inspections','No Commitment']].map(([a,b])=>(
+              {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Fully Insured','Workers Comp Covered'],['Free Inspections','No Commitment']].map(([a,b])=>(
                 <div key={a} style={{ display:'flex', gap:10, alignItems:'flex-start' }}>
                   <span style={{ color:ORANGE, marginTop:2, flexShrink:0, fontSize:14 }}>✓</span>
                   <div>
@@ -422,7 +422,7 @@ function TrustBar() {
   return (
     <div style={{ background:ORANGE, padding:'16px 48px' }}>
       <div style={{ maxWidth:1200, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
-        {['Free Inspections, No Commitment','Licensed, Bonded & Insured','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited'].map((t,i)=>(
+        {['Free Inspections, No Commitment','Fully Insured & Workers Comp','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited'].map((t,i)=>(
           <span key={i} style={{ fontSize:12, fontWeight:600, color:'rgba(255,255,255,0.92)', letterSpacing:'0.3px' }}>✓ {t}</span>
         ))}
       </div>

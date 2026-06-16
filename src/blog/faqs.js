@@ -32,7 +32,7 @@ export const FAQS = [
     a: 'The honest answer is that a thorough inspection is the only way to know for sure. Age, granule loss, visible damage, leaks, and the extent of any storm damage all factor in. We will document everything we find and give you a clear recommendation based on what your roof actually needs, not what generates the biggest invoice. Sometimes a targeted repair is the right call. Sometimes a full replacement makes more sense long-term. We will explain the trade-offs honestly.',
   },
   {
-    q: 'Are you licensed, bonded, and insured?',
-    a: 'Yes, fully. We are licensed, bonded, insured, and BBB A+ accredited. We will provide documentation upon request. Hiring a roofer who is not properly insured is one of the biggest risks a homeowner can take, because if a worker is injured on your property and the contractor lacks workers compensation coverage, the liability can fall to you.',
+    q: 'Are you insured?',
+    a: 'Yes, fully. We carry general liability insurance and workers compensation coverage, and we are BBB A+ accredited. We will provide documentation upon request. Worth knowing: Texas does not require general roofers to hold a state license, so insurance, workers comp, and reputation are the most important things to vet when hiring. Hiring a roofer without workers comp is one of the biggest risks a homeowner can take, because if a worker is injured on your property and the contractor lacks coverage, the liability can fall to you.',
   },
 ]
