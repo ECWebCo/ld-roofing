@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BLOG_POSTS } from '../blog/posts'
+import Seo, { breadcrumbSchema } from '../seo/Seo'
 
 const NAVY    = '#0F1F4B'
 const ORANGE  = '#E8701A'
@@ -13,13 +13,6 @@ const WHITE   = '#FFFFFF'
 const TOP_BAR_HEIGHT = 36
 
 export default function BlogList() {
-  useEffect(() => {
-    document.title = 'Roofing Blog | LD Roofing & Exteriors'
-    const desc = document.querySelector('meta[name="description"]')
-    if (desc) desc.setAttribute('content', 'Expert roofing advice, guides, and insights for Texas homeowners from LD Roofing & Exteriors. Houston and Dallas roofing specialists.')
-    window.scrollTo(0, 0)
-  }, [])
-
   const formatDate = (iso) => {
     const d = new Date(iso)
     return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })
@@ -27,6 +20,12 @@ export default function BlogList() {
 
   return (
     <div style={{ background:WHITE, minHeight:'100vh', paddingTop:TOP_BAR_HEIGHT + 110 }}>
+      <Seo
+        title="Roofing Blog | LD Roofing & Exteriors"
+        description="Expert roofing advice, guides, and insights for Texas homeowners from LD Roofing & Exteriors. Houston and Dallas roofing specialists."
+        path="/blog"
+        schema={[breadcrumbSchema([{ name:'Home', path:'/' }, { name:'Blog', path:'/blog' }])]}
+      />
       {/* Hero */}
       <section style={{ background:NAVY, padding:'80px 48px 64px', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>

@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
-import { getPostBySlug, BLOG_POSTS } from '../blog/posts'
+import { getPostBySlug } from '../blog/posts'
+import Seo, { breadcrumbSchema } from '../seo/Seo'
+import { SITE_URL, OG_IMAGE } from '../ui/theme'
+import { useModals } from '../ui/primitives'
 
 const NAVY    = '#0F1F4B'
 const ORANGE  = '#E8701A'
@@ -12,65 +14,28 @@ const WHITE   = '#FFFFFF'
 
 const TOP_BAR_HEIGHT = 36
 
-export default function BlogPost({ onSchedule, onCall }) {
+export default function BlogPost() {
   const { slug } = useParams()
   const post = getPostBySlug(slug)
-
-  useEffect(() => {
-    if (!post) return
-    document.title = `${post.title} | LD Roofing & Exteriors`
-    const desc = document.querySelector('meta[name="description"]')
-    if (desc) desc.setAttribute('content', post.description)
-
-    // Open Graph
-    const setMeta = (property, content) => {
-      let el = document.querySelector(`meta[property="${property}"]`)
-      if (!el) {
-        el = document.createElement('meta')
-        el.setAttribute('property', property)
-        document.head.appendChild(el)
-      }
-      el.setAttribute('content', content)
-    }
-    setMeta('og:title', post.title)
-    setMeta('og:description', post.description)
-    setMeta('og:image', post.coverImage)
-    setMeta('og:type', 'article')
-
-    // Article schema for SEO rich results
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      'headline': post.title,
-      'description': post.description,
-      'image': post.coverImage,
-      'author': { '@type': 'Person', 'name': post.author },
-      'publisher': {
-        '@type': 'Organization',
-        'name': 'LD Roofing & Exteriors',
-        'logo': { '@type': 'ImageObject', 'url': 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_48_39%20PM.png' },
-      },
-      'datePublished': post.published,
-      'dateModified': post.published,
-      'mainEntityOfPage': { '@type': 'WebPage', '@id': `https://ld-roofing.com/blog/${post.slug}` },
-    }
-    const el = document.createElement('script')
-    el.type = 'application/ld+json'
-    el.id = 'article-schema'
-    el.textContent = JSON.stringify(schema)
-    const existing = document.getElementById('article-schema')
-    if (existing) existing.remove()
-    document.head.appendChild(el)
-
-    window.scrollTo(0, 0)
-
-    return () => {
-      const cleanup = document.getElementById('article-schema')
-      if (cleanup) cleanup.remove()
-    }
-  }, [post])
+  const { openSchedule, openCall } = useModals()
 
   if (!post) return <Navigate to="/blog" replace />
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    image: post.coverImage,
+    author: { '@type': 'Person', name: post.author },
+    publisher: { '@type': 'Organization', name: 'LD Roofing & Exteriors', logo: { '@type': 'ImageObject', url: OG_IMAGE } },
+    datePublished: post.published,
+    dateModified: post.published,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+  }
+  const breadcrumbs = breadcrumbSchema([
+    { name:'Home', path:'/' }, { name:'Blog', path:'/blog' }, { name:post.title, path:`/blog/${post.slug}` },
+  ])
 
   const formatDate = (iso) => {
     const d = new Date(iso)
@@ -105,6 +70,14 @@ export default function BlogPost({ onSchedule, onCall }) {
 
   return (
     <div style={{ background:WHITE, minHeight:'100vh', paddingTop:TOP_BAR_HEIGHT + 110 }}>
+      <Seo
+        title={`${post.title} | LD Roofing & Exteriors`}
+        description={post.description}
+        path={`/blog/${post.slug}`}
+        image={post.coverImage}
+        type="article"
+        schema={[articleSchema, breadcrumbs]}
+      />
       {/* Cover image */}
       <div style={{ position:'relative', width:'100%', aspectRatio:'21/9', maxHeight:480, overflow:'hidden', background:NAVY }}>
         <img src={post.coverImage} alt={post.title} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}/>
@@ -160,13 +133,13 @@ export default function BlogPost({ onSchedule, onCall }) {
               Free, thorough inspections from a team built on customer service. Houston and Dallas.
             </p>
             <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
-              <button onClick={onSchedule} style={{
+              <button onClick={openSchedule} style={{
                 background:ORANGE, color:WHITE, border:'none', padding:'14px 28px', fontSize:13, fontWeight:700,
                 fontFamily:'inherit', cursor:'pointer', borderRadius:2, letterSpacing:'0.5px', textTransform:'uppercase',
               }}>
                 Schedule Free Inspection
               </button>
-              <button onClick={onCall} style={{
+              <button onClick={openCall} style={{
                 background:'transparent', color:WHITE, border:'1px solid rgba(255,255,255,0.3)',
                 padding:'14px 22px', fontSize:13, fontWeight:600, fontFamily:'inherit', cursor:'pointer', borderRadius:2,
               }}>
