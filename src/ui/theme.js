@@ -10,7 +10,7 @@ export const BORDER  = '#E2E0DB'
 export const WHITE   = '#FFFFFF'
 
 // ─── Business NAP (Name / Address / Phone) — single source of truth ─────────
-export const SITE_URL = 'https://ld-roofing.com'
+export const SITE_URL = 'https://www.ld-roofing.com'
 export const BUSINESS_NAME = 'LD Roofing & Exteriors'
 export const PHONE_HOUSTON = '(469) 585-8908'
 export const PHONE_DALLAS  = '(214) 755-3159'

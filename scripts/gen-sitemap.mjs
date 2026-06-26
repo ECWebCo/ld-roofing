@@ -9,7 +9,7 @@ import { ROOF_TYPES } from '../src/data/roofTypes.js'
 import { LOCATIONS } from '../src/data/locations.js'
 import { BLOG_POSTS } from '../src/blog/posts.js'
 
-const SITE = 'https://ld-roofing.com'
+const SITE = 'https://www.ld-roofing.com'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const distDir = resolve(__dirname, '../dist')
 
