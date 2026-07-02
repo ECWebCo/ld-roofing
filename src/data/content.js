@@ -17,7 +17,7 @@ export const STATS = [
 
 const GBASE = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc'
 export const GALLERY = [
-  { src:`${GBASE}/collage_2-1778199338635-0-R-photo-gallery-3.jpg`, label:'Residential Roof, Houston' },
+  { src:'/photos/residential-shingle-aerial.jpg', label:'Residential Roof, Houston' },
   { src:`${GBASE}/collage_3-1778199484168-0-C-Photo-gallery-6.jpg`, label:'Commercial Project, Dallas' },
   { src:`${GBASE}/collage_1-1778199330797-0-gutter-rapair.jpg`, label:'Gutter Repair, Residential' },
   { src:`${GBASE}/collage_4-1778199373951-0-C-photo-gallery-1.jpg`, label:'Commercial Flat, DFW' },
@@ -25,7 +25,7 @@ export const GALLERY = [
   { src:`${GBASE}/collage_3-1778199367549-0-InstallationMore2.jpg`, label:'Commercial Install, Houston' },
   { src:`${GBASE}/collage_1-1778199334228-0-siding.jpg`, label:'Siding Project, Residential' },
   { src:`${GBASE}/collage_4-1778199380131-0-C-Photo-gallery-5.jpg`, label:'Commercial, Plano' },
-  { src:`${GBASE}/collage_2-1778199344049-0-R-photo-gallery-6.jpg`, label:'Roof Replacement, Katy' },
+  { src:'/photos/roof-replacement-complete.jpg', label:'Roof Replacement, Katy' },
 ]
 
 export const PROCESS = [
