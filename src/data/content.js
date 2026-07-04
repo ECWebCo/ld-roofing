@@ -15,16 +15,15 @@ export const STATS = [
   { num: 32,  suffix:'',  label:'Cities Served' },
 ]
 
-const GBASE = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc'
 export const GALLERY = [
   { src:'/photos/residential-shingle-aerial.jpg', label:'Residential Roof, Houston' },
-  { src:`${GBASE}/collage_3-1778199484168-0-C-Photo-gallery-6.jpg`, label:'Commercial Project, Dallas' },
-  { src:`${GBASE}/collage_1-1778199330797-0-gutter-rapair.jpg`, label:'Gutter Repair, Residential' },
-  { src:`${GBASE}/collage_4-1778199373951-0-C-photo-gallery-1.jpg`, label:'Commercial Flat, DFW' },
-  { src:`${GBASE}/collage_2-1778199341205-0-R-photo-gallery-5.jpg`, label:'Residential, Sugar Land' },
-  { src:`${GBASE}/collage_3-1778199367549-0-InstallationMore2.jpg`, label:'Commercial Install, Houston' },
-  { src:`${GBASE}/collage_1-1778199334228-0-siding.jpg`, label:'Siding Project, Residential' },
-  { src:`${GBASE}/collage_4-1778199380131-0-C-Photo-gallery-5.jpg`, label:'Commercial, Plano' },
+  { src:'/photos/gallery-commercial-dallas.jpg', label:'Commercial Project, Dallas' },
+  { src:'/photos/gallery-gutter-repair.jpg', label:'Gutter Repair, Residential' },
+  { src:'/photos/gallery-commercial-flat-dfw.jpg', label:'Commercial Flat, DFW' },
+  { src:'/photos/gallery-residential-sugar-land.jpg', label:'Residential, Sugar Land' },
+  { src:'/photos/gallery-commercial-install-houston.jpg', label:'Commercial Install, Houston' },
+  { src:'/photos/gallery-siding.jpg', label:'Siding Project, Residential' },
+  { src:'/photos/gallery-commercial-plano.jpg', label:'Commercial, Plano' },
   { src:'/photos/roof-replacement-complete.jpg', label:'Roof Replacement, Katy' },
 ]
 

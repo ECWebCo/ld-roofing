@@ -18,9 +18,9 @@ export const PHONE_HOUSTON_E164 = '+1-469-585-8908'
 export const PHONE_DALLAS_E164  = '+1-214-755-3159'
 export const EMAIL = 'Info@ld-roofing.com'
 
-export const LOGO  = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/ChatGPT%20Image%20Apr%2021,%202026,%2009_48_39%20PM.png'
-export const OG_IMAGE = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/LD%20Logo.png'
-export const HERO_IMG = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg'
+export const LOGO  = '/photos/logo.png'
+export const OG_IMAGE = `${SITE_URL}/photos/hero-residential-home.jpg`
+export const HERO_IMG = '/photos/hero-residential-home.jpg'
 export const CTA_IMG  = '/photos/our-work-luxury-roof.jpg'
 
 export const TOP_BAR_HEIGHT = 36

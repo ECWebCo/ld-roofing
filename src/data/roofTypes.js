@@ -2,13 +2,12 @@
 // Drives the home "Roof Types" selector AND a dedicated page per material at
 // /roof-types/<slug>. img/desc/good/life power the home widget; the rest is SEO.
 
-const BASE = 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/43489564-5a0f-413b-9f7d-b35e4ac379f9'
 
 export const ROOF_TYPES = [
   {
     slug: 'asphalt-shingle',
     name:'Asphalt Shingle', tag:'Most popular',
-    img:`${BASE}/collage_3-1778202331445-0-shingle.png`,
+    img:`/photos/roof-shingle.jpg`,
     desc:'The most common roof in Texas. Affordable, durable, and available in dozens of colors. 25 to 50 year warranties available depending on the line.',
     good:'Most homes, Best value', life:'25-50 yrs',
     metaTitle:'Asphalt Shingle Roofing in Houston & Dallas | LD Roofing',
@@ -23,7 +22,7 @@ export const ROOF_TYPES = [
   {
     slug: 'standing-seam-metal',
     name:'Standing Seam Metal', tag:'Premium look',
-    img:`${BASE}/collage_2-1778202322708-0-metal.png`,
+    img:`/photos/roof-metal.jpg`,
     desc:'Hidden fastener metal panels for a clean, modern profile. Reflects heat, sheds water, and lasts 2 to 3 times longer than shingles.',
     good:'Modern homes, Coastal, High-end', life:'40-70 yrs',
     metaTitle:'Standing Seam Metal Roofing in Houston & Dallas | LD Roofing',
@@ -38,7 +37,7 @@ export const ROOF_TYPES = [
   {
     slug: 'clay-concrete-tile',
     name:'Clay & Concrete Tile', tag:'Mediterranean',
-    img:`${BASE}/collage_1-1778202315029-0-clay.png`,
+    img:`/photos/roof-clay.jpg`,
     desc:'Heavy, beautiful, and built to last. Excellent for Spanish, Mediterranean, and Southwestern style homes. Resists fire and rot.',
     good:'Stucco homes, Spanish style', life:'50-100 yrs',
     metaTitle:'Clay & Concrete Tile Roofing in Houston & Dallas | LD Roofing',
@@ -52,7 +51,7 @@ export const ROOF_TYPES = [
   {
     slug: 'slate-cedar-shake',
     name:'Slate & Cedar Shake', tag:'Specialty',
-    img:`${BASE}/collage_1-1778202309750-0-cedar.png`,
+    img:`/photos/roof-cedar.jpg`,
     desc:'Natural slate and cedar shake roofing for historic homes and high-end renovations. We handle the specialty install.',
     good:'Historic, Custom, Estate homes', life:'30-100+ yrs',
     metaTitle:'Slate & Cedar Shake Roofing in Houston & Dallas | LD Roofing',
@@ -66,7 +65,7 @@ export const ROOF_TYPES = [
   {
     slug: 'tpo-membrane',
     name:'TPO Membrane', tag:'Commercial flat',
-    img:`${BASE}/collage_3-1778202336712-0-tpo.png`,
+    img:`/photos/roof-tpo.jpg`,
     desc:'The most popular commercial flat roof system. Heat-welded seams, energy-efficient white surface, and proven performance in Texas heat.',
     good:'Warehouses, Retail, Offices', life:'20-30 yrs',
     metaTitle:'TPO Membrane Flat Roofing in Houston & Dallas | LD Roofing',
@@ -80,7 +79,7 @@ export const ROOF_TYPES = [
   {
     slug: 'epdm-rubber',
     name:'EPDM Rubber', tag:'Proven flat',
-    img:`${BASE}/collage_2-1778202327587-0-rubber.png`,
+    img:`/photos/roof-rubber.jpg`,
     desc:'The original single-ply membrane. Black rubber roofing with decades of track record on commercial buildings of every size.',
     good:'Commercial, Industrial', life:'25-30 yrs',
     metaTitle:'EPDM Rubber Flat Roofing in Houston & Dallas | LD Roofing',
@@ -93,7 +92,7 @@ export const ROOF_TYPES = [
   {
     slug: 'modified-bitumen',
     name:'Modified Bitumen', tag:'Flat & low-slope',
-    img:`${BASE}/collage_2-1778202325195-0-modified-bitumen.png`,
+    img:`/photos/roof-modified-bitumen.jpg`,
     desc:'Asphalt-based rolled roofing for low-slope residential additions, garages, and small commercial. Affordable and reliable.',
     good:'Garages, Additions, Small commercial', life:'15-25 yrs',
     metaTitle:'Modified Bitumen Roofing in Houston & Dallas | LD Roofing',
@@ -106,7 +105,7 @@ export const ROOF_TYPES = [
   {
     slug: 'corrugated-metal',
     name:'Corrugated Metal', tag:'Workhorse',
-    img:`${BASE}/collage_1-1778202318420-0-corrugated-metal.png`,
+    img:`/photos/roof-corrugated-metal.jpg`,
     desc:'Exposed-fastener metal panels, economical and tough. The go-to for barns, shops, ag buildings, and budget-conscious homeowners.',
     good:'Outbuildings, Rural, Budget', life:'30-50 yrs',
     metaTitle:'Corrugated Metal Roofing in Houston & Dallas | LD Roofing',

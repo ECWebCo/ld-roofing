@@ -6,3 +6,4 @@ package-lock.json
 *.log
 ld-roofing@0.0.0
 vite
+.claude/

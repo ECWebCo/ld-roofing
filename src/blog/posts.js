@@ -19,7 +19,7 @@ export const BLOG_POSTS = [
     published: '2026-05-28',
     readTime: '8 min read',
     category: 'Roofing Guides',
-    coverImage: 'https://snthchxrqjtriorgvakk.supabase.co/storage/v1/object/public/restaurant-photos/91a71a5c-5a1c-4814-b85d-b60b4f2cc6bc/collage_1-1778199271017-0-residential-home-1280x853.jpg',
+    coverImage: '/photos/hero-residential-home.jpg',
     excerpt: 'Choosing the right roof is one of the biggest decisions a homeowner makes. Here is a clear, no-nonsense breakdown of every major roofing material we install in Texas, what each one costs, how long it lasts, and which one is the best fit for your home.',
     body: [
       { type:'p', text:'If you are reading this, you are probably in one of three situations. Your roof is starting to show its age and you know a replacement is coming. A storm just rolled through and you are wondering whether your roof took a hit. Or you are buying or building a home and trying to make a smart decision about which roof to install.' },
