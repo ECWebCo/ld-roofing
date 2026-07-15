@@ -10,21 +10,22 @@ export const REVIEWS = [
 
 export const STATS = [
   { num: 500, suffix:'+', label:'Roofs Replaced' },
-  { num: 10,  suffix:'+', label:'Years in Business' },
+  { num: 10,  suffix:'+', label:'Years of Experience' },
   { num: 63,  suffix:'',  label:'5-Star Reviews' },
   { num: 32,  suffix:'',  label:'Cities Served' },
 ]
 
+// Real drone photos of LD Roofing jobs, mixed with real commercial project shots.
 export const GALLERY = [
-  { src:'/photos/residential-shingle-aerial.jpg', label:'Residential Roof, Houston' },
+  { src:'/photos/aerial-2story-pool.jpg', label:'Residential Roof Replacement' },
   { src:'/photos/gallery-commercial-dallas.jpg', label:'Commercial Project, Dallas' },
-  { src:'/photos/gallery-gutter-repair.jpg', label:'Gutter Repair, Residential' },
-  { src:'/photos/gallery-commercial-flat-dfw.jpg', label:'Commercial Flat, DFW' },
-  { src:'/photos/gallery-residential-sugar-land.jpg', label:'Residential, Sugar Land' },
+  { src:'/photos/aerial-gabled-shingle.jpg', label:'Architectural Shingle Roof' },
+  { src:'/photos/aerial-craftsmanship.jpg', label:'New Roof, Detail' },
+  { src:'/photos/gallery-commercial-flat-dfw.jpg', label:'Commercial Flat Roof, DFW' },
+  { src:'/photos/aerial-two-story.jpg', label:'Two-Story Roof Replacement' },
+  { src:'/photos/aerial-replacement-pool.jpg', label:'Full Roof Replacement' },
   { src:'/photos/gallery-commercial-install-houston.jpg', label:'Commercial Install, Houston' },
-  { src:'/photos/gallery-siding.jpg', label:'Siding Project, Residential' },
-  { src:'/photos/gallery-commercial-plano.jpg', label:'Commercial, Plano' },
-  { src:'/photos/roof-replacement-complete.jpg', label:'Roof Replacement, Katy' },
+  { src:'/photos/aerial-charcoal.jpg', label:'Charcoal Shingle Roof' },
 ]
 
 export const PROCESS = [

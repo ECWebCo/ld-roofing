@@ -20,8 +20,13 @@ export const EMAIL = 'Info@ld-roofing.com'
 
 export const LOGO  = '/photos/logo.png'
 export const OG_IMAGE = `${SITE_URL}/photos/hero-residential-home.jpg`
-export const HERO_IMG = '/photos/hero-residential-home.jpg'
-export const CTA_IMG  = '/photos/our-work-luxury-roof.jpg'
+export const HERO_IMG = '/photos/hero-drone-poster.jpg'
+export const CTA_IMG  = '/photos/aerial-2story-pool.jpg'
+
+// Real drone footage of LD Roofing jobs (see public/videos)
+export const HERO_VIDEO = '/videos/hero-drone.mp4'
+export const HERO_POSTER = '/photos/hero-drone-poster.jpg'
+export const WORK_VIDEO = '/videos/work-drone.mp4'
 
 export const TOP_BAR_HEIGHT = 36
 

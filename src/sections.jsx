@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   NAVY, ORANGE, ORANGE2, OFF, DARK, MUTED, BORDER, WHITE, BTN,
   PHONE_HOUSTON, PHONE_DALLAS, HERO_IMG, CTA_IMG,
+  HERO_VIDEO, HERO_POSTER, WORK_VIDEO,
 } from './ui/theme'
 import { useReveal, Counter, Stars, InspectionForm, useModals } from './ui/primitives'
 import laneFamilyImg from './lane-family.png'
@@ -22,8 +23,10 @@ export function Hero() {
   }, [])
   return (
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
-      <img src={HERO_IMG} alt="Texas home roof replacement by LD Roofing"
-        style={{ position:'absolute', inset:0, width:'100%', height:'110%', objectFit:'cover', objectPosition:'center 40%', opacity:0.45, transform:`translateY(${scrollY * 0.25}px)`, willChange:'transform' }}/>
+      <video autoPlay muted loop playsInline poster={HERO_POSTER} aria-hidden="true"
+        style={{ position:'absolute', inset:0, width:'100%', height:'110%', objectFit:'cover', objectPosition:'center 45%', opacity:0.5, transform:`translateY(${scrollY * 0.18}px)`, willChange:'transform' }}>
+        <source src={HERO_VIDEO} type="video/mp4" />
+      </video>
       <div style={{ position:'absolute', inset:0, background:`linear-gradient(100deg, ${NAVY}E0 30%, ${NAVY}99 65%, rgba(15,31,75,0.4) 100%)` }}/>
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>
       <div style={{ position:'relative', maxWidth:1200, margin:'0 auto', padding:'140px 48px 100px', width:'100%' }}>
@@ -31,13 +34,13 @@ export function Hero() {
           <div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:12, marginBottom:20 }}>
               <div style={{ width:28, height:3, background:ORANGE }}/>
-              <span style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, fontFamily:"'Barlow',sans-serif" }}>Houston & Dallas, Texas</span>
+              <span style={{ fontSize:11, fontWeight:700, letterSpacing:'4px', textTransform:'uppercase', color:ORANGE, fontFamily:"'Barlow',sans-serif" }}>Family-Owned · Houston & Dallas</span>
             </div>
             <h1 style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:'clamp(48px,7vw,88px)', fontWeight:800, color:WHITE, lineHeight:0.95, marginBottom:24, textTransform:'uppercase', letterSpacing:'-0.5px' }}>
               Roofing You<br/>Can Actually<br/><span style={{ color:ORANGE }}>Trust.</span>
             </h1>
             <p style={{ fontSize:17, color:'rgba(255,255,255,0.78)', lineHeight:1.75, marginBottom:36, maxWidth:480, fontFamily:"'Barlow',sans-serif" }}>
-              Family-owned. BBB A+ rated. Free inspections, customer-service-oriented estimates, and roofing for every budget, from asphalt shingle to standing seam metal. Financing and insurance-claim help available.
+              We're a family crew, not a call center. Lane runs Houston, Robert runs Dallas, and an owner is on-site for every job from the first inspection to the final cleanup. Free inspections, straight answers, and roofs built to handle Texas hail and heat.
             </p>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px 28px', maxWidth:380 }}>
               {[['BBB A+ Rated','Accredited Business'],['5.0 ★ Google','Verified Reviews'],['Fully Insured','Workers Comp Covered'],['Free Inspections','No Commitment']].map(([a,b])=>(
@@ -427,7 +430,10 @@ export function CTA() {
   }, [])
   return (
     <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'96px 48px' }}>
-      <img src={CTA_IMG} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'120%', objectFit:'cover', opacity:0.18, transform:`translateY(${scrollY * -0.15}px)`, willChange:'transform' }}/>
+      <video autoPlay muted loop playsInline poster={CTA_IMG} aria-hidden="true"
+        style={{ position:'absolute', inset:0, width:'100%', height:'120%', objectFit:'cover', opacity:0.22, transform:`translateY(${scrollY * -0.12}px)`, willChange:'transform' }}>
+        <source src={WORK_VIDEO} type="video/mp4" />
+      </video>
       <div style={{ position:'absolute', inset:0, background:`linear-gradient(135deg, ${NAVY}D0 0%, ${NAVY}99 100%)` }}/>
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:4, background:ORANGE }}/>
       <div style={{ position:'relative', maxWidth:700, margin:'0 auto', textAlign:'center' }}>
