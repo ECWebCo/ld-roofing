@@ -155,3 +155,78 @@ export const LOCATIONS = [...CITIES, ...COUNTIES]
 export const getLocationBySlug = (slug) => LOCATIONS.find(l => l.slug === slug)
 export const citiesByMetro = (metro) => CITIES.filter(c => c.metro === metro)
 export const countiesByMetro = (metro) => COUNTIES.filter(c => c.metro === metro)
+
+// ─── Deep, city-specific content for priority pages ──────────────────────────
+// These are the cities pulling the most Search Console impressions. The extra
+// content targets the exact "roof repair / roof leak repair in <city>" queries
+// they already rank for (page 2), to push them onto page 1. Genuinely local
+// and unique per city — do not templatize.
+export const CITY_DEEP = {
+  'katy-tx': [
+    { type:'h2', text:'Roofing built for Katy weather' },
+    { type:'p', text:'Katy has grown from farmland into one of the largest master-planned suburbs in the country, which means thousands of homes built in the late 1990s and 2000s are now hitting the age where a builder-grade roof gives out. Add the Gulf Coast heat, heavy downpours, and tropical-season wind, and Katy roofs work hard. We serve all of greater Katy across Harris, Fort Bend, and Waller counties.' },
+    { type:'h3', text:'Roof repair in Katy' },
+    { type:'p', text:'Most Katy repair calls come down to wind-lifted or cracked shingles, worn flashing around chimneys and vents, and storm damage that is easy to miss from the ground. We trace the problem to its real source and fix it to last, not just patch the spot that shows.' },
+    { type:'h3', text:'Roof leak repair in Katy' },
+    { type:'p', text:'Katy’s heavy rain finds every weak point. A stain on your ceiling usually starts several feet away at a failed valley, pipe boot, or flashing joint. We find the true entry point, stop the water, and verify the fix, with emergency response available when a leak is active.' },
+    { type:'callout', text:'Just had a storm roll through Katy? A free, photo-documented inspection is the smart first step before you file an insurance claim.' },
+  ],
+  'arlington-tx': [
+    { type:'h2', text:'Roofing in the heart of North Texas hail country' },
+    { type:'p', text:'Sitting dead center between Dallas and Fort Worth, Arlington takes the full force of the severe hail and straight-line wind North Texas is known for. From the established neighborhoods near the entertainment district to the newer developments on the south side, Arlington roofs see more hail events than almost anywhere in the country.' },
+    { type:'h3', text:'Roof repair in Arlington' },
+    { type:'p', text:'Hail bruising, wind-torn shingles, and damaged flashing are the usual culprits here. A lot of that damage is not visible from the ground, so our inspection documents everything with photos, which also gives you what you need if a storm claim makes sense.' },
+    { type:'h3', text:'Roof leak repair in Arlington' },
+    { type:'p', text:'When hail or wind compromises your roof, leaks follow with the next rain. We find the real entry point and repair it properly, and we can coordinate directly with your insurance carrier if the damage warrants a claim.' },
+    { type:'callout', text:'Most approved storm claims in Arlington leave homeowners paying only their deductible. We will tell you honestly whether the damage justifies one.' },
+  ],
+  'grand-prairie-tx': [
+    { type:'h2', text:'Roofing between Dallas and Fort Worth' },
+    { type:'p', text:'Grand Prairie stretches across the middle of the Metroplex, spanning Dallas and Tarrant counties, which puts it squarely in the path of North Texas hail and wind. Its mix of established homes and newer subdivisions keeps our crews busy with everything from single-shingle repairs to full storm-damage replacements.' },
+    { type:'h3', text:'Roof repair in Grand Prairie' },
+    { type:'p', text:'We handle the wind-lifted shingles, cracked pipe boots, and hail damage that come with Metroplex weather. Every repair starts with finding the actual cause, not just treating the symptom.' },
+    { type:'h3', text:'Roof leak repair in Grand Prairie' },
+    { type:'p', text:'Leaks here usually trace back to storm-damaged flashing or valleys. We locate the source, deliver a lasting fix, and document everything in case an insurance claim is warranted.' },
+  ],
+  'galveston-tx': [
+    { type:'h2', text:'Coastal roofing built for the island' },
+    { type:'p', text:'On Galveston Island, roofs face what few others do: hurricane-force wind, wind-driven rain, and constant salt air. A roof that would last decades inland can fail fast here if it is not the right system installed the right way. Wind ratings and proper fastening are not optional on the coast, they are the whole game.' },
+    { type:'h3', text:'Roof repair in Galveston' },
+    { type:'p', text:'Salt air and coastal wind wear roofs faster, loosening fasteners and lifting edges. We repair the damage and make sure your roof is ready for the next storm season.' },
+    { type:'h3', text:'Roof leak repair in Galveston' },
+    { type:'p', text:'Wind-driven rain pushes water uphill and into places normal rain never reaches. We find those hidden entry points and seal them properly, with emergency response when a leak is active.' },
+    { type:'callout', text:'Buying or selling on the island? A free roof inspection tells you exactly where the roof stands before you sign anything.' },
+  ],
+  'fort-worth-tx': [
+    { type:'h2', text:'Roofing for Fort Worth and Tarrant County' },
+    { type:'p', text:'Fort Worth sits in the same North Texas hail belt as the rest of the Metroplex, and its blend of historic homes, established neighborhoods, and fast-growing suburbs means every kind of roof is on the map. From a small repair to a full replacement, we bring the same standard to all of Tarrant County.' },
+    { type:'h3', text:'Roof repair in Fort Worth' },
+    { type:'p', text:'Hail and wind are the main drivers of repair here. We document damage with photos, fix the root cause, and give you an honest read on whether a repair or a claim is the smarter path.' },
+    { type:'h3', text:'Roof leak repair in Fort Worth' },
+    { type:'p', text:'We trace leaks to their true source, whether it is storm-damaged flashing, a worn boot, or a failing valley, and repair it to last.' },
+  ],
+  'tomball-tx': [
+    { type:'h2', text:'Roofing for Tomball’s growing neighborhoods' },
+    { type:'p', text:'Tomball has kept its small-town character while growing fast across northwest Harris and Montgomery counties. That growth means a mix of brand-new construction and established homes whose original roofs are now reaching the end of their first life, all under the same Gulf Coast heat and storms.' },
+    { type:'h3', text:'Roof repair in Tomball' },
+    { type:'p', text:'From aging builder-grade shingles to wind and storm damage, we diagnose the real issue and fix it right the first time.' },
+    { type:'h3', text:'Roof leak repair in Tomball' },
+    { type:'p', text:'Heavy Gulf rain finds weak flashing and worn boots. We locate the source, stop the water, and back the repair with a workmanship warranty.' },
+  ],
+  'carrollton-tx': [
+    { type:'h2', text:'Roofing for Carrollton and the north Metroplex' },
+    { type:'p', text:'Carrollton spans Dallas, Denton, and Collin counties on the north side of the Metroplex, where established neighborhoods regularly take North Texas hail and wind. Many homes here are at the age where a repair-or-replace decision comes up, and we help homeowners make the honest call.' },
+    { type:'h3', text:'Roof repair in Carrollton' },
+    { type:'p', text:'Hail bruising and wind-lifted shingles are the usual suspects. We document the damage and fix the cause, and we know the local claim process well.' },
+    { type:'h3', text:'Roof leak repair in Carrollton' },
+    { type:'p', text:'We find where the water actually gets in, repair it properly, and coordinate with your insurer if a storm is behind it.' },
+  ],
+  'garland-tx': [
+    { type:'h2', text:'Roofing for Garland and east Dallas County' },
+    { type:'p', text:'Garland’s established Dallas County neighborhoods have plenty of roofs ready for repair or replacement, and the area sees its share of the hail that rolls across North Texas. We deliver dependable work and honest assessments to homeowners across the city.' },
+    { type:'h3', text:'Roof repair in Garland' },
+    { type:'p', text:'We handle hail damage, wind-lifted shingles, and the leaks that follow a storm, always fixing the root cause rather than the symptom.' },
+    { type:'h3', text:'Roof leak repair in Garland' },
+    { type:'p', text:'A leak rarely starts where the stain appears. We trace it to the source and deliver a lasting repair, with emergency response available.' },
+  ],
+}
