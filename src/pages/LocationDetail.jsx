@@ -2,9 +2,9 @@ import { useParams, Navigate, Link } from 'react-router-dom'
 import Seo, { breadcrumbSchema, localBusinessSchema, faqSchema } from '../seo/Seo'
 import { NAVY, ORANGE, OFF, MUTED, BORDER, WHITE, DARK, SITE_URL, PHONE_HOUSTON, PHONE_DALLAS } from '../ui/theme'
 import { PageHero, CtaBand, FaqAccordion } from '../ui/page-bits'
-import { Stars } from '../ui/primitives'
+import { Stars, renderSection } from '../ui/primitives'
 import { getLocationBySlug, getLocationBySlug as findLoc } from '../data/locations'
-import { CITIES } from '../data/locations'
+import { CITIES, CITY_DEEP } from '../data/locations'
 import { SERVICES } from '../data/services'
 import { ROOF_TYPES } from '../data/roofTypes'
 import { REVIEWS } from '../data/content'
@@ -41,6 +41,7 @@ export default function LocationDetail() {
     { name:loc.name, path:`/service-areas/${loc.slug}` },
   ]
   const faqs = localFaqs(loc)
+  const deep = !isCounty ? CITY_DEEP[loc.slug] : null
 
   // Nearby links: cities use their `nearby` list; counties link their member cities.
   const nearby = isCounty
@@ -52,8 +53,8 @@ export default function LocationDetail() {
   return (
     <>
       <Seo
-        title={`Roofing in ${where} | Roof Repair & Replacement | LD Roofing`}
-        description={`Trusted roofing contractor in ${where}. Free inspections, roof repair, replacement, storm damage, and insurance-claim help. BBB A+ rated, fully insured. Call ${phone}.`}
+        title={`${where} Roofing: Repair, Replacement & Leak Repair | LD Roofing`}
+        description={`${where} roofing contractor rated 5.0 stars across 71 reviews. Roof repair, leak repair, replacement, and storm damage. Free inspections, BBB A+, fully insured. Call ${phone}.`}
         path={`/service-areas/${loc.slug}`}
         schema={[
           breadcrumbSchema(crumbs),
@@ -84,6 +85,9 @@ export default function LocationDetail() {
           <p style={{ fontSize:16, color:DARK, lineHeight:1.85, marginBottom:8 }}>
             Whether you just weathered a storm, you are dealing with an aging roof, or you simply want peace of mind, our free, photo-documented inspection tells you exactly where your roof stands, with no pressure and no upselling.
           </p>
+
+          {/* Deep, city-specific content (priority pages) */}
+          {deep && <div style={{ marginTop:8 }}>{deep.map(renderSection)}</div>}
 
           {/* County: list member cities */}
           {isCounty && loc.cities?.length > 0 && (
