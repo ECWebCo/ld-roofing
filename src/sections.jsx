@@ -142,37 +142,46 @@ export function ServicesSection() {
   return (
     <section id="services" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:OFF, padding:'104px 48px' }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:36, flexWrap:'wrap', gap:24 }}>
-          <Kicker label="What We Do" title={<>Complete roofing,<br/>done by owners.</>} />
-          <button onClick={openSchedule} style={{ ...BTN, borderRadius:RADIUS }} onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Schedule Free Inspection</button>
-        </div>
+        <div className="ld-svc-wrap" style={{ display:'grid', gridTemplateColumns:'0.9fr 1.1fr', gap:64, alignItems:'start' }}>
+          {/* Left: heading, toggle, image, CTA */}
+          <div>
+            <Kicker label="What We Do" title={<>Complete roofing,<br/>done by owners.</>} sub="From a single leak to a full replacement, an owner is on every job. Switch between residential and commercial to see what we handle." />
+            <div style={{ display:'inline-flex', background:WHITE, border:`1px solid ${BORDER}`, padding:4, marginTop:26, borderRadius:100, boxShadow:CARD }}>
+              {[['residential','Residential'],['commercial','Commercial']].map(([k,label])=>{
+                const active = tab===k
+                return (<button key={k} onClick={()=>setTab(k)} style={{ background: active ? NAVY : 'transparent', color: active ? WHITE : MUTED, border:'none', padding:'11px 30px', fontSize:13, fontWeight:700, fontFamily:'inherit', cursor:'pointer', letterSpacing:'0.5px', transition:'all 0.25s ease', borderRadius:100 }}>{label}</button>)
+              })}
+            </div>
+            <div style={{ marginTop:28, position:'relative', borderRadius:RADIUS, overflow:'hidden', boxShadow:CARD }}>
+              <img src="/photos/aerial-craftsmanship.jpg" alt="LD Roofing workmanship, aerial view" loading="lazy" style={{ width:'100%', height:270, objectFit:'cover', display:'block' }}/>
+              <div style={{ position:'absolute', inset:0, background:`linear-gradient(to top, rgba(15,31,75,0.6), transparent 55%)` }}/>
+              <div style={{ position:'absolute', left:22, bottom:16, color:WHITE, fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, textTransform:'uppercase', letterSpacing:'0.5px', fontSize:19 }}>500+ Roofs & Counting</div>
+            </div>
+            <button onClick={openSchedule} style={{ ...BTN, borderRadius:RADIUS, marginTop:24 }} onMouseOver={e=>e.currentTarget.style.background=ORANGE2} onMouseOut={e=>e.currentTarget.style.background=ORANGE}>Schedule Free Inspection</button>
+          </div>
 
-        <div style={{ display:'inline-flex', background:WHITE, border:`1px solid ${BORDER}`, padding:4, marginBottom:36, borderRadius:100, boxShadow:CARD }}>
-          {[['residential','Residential'],['commercial','Commercial']].map(([k,label])=>{
-            const active = tab===k
-            return (
-              <button key={k} onClick={()=>setTab(k)} style={{ background: active ? NAVY : 'transparent', color: active ? WHITE : MUTED, border:'none', padding:'11px 30px', fontSize:13, fontWeight:700, fontFamily:'inherit', cursor:'pointer', letterSpacing:'0.5px', transition:'all 0.25s ease', borderRadius:100 }}>{label}</button>
-            )
-          })}
-        </div>
-
-        <div key={tab} style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20 }} className="ld-svc">
-          {list.map((s,i)=>(
-            <Link key={s.slug} to={`/services/${s.slug}`} style={{ display:'block', background:WHITE, padding:'32px 30px', textDecoration:'none', borderRadius:RADIUS, boxShadow:CARD, transition:'transform 0.28s ease, box-shadow 0.28s ease', animation:`fadeUp 0.5s ${i*55}ms ease both` }}
-              onMouseOver={e=>{ e.currentTarget.style.transform='translateY(-5px)'; e.currentTarget.style.boxShadow=CARD_HOVER }}
-              onMouseOut={e=>{ e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow=CARD }}>
-              <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:15, fontWeight:800, color:ORANGE, letterSpacing:'1px', marginBottom:16 }}>{String(i+1).padStart(2,'0')}</div>
-              <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:19, color:NAVY, marginBottom:10, lineHeight:1.3 }}>{s.title}</h3>
-              <p style={{ fontSize:14, color:MUTED, lineHeight:1.8, marginBottom:16 }}>{s.short}</p>
-              <span style={{ fontSize:12, fontWeight:700, color:NAVY, letterSpacing:'0.5px' }}>Learn more <span style={{ color:ORANGE }}>→</span></span>
-            </Link>
-          ))}
-        </div>
-        <div style={{ marginTop:32, textAlign:'center' }}>
-          <Link to="/services" style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none' }}>View all roofing services →</Link>
+          {/* Right: big-numbered service list */}
+          <div key={tab} style={{ borderTop:`2px solid ${NAVY}` }}>
+            {list.map((s,i)=>(
+              <Link key={s.slug} to={`/services/${s.slug}`} className="ld-svc-row"
+                style={{ display:'flex', gap:24, alignItems:'center', padding:'23px 12px', borderBottom:`1px solid ${BORDER}`, textDecoration:'none', transition:'background 0.2s ease, padding 0.2s ease', animation:`fadeUp 0.5s ${i*45}ms ease both` }}
+                onMouseOver={e=>{ e.currentTarget.style.background=WHITE; e.currentTarget.style.paddingLeft='22px'; e.currentTarget.style.paddingRight='22px' }}
+                onMouseOut={e=>{ e.currentTarget.style.background='transparent'; e.currentTarget.style.paddingLeft='12px'; e.currentTarget.style.paddingRight='12px' }}>
+                <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:36, fontWeight:800, color:ORANGE, lineHeight:1, minWidth:48 }}>{String(i+1).padStart(2,'0')}</span>
+                <div style={{ flex:1 }}>
+                  <h3 style={{ fontFamily:"'Source Serif 4',serif", fontSize:19, color:NAVY, marginBottom:4, lineHeight:1.25 }}>{s.title}</h3>
+                  <p style={{ fontSize:13.5, color:MUTED, lineHeight:1.6 }}>{s.short}</p>
+                </div>
+                <span style={{ fontSize:20, color:ORANGE, fontWeight:700, flexShrink:0 }}>→</span>
+              </Link>
+            ))}
+            <div style={{ marginTop:26 }}>
+              <Link to="/services" style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none' }}>View all roofing services →</Link>
+            </div>
+          </div>
         </div>
       </div>
-      <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}.ld-svc > a:nth-child(3n+2){margin-top:38px}@media(max-width:900px){.ld-svc{grid-template-columns:1fr!important}.ld-svc > a{margin-top:0!important}}`}</style>
+      <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@media(max-width:900px){.ld-svc-wrap{grid-template-columns:1fr!important;gap:40px!important}}`}</style>
     </section>
   )
 }
@@ -311,40 +320,65 @@ export function ProcessSection() {
   )
 }
 
+function GoogleG() {
+  return (
+    <svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+      <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+      <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+    </svg>
+  )
+}
+
 export function ReviewsSection() {
   const [ref, shown] = useReveal(0.08)
+  const featured = REVIEWS[0]
+  const rest = REVIEWS.slice(1)
   return (
     <section id="reviews" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:OFF, padding:'104px 48px' }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:48, flexWrap:'wrap', gap:24 }}>
-          <Kicker label="Testimonials" title="What our customers say" />
-          <div style={{ textAlign:'right' }}>
-            <div style={{ display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end', marginBottom:4 }}><Stars/><span style={{ fontSize:20, fontWeight:800, color:NAVY }}>5.0</span></div>
-            <div style={{ fontSize:12, color:MUTED }}>71 Google Reviews</div>
+        <Kicker label="Testimonials" title="Don't just take our word for it." sub="A 5.0-star reputation across 71 Google reviews, earned one honest job at a time." />
+
+        <div className="ld-rev-top" style={{ display:'grid', gridTemplateColumns:'1.45fr 1fr', gap:24, margin:'48px 0 20px', alignItems:'stretch' }}>
+          {/* Featured quote */}
+          <div style={{ background:NAVY, color:WHITE, borderRadius:RADIUS, padding:'46px 46px', position:'relative', overflow:'hidden' }}>
+            <div style={{ position:'absolute', top:-24, right:28, fontSize:170, lineHeight:1, color:ORANGE, opacity:0.16, fontFamily:"'Source Serif 4',serif" }}>”</div>
+            <div style={{ position:'absolute', left:0, top:0, bottom:0, width:4, background:ORANGE }}/>
+            <div style={{ position:'relative' }}>
+              <Stars/>
+              <p style={{ fontFamily:"'Source Serif 4',serif", fontSize:'clamp(20px,2.3vw,27px)', lineHeight:1.5, margin:'20px 0 28px' }}>{featured.text}</p>
+              <div style={{ fontSize:15, fontWeight:700 }}>{featured.name}</div>
+              <div style={{ fontSize:12.5, color:'rgba(255,255,255,0.55)', marginTop:2 }}>{featured.role}</div>
+            </div>
+          </div>
+          {/* Rating panel */}
+          <div style={{ background:WHITE, borderRadius:RADIUS, boxShadow:CARD, padding:'40px 32px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center' }}>
+            <GoogleG/>
+            <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:74, fontWeight:800, color:NAVY, lineHeight:0.9, marginTop:10 }}>5.0</div>
+            <div style={{ marginTop:6 }}><Stars/></div>
+            <div style={{ fontSize:13, color:MUTED, marginTop:10 }}>Based on <strong style={{ color:NAVY }}>71</strong> Google reviews</div>
+            <a href="https://www.google.com/search?q=LD+Roofing+%26+Exteriors+reviews" target="_blank" rel="noreferrer" style={{ marginTop:18, fontSize:13, fontWeight:700, color:ORANGE, textDecoration:'none' }}>Read them on Google →</a>
           </div>
         </div>
-        <div className="ld-rev3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20, marginBottom:20 }}>
-          {REVIEWS.slice(0,3).map((r,i)=>(<ReviewCard key={i} r={r} accent={NAVY}/>))}
-        </div>
-        <div className="ld-rev2" style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:20 }}>
-          {REVIEWS.slice(3).map((r,i)=>(<ReviewCard key={i} r={r} accent={ORANGE}/>))}
+
+        {/* Remaining reviews */}
+        <div className="ld-rev-grid" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:20 }}>
+          {rest.map((r,i)=>(<ReviewCard key={i} r={r} accent={i%2?ORANGE:NAVY}/>))}
         </div>
       </div>
-      <style>{`@media(max-width:768px){.ld-rev3,.ld-rev2{grid-template-columns:1fr!important}}`}</style>
+      <style>{`@media(max-width:900px){.ld-rev-top{grid-template-columns:1fr!important}.ld-rev-grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:560px){.ld-rev-grid{grid-template-columns:1fr!important}}`}</style>
     </section>
   )
 }
 function ReviewCard({ r, accent }) {
   return (
-    <div style={{ background:WHITE, padding:'32px 28px', borderRadius:RADIUS, boxShadow:CARD }}>
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:16 }}>
-        <Stars/>
-        <span style={{ fontSize:30, lineHeight:0.6, color:ORANGE, opacity:0.25, fontFamily:"'Source Serif 4',serif" }}>”</span>
-      </div>
-      <p style={{ fontSize:15, color:DARK, lineHeight:1.85, marginBottom:22, fontFamily:"'Source Serif 4',serif", fontStyle:'italic' }}>{r.text}</p>
-      <div style={{ borderTop:`1px solid ${BORDER}`, paddingTop:18, display:'flex', alignItems:'center', gap:12 }}>
-        <div style={{ width:38, height:38, borderRadius:'50%', background:accent, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-          <span style={{ fontSize:14, fontWeight:700, color:WHITE }}>{r.name[0]}</span>
+    <div style={{ background:WHITE, padding:'26px 24px', borderRadius:RADIUS, boxShadow:CARD, height:'100%', boxSizing:'border-box' }}>
+      <Stars/>
+      <p style={{ fontSize:14, color:DARK, lineHeight:1.75, margin:'14px 0 18px', fontFamily:"'Source Serif 4',serif", fontStyle:'italic' }}>{r.text}</p>
+      <div style={{ borderTop:`1px solid ${BORDER}`, paddingTop:16, display:'flex', alignItems:'center', gap:11 }}>
+        <div style={{ width:34, height:34, borderRadius:'50%', background:accent, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+          <span style={{ fontSize:13, fontWeight:700, color:WHITE }}>{r.name[0]}</span>
         </div>
         <div>
           <div style={{ fontSize:13, fontWeight:700, color:NAVY }}>{r.name}</div>
