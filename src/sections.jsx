@@ -172,7 +172,7 @@ export function ServicesSection() {
           <Link to="/services" style={{ fontSize:14, fontWeight:700, color:NAVY, textDecoration:'none' }}>View all roofing services →</Link>
         </div>
       </div>
-      <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@media(max-width:900px){.ld-svc{grid-template-columns:1fr!important}}`}</style>
+      <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}.ld-svc > a:nth-child(3n+2){margin-top:38px}@media(max-width:900px){.ld-svc{grid-template-columns:1fr!important}.ld-svc > a{margin-top:0!important}}`}</style>
     </section>
   )
 }
@@ -181,7 +181,7 @@ export function ServicesSection() {
 export function RoofTypesSection() {
   const [ref, shown] = useReveal(0.08)
   return (
-    <section id="roof-types" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:`linear-gradient(180deg, ${NAVY} 0%, ${DARK} 100%)`, padding:'104px 48px', position:'relative', overflow:'hidden' }}>
+    <section id="roof-types" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:`linear-gradient(180deg, ${NAVY} 0%, ${DARK} 100%)`, padding:'128px 48px 104px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
       <div style={{ maxWidth:1240, margin:'0 auto', position:'relative' }}>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', flexWrap:'wrap', gap:20, marginBottom:44 }}>
           <Kicker label="Roof Types We Install" title={<span style={{ color:WHITE }}>Every type of roof.<br/>Every budget.</span>} light
@@ -259,7 +259,7 @@ export function Divisions() {
 export function Gallery() {
   const [ref, shown] = useReveal(0.08)
   return (
-    <section ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:DARK, padding:'96px 48px' }}>
+    <section ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:DARK, padding:'124px 48px 96px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:36, flexWrap:'wrap', gap:16 }}>
           <Kicker label="Portfolio" title={<span style={{ color:WHITE }}>Recent projects</span>} light />
@@ -285,7 +285,7 @@ export function ProcessSection() {
   const { openSchedule } = useModals()
   const [ref, shown] = useReveal(0.1)
   return (
-    <section id="process" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:NAVY, padding:'104px 48px' }}>
+    <section id="process" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:NAVY, padding:'128px 48px 104px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
         <div style={{ display:'grid', gridTemplateColumns:'0.85fr 1.15fr', gap:80, alignItems:'start' }} className="ld-proc">
           <div>
@@ -412,7 +412,7 @@ export function CTA() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
-    <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'120px 48px' }}>
+    <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'150px 48px 120px', clipPath:'polygon(0 66px, 100% 0, 100% 100%, 0 100%)', marginTop:-66, zIndex:1 }}>
       <video autoPlay muted loop playsInline poster={HERO_POSTER} aria-hidden="true"
         style={{ position:'absolute', inset:0, width:'100%', height:'124%', objectFit:'cover', opacity:0.6, transform:`translateY(${scrollY * -0.1}px)`, willChange:'transform' }}>
         <source src={HERO_VIDEO} type="video/mp4" />
