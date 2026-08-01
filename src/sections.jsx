@@ -77,7 +77,7 @@ export function Hero() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop:30, display:'inline-flex', alignItems:'center', gap:11, transform:'rotate(-2deg)', border:`2px solid ${ORANGE}`, borderRadius:3, padding:'9px 16px', background:'rgba(8,10,16,0.32)', backdropFilter:'blur(3px)' }}>
+            <div style={{ marginTop:30, display:'inline-flex', alignItems:'center', gap:11, border:`2px solid ${ORANGE}`, borderRadius:3, padding:'9px 16px', background:'rgba(8,10,16,0.32)', backdropFilter:'blur(3px)' }}>
               <span style={{ color:ORANGE, fontSize:16 }}>★</span>
               <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, textTransform:'uppercase', letterSpacing:'1.5px', fontSize:13.5, color:WHITE }}>Est. 2022 · Texas Family-Owned</span>
             </div>
@@ -100,8 +100,8 @@ export function TrustBar() {
   const items = ['Free Inspections, No Commitment','Fully Insured & Workers Comp','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited','5.0 ★ · 71 Google Reviews','Family-Owned Since 2022']
   const row = [...items, ...items]
   return (
-    // Angled top edge = a roofline that cuts up into the hero; content scrolls as a marquee
-    <div style={{ background:ORANGE, overflow:'hidden', clipPath:'polygon(0 15px, 100% 0, 100% 100%, 0 100%)', marginTop:-15, position:'relative', zIndex:3 }}>
+    // Scrolling marquee of trust points
+    <div style={{ background:ORANGE, overflow:'hidden', position:'relative', zIndex:3 }}>
       <div className="ld-marquee" style={{ display:'flex', whiteSpace:'nowrap', padding:'17px 0 15px', width:'max-content' }}>
         {row.map((t,i)=>(
           <span key={i} style={{ fontSize:12.5, fontWeight:700, color:'#fff', letterSpacing:'0.5px', padding:'0 26px', display:'inline-flex', alignItems:'center', gap:9 }}>
@@ -190,7 +190,7 @@ export function ServicesSection() {
 export function RoofTypesSection() {
   const [ref, shown] = useReveal(0.08)
   return (
-    <section id="roof-types" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:`linear-gradient(180deg, ${NAVY} 0%, ${DARK} 100%)`, padding:'128px 48px 104px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
+    <section id="roof-types" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:`linear-gradient(180deg, ${NAVY} 0%, ${DARK} 100%)`, padding:'104px 48px', position:'relative', overflow:'hidden' }}>
       <div style={{ maxWidth:1240, margin:'0 auto', position:'relative' }}>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', flexWrap:'wrap', gap:20, marginBottom:44 }}>
           <Kicker label="Roof Types We Install" title={<span style={{ color:WHITE }}>Every type of roof.<br/>Every budget.</span>} light
@@ -268,7 +268,7 @@ export function Divisions() {
 export function Gallery() {
   const [ref, shown] = useReveal(0.08)
   return (
-    <section ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:DARK, padding:'124px 48px 96px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
+    <section ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:DARK, padding:'96px 48px' }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:36, flexWrap:'wrap', gap:16 }}>
           <Kicker label="Portfolio" title={<span style={{ color:WHITE }}>Recent projects</span>} light />
@@ -294,7 +294,7 @@ export function ProcessSection() {
   const { openSchedule } = useModals()
   const [ref, shown] = useReveal(0.1)
   return (
-    <section id="process" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:NAVY, padding:'128px 48px 104px', position:'relative', overflow:'hidden', clipPath:'polygon(0 64px, 100% 0, 100% 100%, 0 100%)', marginTop:-64, zIndex:1 }}>
+    <section id="process" ref={ref} className={`reveal ${shown?'is-in':''}`} style={{ background:NAVY, padding:'104px 48px' }}>
       <div style={{ maxWidth:1240, margin:'0 auto' }}>
         <div style={{ display:'grid', gridTemplateColumns:'0.85fr 1.15fr', gap:80, alignItems:'start' }} className="ld-proc">
           <div>
@@ -446,7 +446,7 @@ export function CTA() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
   return (
-    <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'150px 48px 120px', clipPath:'polygon(0 66px, 100% 0, 100% 100%, 0 100%)', marginTop:-66, zIndex:1 }}>
+    <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'120px 48px' }}>
       <video autoPlay muted loop playsInline poster={HERO_POSTER} aria-hidden="true"
         style={{ position:'absolute', inset:0, width:'100%', height:'124%', objectFit:'cover', opacity:0.6, transform:`translateY(${scrollY * -0.1}px)`, willChange:'transform' }}>
         <source src={HERO_VIDEO} type="video/mp4" />
