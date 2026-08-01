@@ -17,15 +17,15 @@ export const STATS = [
 
 // Real drone photos of LD Roofing jobs, mixed with real commercial project shots.
 export const GALLERY = [
-  { src:'/photos/aerial-2story-pool.jpg', label:'Residential Roof Replacement' },
+  { src:'/photos/aerial-2story-pool.jpg', label:'Full Roof Replacement' },
   { src:'/photos/gallery-commercial-dallas.jpg', label:'Commercial Project, Dallas' },
-  { src:'/photos/aerial-gabled-shingle.jpg', label:'Architectural Shingle Roof' },
-  { src:'/photos/aerial-craftsmanship.jpg', label:'New Roof, Detail' },
+  { src:'/photos/aerial-tan-ranch.jpg', label:'Residential Reroof' },
+  { src:'/photos/aerial-craftsmanship.jpg', label:'New Roof, Up Close' },
   { src:'/photos/gallery-commercial-flat-dfw.jpg', label:'Commercial Flat Roof, DFW' },
-  { src:'/photos/aerial-two-story.jpg', label:'Two-Story Roof Replacement' },
-  { src:'/photos/aerial-replacement-pool.jpg', label:'Full Roof Replacement' },
-  { src:'/photos/gallery-commercial-install-houston.jpg', label:'Commercial Install, Houston' },
   { src:'/photos/aerial-charcoal.jpg', label:'Charcoal Shingle Roof' },
+  { src:'/photos/aerial-blue-hip.jpg', label:'Hip Roof Replacement' },
+  { src:'/photos/gallery-commercial-install-houston.jpg', label:'Commercial Install, Houston' },
+  { src:'/photos/aerial-tan-wide.jpg', label:'Architectural Shingle Roof' },
 ]
 
 export const PROCESS = [

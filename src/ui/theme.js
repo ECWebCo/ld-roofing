@@ -27,6 +27,7 @@ export const CTA_IMG  = '/photos/aerial-2story-pool.jpg'
 export const HERO_VIDEO = '/videos/hero-drone.mp4'
 export const HERO_POSTER = '/photos/hero-drone-poster.jpg'
 export const WORK_VIDEO = '/videos/work-drone.mp4'
+export const WORK_POSTER = '/photos/work-drone-poster.jpg'
 
 export const TOP_BAR_HEIGHT = 36
 

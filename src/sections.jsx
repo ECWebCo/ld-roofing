@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   NAVY, ORANGE, ORANGE2, OFF, DARK, MUTED, BORDER, WHITE, BTN,
   PHONE_HOUSTON, PHONE_DALLAS, HERO_IMG, CTA_IMG,
-  HERO_VIDEO, HERO_POSTER, WORK_VIDEO,
+  HERO_VIDEO, HERO_POSTER, WORK_VIDEO, WORK_POSTER,
 } from './ui/theme'
 import { useReveal, Counter, Stars, InspectionForm, useModals } from './ui/primitives'
 import laneFamilyImg from './lane-family.png'
@@ -44,13 +44,13 @@ export function Hero() {
   }, [])
   return (
     <section style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', background:NAVY, overflow:'hidden' }}>
-      <video autoPlay muted loop playsInline poster={HERO_POSTER} aria-hidden="true"
-        style={{ position:'absolute', inset:0, width:'100%', height:'116%', objectFit:'cover', objectPosition:'center 45%', opacity:1, transform:`translateY(${scrollY * 0.18}px)`, willChange:'transform' }}>
-        <source src={HERO_VIDEO} type="video/mp4" />
+      <video autoPlay muted loop playsInline poster={WORK_POSTER} aria-hidden="true"
+        style={{ position:'absolute', inset:0, width:'100%', height:'116%', objectFit:'cover', objectPosition:'center 42%', opacity:1, transform:`translateY(${scrollY * 0.18}px)`, willChange:'transform' }}>
+        <source src={WORK_VIDEO} type="video/mp4" />
       </video>
-      {/* Directional scrim: readable on the left, video breathes on the right */}
-      <div style={{ position:'absolute', inset:0, background:`linear-gradient(102deg, rgba(15,31,75,0.86) 0%, rgba(15,31,75,0.58) 38%, rgba(15,31,75,0.22) 68%, rgba(15,31,75,0.06) 100%)` }}/>
-      <div style={{ position:'absolute', inset:0, background:`linear-gradient(to top, rgba(15,31,75,0.55) 0%, transparent 30%)` }}/>
+      {/* Neutral shadow scrim (no blue cast) — darkens only where the text sits so the footage stays true-color */}
+      <div style={{ position:'absolute', inset:0, background:`linear-gradient(103deg, rgba(8,10,16,0.76) 0%, rgba(8,10,16,0.42) 36%, rgba(8,10,16,0.08) 64%, transparent 100%)` }}/>
+      <div style={{ position:'absolute', inset:0, background:`linear-gradient(to top, rgba(8,10,16,0.5) 0%, transparent 26%)` }}/>
       <div style={{ position:'absolute', left:0, top:0, bottom:0, width:5, background:ORANGE }}/>
 
       <div style={{ position:'relative', maxWidth:1240, margin:'0 auto', padding:'150px 48px 110px', width:'100%' }}>
@@ -77,6 +77,10 @@ export function Hero() {
                 </div>
               ))}
             </div>
+            <div style={{ marginTop:30, display:'inline-flex', alignItems:'center', gap:11, transform:'rotate(-2deg)', border:`2px solid ${ORANGE}`, borderRadius:3, padding:'9px 16px', background:'rgba(8,10,16,0.32)', backdropFilter:'blur(3px)' }}>
+              <span style={{ color:ORANGE, fontSize:16 }}>★</span>
+              <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, textTransform:'uppercase', letterSpacing:'1.5px', fontSize:13.5, color:WHITE }}>Est. 2022 · Texas Family-Owned</span>
+            </div>
           </div>
           <div style={{ background:WHITE, borderRadius:RADIUS, overflow:'hidden', boxShadow:'0 30px 80px rgba(0,0,0,0.45)' }}>
             <div style={{ background:NAVY, borderBottom:`4px solid ${ORANGE}`, padding:'22px 24px' }}>
@@ -93,13 +97,19 @@ export function Hero() {
 }
 
 export function TrustBar() {
+  const items = ['Free Inspections, No Commitment','Fully Insured & Workers Comp','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited','5.0 ★ · 71 Google Reviews','Family-Owned Since 2022']
+  const row = [...items, ...items]
   return (
-    <div style={{ background:ORANGE, padding:'15px 48px' }}>
-      <div style={{ maxWidth:1240, margin:'0 auto', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
-        {['Free Inspections, No Commitment','Fully Insured & Workers Comp','Residential & Commercial','Serving Houston & Dallas','BBB A+ Accredited'].map((t,i)=>(
-          <span key={i} style={{ fontSize:12, fontWeight:600, color:'rgba(255,255,255,0.95)', letterSpacing:'0.3px' }}>✓ {t}</span>
+    // Angled top edge = a roofline that cuts up into the hero; content scrolls as a marquee
+    <div style={{ background:ORANGE, overflow:'hidden', clipPath:'polygon(0 15px, 100% 0, 100% 100%, 0 100%)', marginTop:-15, position:'relative', zIndex:3 }}>
+      <div className="ld-marquee" style={{ display:'flex', whiteSpace:'nowrap', padding:'17px 0 15px', width:'max-content' }}>
+        {row.map((t,i)=>(
+          <span key={i} style={{ fontSize:12.5, fontWeight:700, color:'#fff', letterSpacing:'0.5px', padding:'0 26px', display:'inline-flex', alignItems:'center', gap:9 }}>
+            <span style={{ color:'rgba(255,255,255,0.55)', fontSize:10 }}>◆</span> {t}
+          </span>
         ))}
       </div>
+      <style>{`.ld-marquee{animation:ldscroll 34s linear infinite}@keyframes ldscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.ld-marquee{animation:none}}`}</style>
     </div>
   )
 }
@@ -403,9 +413,9 @@ export function CTA() {
   }, [])
   return (
     <section ref={ref} style={{ position:'relative', overflow:'hidden', background:NAVY, padding:'120px 48px' }}>
-      <video autoPlay muted loop playsInline poster={CTA_IMG} aria-hidden="true"
+      <video autoPlay muted loop playsInline poster={HERO_POSTER} aria-hidden="true"
         style={{ position:'absolute', inset:0, width:'100%', height:'124%', objectFit:'cover', opacity:0.6, transform:`translateY(${scrollY * -0.1}px)`, willChange:'transform' }}>
-        <source src={WORK_VIDEO} type="video/mp4" />
+        <source src={HERO_VIDEO} type="video/mp4" />
       </video>
       {/* Center scrim keeps text readable while the drone footage stays visible */}
       <div style={{ position:'absolute', inset:0, background:`radial-gradient(130% 130% at 50% 45%, rgba(15,31,75,0.35) 0%, rgba(15,31,75,0.82) 78%)` }}/>
