@@ -78,12 +78,12 @@ export function renderSection(section, i) {
 // ─── Shared inspection form ──────────────────────────────────────────────────
 export function InspectionForm({ compact = false }) {
   const { openCall } = useModals()
-  const [form, setForm] = useState({ name:'', phone:'', email:'', address:'', service:'', message:'' })
+  const [form, setForm] = useState({ name:'', email:'', address:'', service:'', message:'' })
   const [sent, setSent] = useState(false)
   const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
   const submit = () => {
-    if (!form.name || !form.phone) return
-    const body = `Name: ${form.name}%0APhone: ${form.phone}%0AEmail: ${form.email}%0AAddress: ${form.address}%0AService: ${form.service}%0AMessage: ${form.message}`
+    if (!form.name || !form.email) return
+    const body = `Name: ${form.name}%0AEmail: ${form.email}%0AAddress: ${form.address}%0AService: ${form.service}%0AMessage: ${form.message}`
     window.location.href = `mailto:${EMAIL}?subject=Free Roof Inspection Request&body=${body}`
     setSent(true)
   }
@@ -109,24 +109,23 @@ export function InspectionForm({ compact = false }) {
   return (
     <div style={{ padding:compact ? '24px' : '28px' }}>
       <input style={inp} placeholder="Full Name *" value={form.name} onChange={set('name')}/>
-      <input style={inp} placeholder="Phone Number *" value={form.phone} onChange={set('phone')}/>
-      <input style={inp} placeholder="Email Address" value={form.email} onChange={set('email')}/>
+      <input style={inp} placeholder="Email Address *" value={form.email} onChange={set('email')}/>
       <input style={inp} placeholder="Property Address" value={form.address} onChange={set('address')}/>
       <select style={{...inp, color:form.service?DARK:MUTED}} value={form.service} onChange={set('service')}>
         <option value="">Service Needed</option>
         {['Free Roof Inspection','Roof Repair','Roof Replacement','Roof Leak Repair','Attic Venting','Commercial Roofing','Insurance Claim Help','Free Estimate'].map(s=><option key={s}>{s}</option>)}
       </select>
       <textarea style={{...inp, resize:'vertical', minHeight:80, marginBottom:20}} placeholder="Additional notes (optional)" value={form.message} onChange={set('message')}/>
-      <button onClick={submit} disabled={!form.name || !form.phone}
+      <button onClick={submit} disabled={!form.name || !form.email}
         style={{
           width:'100%', background:ORANGE, color:WHITE, border:'none',
           padding:'15px', fontSize:14, fontWeight:700, fontFamily:"'Barlow',sans-serif",
-          cursor:(!form.name||!form.phone)?'not-allowed':'pointer',
-          opacity:(!form.name||!form.phone)?0.6:1,
+          cursor:(!form.name||!form.email)?'not-allowed':'pointer',
+          opacity:(!form.name||!form.email)?0.6:1,
           borderRadius:2, letterSpacing:'0.5px', textTransform:'uppercase',
           transition:'background 0.2s', marginBottom:12,
         }}
-        onMouseOver={e=>{ if(form.name && form.phone) e.currentTarget.style.background=ORANGE2 }}
+        onMouseOver={e=>{ if(form.name && form.email) e.currentTarget.style.background=ORANGE2 }}
         onMouseOut={e=>e.currentTarget.style.background=ORANGE}>
         Request Free Inspection →
       </button>
